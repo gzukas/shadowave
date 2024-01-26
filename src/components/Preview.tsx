@@ -17,8 +17,6 @@ export function Preview(props: PreviewProps) {
 
   const maskId = useId();
 
-  console.log({ sortedImages })
-
   return (
     largestImage && (
       <svg

@@ -2,22 +2,24 @@ import { atom } from "jotai";
 import { loadImage } from "@/utils/loadImage";
 import { readFile } from "@/utils/readFile";
 
-const privateImagesAtom = atom<Promise<HTMLImageElement[]> | null>(null);
+const filesOrImagesAtom = atom<FileList | HTMLImageElement[]>([]);
 
 export const imagesAtom = atom(
-  (get) => get(privateImagesAtom),
-  async (_get, set, filesOrImages: FileList | HTMLImageElement[] | null) => {
-    const images = Array.isArray(filesOrImages)
-      ? Promise.resolve(filesOrImages)
-      : Promise.all(
-          Array.from(filesOrImages ?? []).map(async (file) => {
+  async (get) => {
+    const filesOrImages = get(filesOrImagesAtom);
+    return Promise.all(
+      Array.isArray(filesOrImages)
+        ? filesOrImages
+        : Array.from(filesOrImages).map(async (file) => {
             const image = await loadImage(
               (await readFile((fr) => fr.readAsDataURL(file))) as string
             );
             image.id = file.name;
             return image;
           })
-        );
-    set(privateImagesAtom, images);
+    );
+  },
+  (_get, set, filesOrImages: FileList | HTMLImageElement[]) => {
+    set(filesOrImagesAtom, filesOrImages);
   }
 );

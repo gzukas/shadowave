@@ -1,9 +1,9 @@
 import { useId } from "react";
-import clsx from "clsx";
+import { PrimitiveAtom, useAtom } from "jotai";
 import { Label } from "@/components/ui/Label";
 import { Input } from "@/components/ui/Input";
 import { Slider } from "@/components/ui/Slider";
-import { PrimitiveAtom, useAtom } from "jotai";
+import { cn } from '@/lib/utils';
 
 export interface AtomSliderProps
   extends Omit<
@@ -20,7 +20,7 @@ export function AtomSlider(props: AtomSliderProps) {
   const id = useId();
 
   return (
-    <div className={clsx("grid", "gap-4", className)}>
+    <div className={cn("grid", "gap-4", className)}>
       {label && (
         <div className="flex items-center justify-between">
           <Label htmlFor={id}>{label}</Label>
