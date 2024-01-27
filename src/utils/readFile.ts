@@ -1,6 +1,6 @@
 export function readFile(
   read: (reader: FileReader) => void
-): Promise<string | ArrayBuffer | null | undefined> {
+): Promise<FileReader["result"] | undefined> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.addEventListener("load", (e) => resolve(e.target?.result));

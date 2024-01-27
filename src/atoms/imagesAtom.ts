@@ -1,25 +1,31 @@
-import { atom } from "jotai";
+import { ExtractAtomValue, atom } from "jotai";
 import { loadImage } from "@/utils/loadImage";
 import { readFile } from "@/utils/readFile";
 
-const filesOrImagesAtom = atom<FileList | HTMLImageElement[]>([]);
+type Image = [name: string, src: string];
+
+const filesOrImagesAtom = atom<FileList | Image[]>([]);
 
 export const imagesAtom = atom(
   async (get) => {
     const filesOrImages = get(filesOrImagesAtom);
+    const images = Array.isArray(filesOrImages)
+      ? filesOrImages
+      : await Promise.all(
+          [...filesOrImages].map<Promise<Image>>(async (file) => [
+            file.name,
+            (await readFile((fr) => fr.readAsDataURL(file))) as string,
+          ])
+        );
     return Promise.all(
-      Array.isArray(filesOrImages)
-        ? filesOrImages
-        : Array.from(filesOrImages).map(async (file) => {
-            const image = await loadImage(
-              (await readFile((fr) => fr.readAsDataURL(file))) as string
-            );
-            image.id = file.name;
-            return image;
-          })
+      images.map(async ([name, src]) => {
+        const image = await loadImage(src);
+        image.id = name;
+        return image;
+      })
     );
   },
-  (_get, set, filesOrImages: FileList | HTMLImageElement[]) => {
+  (_get, set, filesOrImages: ExtractAtomValue<typeof filesOrImagesAtom>) => {
     set(filesOrImagesAtom, filesOrImages);
   }
 );

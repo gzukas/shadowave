@@ -1,6 +1,6 @@
 import { atom } from "jotai";
-import { graphicsAtom } from "./graphicsAtom";
 import { loadImage } from "@/utils/loadImage";
+import { graphicsAtom } from "./graphicsAtom";
 
 export const resterizingAtom = atom(false);
 export const rasterAtom = atom<string | null>(null);
