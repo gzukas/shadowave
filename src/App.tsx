@@ -1,8 +1,8 @@
 import { Suspense } from "react";
-import { useAtom } from 'jotai';
+import { useAtom } from "jotai";
 import { DevTools } from "jotai-devtools";
-import { AspectRatio } from "@radix-ui/react-aspect-ratio";
-import { themeEffect } from '@/atoms/themeEffect';
+import { AspectRatio } from "@/components/ui/AspectRatio";
+import { themeEffect } from "@/atoms/themeEffect";
 import { Controls } from "@/components/Controls";
 import { Preview } from "@/components/Preview";
 import { Download } from "@/components/Download";
@@ -20,19 +20,21 @@ export function App() {
       <TooltipProvider>
         <main className="container">
           <div className="grid md:grid-cols-[1fr_320px] overflow-hidden rounded-xl border shadow-md md:shadow-xl">
-            <Suspense fallback="loading">
-              <AspectRatio ratio={16 / 9} className="bg-muted">
+            <AspectRatio ratio={16 / 9} className="bg-muted">
+              <Suspense>
                 <Preview />
-              </AspectRatio>
-              <div className="flex-col flex p-6 justify-between">
-                <div className="flex space-x-2">
-                  <ChooseImages className="flex-grow" />
+              </Suspense>
+            </AspectRatio>
+            <div className="flex flex-col justify-between p-6 gap-8">
+              <Suspense>
+                <div className="flex gap-2">
+                  <ChooseImages className="grow" />
                   <ReverseImages />
                 </div>
-                <Controls className="py-12 space-y-6" />
+                <Controls />
                 <Download />
-              </div>
-            </Suspense>
+              </Suspense>
+            </div>
           </div>
           <DevTools />
         </main>

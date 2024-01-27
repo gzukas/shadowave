@@ -1,8 +1,8 @@
 import { atom } from "jotai";
-import { imagesAtom } from "./imagesAtom";
 import { areImagesReversedAtom } from "./areImagesReversedAtom";
+import { imagesAtom } from "./imagesAtom";
 
-export const sortedImagesAtom = atom(async (get) => {
+export const orderedImagesAtom = atom(async (get) => {
   const areImagesReversed = get(areImagesReversedAtom);
   const images = await get(imagesAtom);
   return areImagesReversed ? [...images].reverse() : images;

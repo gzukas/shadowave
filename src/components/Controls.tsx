@@ -5,15 +5,17 @@ import { rotationAtom } from "@/atoms/rotationAtom";
 import { frequencyAtom } from "@/atoms/frequencyAtom";
 import { imagesAtom } from "@/atoms/imagesAtom";
 import { AtomSlider } from "./AtomSlider";
+import { cn } from "@/lib/utils";
 
 export type ControlsProp = React.ComponentPropsWithoutRef<"div">;
 
 export function Controls(props: ControlsProp) {
+  const { className, ...other } = props;
   const images = useAtomValue(imagesAtom);
   useAtom(sensibleDefaultsEffect);
 
   return (
-    <div {...props}>
+    <div className={cn("space-y-6", className)} {...other}>
       <AtomSlider
         label="Rotation"
         atom={rotationAtom}
