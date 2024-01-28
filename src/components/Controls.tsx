@@ -1,11 +1,11 @@
 import { useAtom, useAtomValue } from "jotai";
+import { cn } from "@/lib/utils";
 import { sensibleDefaultsEffect } from "@/atoms/sensibleDefaultsEffect";
 import { amplitudeAtom } from "@/atoms/amplitudeAtom";
 import { rotationAtom } from "@/atoms/rotationAtom";
 import { frequencyAtom } from "@/atoms/frequencyAtom";
 import { imagesAtom } from "@/atoms/imagesAtom";
 import { AtomSlider } from "./AtomSlider";
-import { cn } from "@/lib/utils";
 
 export type ControlsProp = React.ComponentPropsWithoutRef<"div">;
 

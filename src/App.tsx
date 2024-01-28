@@ -25,20 +25,20 @@ export function App() {
                 <Preview />
               </Suspense>
             </AspectRatio>
-            <div className="flex flex-col justify-between p-6 gap-8">
+            <div className="flex flex-col justify-between p-6 gap-8 border-l">
               <Suspense>
                 <div className="flex gap-2">
                   <ChooseImages className="grow" />
                   <ReverseImages />
                 </div>
-                <Controls />
+                <Controls/>
                 <Download />
               </Suspense>
             </div>
           </div>
           <DevTools />
         </main>
-        <footer className="container py-8 flex items-center justify-between">
+        <footer className="container py-6 flex items-center justify-between">
           <p className="text-sm text-center text-muted-foreground">
             Built by{" "}
             <a href="https://github.com/gzukas" target="_blank">
