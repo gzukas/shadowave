@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { useAtom } from "jotai";
 import { DevTools } from "jotai-devtools";
 import { Eclipse } from "lucide-react";
+import { Trans } from "@lingui/macro";
 import { AspectRatio } from "@/components/ui/AspectRatio";
 import { themeEffect } from "@/atoms/themeEffect";
 import { Controls } from "@/components/Controls";
@@ -13,6 +14,7 @@ import { TooltipProvider } from "@/components/ui/Tooltip";
 import { ChangeTheme } from "@/components/ChangeTheme";
 import { Button } from "@/components/ui/Button";
 import { SeeExample } from "@/components/SeeExample";
+import { siteConfig } from "./config/site";
 
 export function App() {
   useAtom(themeEffect);
@@ -33,13 +35,15 @@ export function App() {
                       <Eclipse className="h-12 w-12 lg:h-24 lg:w-24" />
                       <h1 className="text-2xl lg:text-4xl">Shadowave</h1>
                       <p className="max-w-[350px] text-center">
-                        Choose screenshots featuring both light and dark themes
-                        to start waving.
+                        <Trans>
+                          Choose screenshots featuring both light and dark
+                          themes to start waving.
+                        </Trans>
                       </p>
                       <div className="flex gap-4">
                         <Button variant="outline" asChild>
                           <label htmlFor="image-files" role="button">
-                            Choose Images
+                            <Trans>Choose Images</Trans>
                           </label>
                         </Button>
                         <SeeExample />
@@ -61,15 +65,17 @@ export function App() {
         </main>
         <footer className="container py-6 flex items-center justify-between">
           <p className="text-sm text-center text-muted-foreground">
-            Built by{" "}
-            <a href="https://github.com/gzukas" target="_blank">
-              gzukas
-            </a>
-            . The source code is available on{" "}
-            <a href="https://github.com/gzukas/mei" target="_blank">
-              GitHub
-            </a>
-            .
+            <Trans>
+              Built by{" "}
+              <a href={siteConfig.links.author} target="_blank">
+                gzukas
+              </a>
+              . The source code is available on{" "}
+              <a href={siteConfig.links.github} target="_blank">
+                GitHub
+              </a>
+              .
+            </Trans>
           </p>
           <ChangeTheme />
         </footer>

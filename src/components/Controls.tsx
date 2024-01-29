@@ -1,4 +1,5 @@
 import { useAtom, useAtomValue } from "jotai";
+import { Trans } from "@lingui/macro";
 import { cn } from "@/lib/utils";
 import { sensibleDefaultsEffect } from "@/atoms/sensibleDefaultsEffect";
 import { amplitudeAtom } from "@/atoms/amplitudeAtom";
@@ -17,21 +18,21 @@ export function Controls(props: ControlsProp) {
   return (
     <div className={cn("space-y-6", className)} {...other}>
       <AtomSlider
-        label="Rotation"
+        label={<Trans>Rotation</Trans>}
         atom={rotationAtom}
         min={0}
         max={360}
         disabled={!images.length}
       />
       <AtomSlider
-        label="Frequency"
+        label={<Trans>Frequncy</Trans>}
         atom={frequencyAtom}
         min={1}
         max={1000}
         disabled={!images.length}
       />
       <AtomSlider
-        label="Amplitude"
+        label={<Trans>Amplitude</Trans>}
         atom={amplitudeAtom}
         min={0}
         max={1000}

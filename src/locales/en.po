@@ -13,10 +13,59 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/components/ChooseImages.tsx:33
-msgid "{0, plural, one {# image} other {1 images}}"
+#: src/components/ChooseImages.tsx:55
+msgid "{0, plural, one {# image} other {# images}}"
 msgstr ""
 
-#: src/components/ChooseImages.tsx:27
+#: src/components/Controls.tsx:35
+msgid "Amplitude"
+msgstr ""
+
+#: src/App.tsx:68
+msgid "Built by <0>gzukas</0>. The source code is available on <1>GitHub</1>."
+msgstr ""
+
+#: src/App.tsx:46
+#: src/components/ChooseImages.tsx:57
 msgid "Choose Images"
+msgstr ""
+
+#: src/App.tsx:38
+msgid "Choose screenshots featuring both light and dark themes to start waving."
+msgstr ""
+
+#: src/components/ChangeTheme.tsx:28
+msgid "Dark"
+msgstr ""
+
+#: src/components/Download.tsx:31
+msgid "Download PNG"
+msgstr ""
+
+#: src/components/Controls.tsx:28
+msgid "Frequncy"
+msgstr ""
+
+#: src/components/ChangeTheme.tsx:25
+msgid "Light"
+msgstr ""
+
+#: src/components/ChooseImages.tsx:78
+msgid "Remove images"
+msgstr ""
+
+#: src/components/ReverseImages.tsx:38
+msgid "Reverse images"
+msgstr ""
+
+#: src/components/Controls.tsx:21
+msgid "Rotation"
+msgstr ""
+
+#: src/components/SeeExample.tsx:18
+msgid "See Example"
+msgstr ""
+
+#: src/components/ChangeTheme.tsx:31
+msgid "System"
 msgstr ""
