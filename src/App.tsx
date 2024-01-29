@@ -1,20 +1,20 @@
-import { Suspense } from "react";
-import { useAtom } from "jotai";
-import { DevTools } from "jotai-devtools";
-import { Eclipse } from "lucide-react";
-import { Trans } from "@lingui/macro";
-import { AspectRatio } from "@/components/ui/AspectRatio";
-import { themeEffect } from "@/atoms/themeEffect";
-import { Controls } from "@/components/Controls";
-import { Graphics } from "@/components/Graphics";
-import { Download } from "@/components/Download";
-import { ChooseImages } from "@/components/ChooseImages";
-import { I18nProvider } from "@/components/I18nProvider";
-import { TooltipProvider } from "@/components/ui/Tooltip";
-import { ChangeTheme } from "@/components/ChangeTheme";
-import { Button } from "@/components/ui/Button";
-import { SeeExample } from "@/components/SeeExample";
-import { siteConfig } from "./config/site";
+import { Suspense } from 'react';
+import { useAtom } from 'jotai';
+import { DevTools } from 'jotai-devtools';
+import { Eclipse } from 'lucide-react';
+import { Trans } from '@lingui/macro';
+import { AspectRatio } from '@/components/ui/AspectRatio';
+import { themeEffect } from '@/atoms/themeEffect';
+import { Controls } from '@/components/Controls';
+import { Graphics } from '@/components/Graphics';
+import { Download } from '@/components/Download';
+import { ChooseImages } from '@/components/ChooseImages';
+import { I18nProvider } from '@/components/I18nProvider';
+import { TooltipProvider } from '@/components/ui/Tooltip';
+import { ChangeTheme } from '@/components/ChangeTheme';
+import { Button } from '@/components/ui/Button';
+import { SeeExample } from '@/components/SeeExample';
+import { siteConfig } from './config/site';
 
 export function App() {
   useAtom(themeEffect);
@@ -55,7 +55,7 @@ export function App() {
             </AspectRatio>
             <div className="flex flex-col justify-between p-6 gap-8 border-l">
               <Suspense>
-                <ChooseImages inputProps={{ id: "image-files" }} />
+                <ChooseImages inputProps={{ id: 'image-files' }} />
                 <Controls />
                 <Download />
               </Suspense>
@@ -66,11 +66,11 @@ export function App() {
         <footer className="container py-6 flex items-center justify-between">
           <p className="text-sm text-center text-muted-foreground">
             <Trans>
-              Built by{" "}
+              Built by{' '}
               <a href={siteConfig.links.author} target="_blank">
                 gzukas
               </a>
-              . The source code is available on{" "}
+              . The source code is available on{' '}
               <a href={siteConfig.links.github} target="_blank">
                 GitHub
               </a>

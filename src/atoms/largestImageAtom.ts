@@ -1,7 +1,7 @@
-import { atom } from "jotai";
-import { imagesAtom } from "./imagesAtom";
+import { atom } from 'jotai';
+import { imagesAtom } from './imagesAtom';
 
-export const largestImageAtom = atom(async (get) => {
+export const largestImageAtom = atom(async get => {
   const images = await get(imagesAtom);
   const imagesByArea = [...images].sort(
     (a, b) => a.width * a.height - b.width * b.height

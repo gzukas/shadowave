@@ -1,12 +1,12 @@
-import React, { useId } from "react";
-import { useAtomValue, useSetAtom } from "jotai";
-import { waveAtom } from "@/atoms/waveAtom";
-import { orderedImagesAtom } from "@/atoms/orderedImagesAtom";
-import { rotationAtom } from "@/atoms/rotationAtom";
-import { largestImageAtom } from "@/atoms/largestImageAtom";
-import { graphicsAtom } from "@/atoms/graphicsAtom";
+import React, { useId } from 'react';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { waveAtom } from '@/atoms/waveAtom';
+import { orderedImagesAtom } from '@/atoms/orderedImagesAtom';
+import { rotationAtom } from '@/atoms/rotationAtom';
+import { largestImageAtom } from '@/atoms/largestImageAtom';
+import { graphicsAtom } from '@/atoms/graphicsAtom';
 
-export interface GraphicsProps extends React.ComponentPropsWithoutRef<"svg"> {
+export interface GraphicsProps extends React.ComponentPropsWithoutRef<'svg'> {
   fallback?: React.ReactNode;
 }
 
@@ -35,7 +35,7 @@ export function Graphics(props: GraphicsProps) {
           transform={`rotate(-${rotation}) scale(2)`}
           transform-origin="50% 50%"
         >
-          <path d={wave.join(" ")} />
+          <path d={wave.join(' ')} />
         </clipPath>
       </defs>
       {orderedImages.map((image, index) => (
@@ -43,7 +43,7 @@ export function Graphics(props: GraphicsProps) {
           key={image.id}
           xlinkHref={image.src}
           {...(index === orderedImages.length - 1 && {
-            clipPath: `url(#${maskId})`,
+            clipPath: `url(#${maskId})`
           })}
         />
       ))}

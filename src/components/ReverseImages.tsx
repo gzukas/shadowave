@@ -1,14 +1,14 @@
-import { useAtom, useAtomValue } from "jotai";
-import { ArrowDownUp, ArrowUpDown } from "lucide-react";
-import { Trans } from "@lingui/macro";
-import { areImagesReversedAtom } from "@/atoms/areImagesReversedAtom";
-import { imagesAtom } from "@/atoms/imagesAtom";
-import { Button } from "@/components/ui/Button";
+import { useAtom, useAtomValue } from 'jotai';
+import { ArrowDownUp, ArrowUpDown } from 'lucide-react';
+import { Trans } from '@lingui/macro';
+import { areImagesReversedAtom } from '@/atoms/areImagesReversedAtom';
+import { imagesAtom } from '@/atoms/imagesAtom';
+import { Button } from '@/components/ui/Button';
 import {
   Tooltip,
   TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/Tooltip";
+  TooltipTrigger
+} from '@/components/ui/Tooltip';
 
 export function ReverseImages() {
   const [areImagesReversed, toggleImagesReversed] = useAtom(

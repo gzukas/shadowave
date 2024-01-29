@@ -1,14 +1,14 @@
-import { useSetAtom } from "jotai";
-import { Moon, Sun } from "lucide-react";
-import { Trans } from "@lingui/macro";
-import { themeAtom } from "@/atoms/themeAtom";
-import { Button } from "@/components/ui/Button";
+import { useSetAtom } from 'jotai';
+import { Moon, Sun } from 'lucide-react';
+import { Trans } from '@lingui/macro';
+import { themeAtom } from '@/atoms/themeAtom';
+import { Button } from '@/components/ui/Button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/DropdownMenu";
+  DropdownMenuTrigger
+} from '@/components/ui/DropdownMenu';
 
 export function ChangeTheme() {
   const setTheme = useSetAtom(themeAtom);
@@ -21,13 +21,13 @@ export function ChangeTheme() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
+        <DropdownMenuItem onClick={() => setTheme('light')}>
           <Trans>Light</Trans>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
+        <DropdownMenuItem onClick={() => setTheme('dark')}>
           <Trans>Dark</Trans>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
+        <DropdownMenuItem onClick={() => setTheme('system')}>
           <Trans>System</Trans>
         </DropdownMenuItem>
       </DropdownMenuContent>

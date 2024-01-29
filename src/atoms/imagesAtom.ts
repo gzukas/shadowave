@@ -1,20 +1,20 @@
-import { ExtractAtomValue, atom } from "jotai";
-import { loadImage } from "@/utils/loadImage";
-import { readFile } from "@/utils/readFile";
+import { ExtractAtomValue, atom } from 'jotai';
+import { loadImage } from '@/utils/loadImage';
+import { readFile } from '@/utils/readFile';
 
 const filesOrLinksAtom = atom<FileList | string[]>([]);
 
 export const imagesAtom = atom(
-  async (get) => {
+  async get => {
     const filesOrLinks = get(filesOrLinksAtom);
     return Promise.all(
-      [...filesOrLinks].map(async (fileOrLink) => {
+      [...filesOrLinks].map(async fileOrLink => {
         const [name, blob] =
-          typeof fileOrLink === "string"
+          typeof fileOrLink === 'string'
             ? [fileOrLink, await (await fetch(fileOrLink)).blob()]
             : [fileOrLink.name, fileOrLink];
 
-        const dataUrl = (await readFile((fr) =>
+        const dataUrl = (await readFile(fr =>
           fr.readAsDataURL(blob)
         )) as string;
 

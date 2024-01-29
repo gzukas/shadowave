@@ -1,22 +1,22 @@
-import { useRef } from "react";
-import { useAtom } from "jotai";
-import { Trash } from "lucide-react";
-import { Trans, Plural } from "@lingui/macro";
-import { cn } from "@/lib/utils";
-import { imagesAtom } from "@/atoms/imagesAtom";
-import { Button } from "@/components/ui/Button";
+import { useRef } from 'react';
+import { useAtom } from 'jotai';
+import { Trash } from 'lucide-react';
+import { Trans, Plural } from '@lingui/macro';
+import { cn } from '@/lib/utils';
+import { imagesAtom } from '@/atoms/imagesAtom';
+import { Button } from '@/components/ui/Button';
 import {
   Tooltip,
   TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/Tooltip";
-import { ReverseImages } from "./ReverseImages";
+  TooltipTrigger
+} from '@/components/ui/Tooltip';
+import { ReverseImages } from './ReverseImages';
 
 export interface ChooseImagesProps
-  extends React.ComponentPropsWithoutRef<"div"> {
+  extends React.ComponentPropsWithoutRef<'div'> {
   inputProps?: Omit<
-    Partial<React.ComponentPropsWithoutRef<"input">>,
-    "type" | "onChange" | "className"
+    Partial<React.ComponentPropsWithoutRef<'input'>>,
+    'type' | 'onChange' | 'className'
   >;
 }
 
@@ -25,25 +25,25 @@ export function ChooseImages(props: ChooseImagesProps) {
   const [images, setImages] = useAtom(imagesAtom);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+  const handleChange: React.ChangeEventHandler<HTMLInputElement> = e => {
     setImages(e.target.files ?? []);
   };
 
   const handleRemoveClick = () => {
     setImages([]);
     if (inputRef.current) {
-      inputRef.current.value = "";
+      inputRef.current.value = '';
     }
   };
 
   return (
     <div
       className={cn(
-        "flex",
-        "items-center",
-        "space-x-1",
-        "rounded-md",
-        "bg-secondary",
+        'flex',
+        'items-center',
+        'space-x-1',
+        'rounded-md',
+        'bg-secondary',
         className
       )}
       {...other}

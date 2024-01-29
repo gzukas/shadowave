@@ -1,5 +1,5 @@
-import { atomWithStorage } from "jotai/utils";
+import { atomWithStorage } from 'jotai/utils';
 
-export type Theme = "dark" | "light" | "system";
+export type Theme = 'dark' | 'light' | 'system';
 
-export const themeAtom = atomWithStorage<Theme>("mei-theme", "system");
+export const themeAtom = atomWithStorage<Theme>('mei-theme', 'system');

@@ -1,8 +1,8 @@
-import { atomEffect } from "jotai-effect";
-import { largestImageAtom } from "./largestImageAtom";
-import { amplitudeAtom } from "./amplitudeAtom";
-import { frequencyAtom } from "./frequencyAtom";
-import { rotationAtom } from "./rotationAtom";
+import { atomEffect } from 'jotai-effect';
+import { largestImageAtom } from './largestImageAtom';
+import { amplitudeAtom } from './amplitudeAtom';
+import { frequencyAtom } from './frequencyAtom';
+import { rotationAtom } from './rotationAtom';
 
 export const sensibleDefaultsEffect = atomEffect((get, set) => {
   const abortController = new AbortController();
