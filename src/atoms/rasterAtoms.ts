@@ -10,15 +10,15 @@ export const rasterizeAtom = atom(null, async (get, set) => {
   if (!graphics) {
     return;
   }
-  
+
+  set(resterizingAtom, true);
+
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
   const { width, height } = graphics.getBBox();
 
   canvas.width = width;
   canvas.height = height;
-
-  set(resterizingAtom, true);
 
   const svgString = new XMLSerializer().serializeToString(graphics);
   const image = await loadImage(`data:image/svg+xml;base64,${btoa(svgString)}`);

@@ -1,47 +1,84 @@
+import { useRef } from "react";
 import { useAtom } from "jotai";
+import { Trash } from "lucide-react";
 import { Trans, Plural } from "@lingui/macro";
-import { imagesAtom } from "@/atoms/imagesAtom";
-import { Button, ButtonProps } from "@/components/ui/Button";
-import { Separator } from "@/components/ui/Separator";
 import { cn } from "@/lib/utils";
+import { imagesAtom } from "@/atoms/imagesAtom";
+import { Button } from "@/components/ui/Button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/Tooltip";
+import { ReverseImages } from "./ReverseImages";
 
-export type ChooseImagesProps = Omit<ButtonProps, "asChild">;
+export interface ChooseImagesProps
+  extends React.ComponentPropsWithoutRef<"div"> {
+  inputProps?: Omit<
+    Partial<React.ComponentPropsWithoutRef<"input">>,
+    "type" | "onChange" | "className"
+  >;
+}
 
 export function ChooseImages(props: ChooseImagesProps) {
-  const { className, ...other } = props;
+  const { className, inputProps, ...other } = props;
   const [images, setImages] = useAtom(imagesAtom);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setImages(e.target.files ?? []);
   };
 
+  const handleRemoveClick = () => {
+    setImages([]);
+    if (inputRef.current) {
+      inputRef.current.value = "";
+    }
+  };
+
   return (
-    <Button
-      variant="secondary"
-      className={cn("space-x-2", className)}
-      asChild
+    <div
+      className={cn(
+        "flex",
+        "items-center",
+        "space-x-1",
+        "rounded-md",
+        "bg-secondary",
+        className
+      )}
       {...other}
     >
-      <label role="button">
-        <span className="flex-grow">
-          <Trans>Choose Images</Trans>
-        </span>
-        {images.length ? (
-          <>
-            <Separator orientation="vertical" className="h-[20px]" />
-            <span className="text-muted-foreground">
-              <Plural value={images.length} one="# image" other="# images" />
-            </span>
-          </>
-        ) : null}
-        <input
-          type="file"
-          className="hidden"
-          onChange={handleChange}
-          accept="image/*"
-          multiple
-        />
-      </label>
-    </Button>
+      <ReverseImages />
+      <Button variant="secondary" asChild>
+        <label role="button" className="grow">
+          {images.length ? (
+            <Plural value={images.length} one="# image" other="# images" />
+          ) : (
+            <Trans>Choose Images</Trans>
+          )}
+          <input
+            ref={inputRef}
+            type="file"
+            onChange={handleChange}
+            className="hidden"
+            accept="image/*"
+            multiple
+            {...inputProps}
+          />
+        </label>
+      </Button>
+      {images.length ? (
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="secondary" size="icon" onClick={handleRemoveClick}>
+              <Trash className="h-4 w-4" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <Trans>Remove images</Trans>
+          </TooltipContent>
+        </Tooltip>
+      ) : null}
+    </div>
   );
 }

@@ -11,7 +11,9 @@ import {
 } from "@/components/ui/Tooltip";
 
 export function ReverseImages() {
-  const [areImagesReversed, toggleImagesReversed] = useAtom(areImagesReversedAtom);
+  const [areImagesReversed, toggleImagesReversed] = useAtom(
+    areImagesReversedAtom
+  );
   const images = useAtomValue(imagesAtom);
   const Icon = areImagesReversed ? ArrowDownUp : ArrowUpDown;
 
@@ -24,11 +26,12 @@ export function ReverseImages() {
       <TooltipTrigger asChild>
         <Button
           type="button"
-          variant="ghost"
+          variant="secondary"
+          size="icon"
           onClick={handleClick}
           disabled={images.length < 2}
         >
-          <Icon className="w-5 h-5" />
+          <Icon className="w-4 h-4" />
         </Button>
       </TooltipTrigger>
       <TooltipContent>

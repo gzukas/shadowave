@@ -1,16 +1,18 @@
 import { Suspense } from "react";
 import { useAtom } from "jotai";
 import { DevTools } from "jotai-devtools";
+import { Eclipse } from "lucide-react";
 import { AspectRatio } from "@/components/ui/AspectRatio";
 import { themeEffect } from "@/atoms/themeEffect";
 import { Controls } from "@/components/Controls";
-import { Preview } from "@/components/Preview";
+import { Graphics } from "@/components/Graphics";
 import { Download } from "@/components/Download";
 import { ChooseImages } from "@/components/ChooseImages";
 import { I18nProvider } from "@/components/I18nProvider";
-import { ReverseImages } from "@/components/ReverseImages";
 import { TooltipProvider } from "@/components/ui/Tooltip";
 import { ChangeTheme } from "@/components/ChangeTheme";
+import { Button } from "@/components/ui/Button";
+import { SeeExample } from "@/components/SeeExample";
 
 export function App() {
   useAtom(themeEffect);
@@ -20,18 +22,37 @@ export function App() {
       <TooltipProvider>
         <main className="container">
           <div className="grid md:grid-cols-[1fr_320px] overflow-hidden rounded-xl border shadow-md md:shadow-xl">
-            <AspectRatio ratio={16 / 9} className="bg-muted">
+            <AspectRatio
+              ratio={16 / 9}
+              className="bg-muted flex flex-col justify-center px-3 py-6"
+            >
               <Suspense>
-                <Preview />
+                <Graphics
+                  fallback={
+                    <div className="flex flex-col items-center gap-3 lg:gap-6 text-muted-foreground">
+                      <Eclipse className="h-12 w-12 lg:h-24 lg:w-24" />
+                      <h1 className="text-2xl lg:text-4xl">Shadowave</h1>
+                      <p className="max-w-[350px] text-center">
+                        Choose screenshots featuring both light and dark themes
+                        to start waving.
+                      </p>
+                      <div className="flex gap-4">
+                        <Button variant="outline" asChild>
+                          <label htmlFor="image-files" role="button">
+                            Choose Images
+                          </label>
+                        </Button>
+                        <SeeExample />
+                      </div>
+                    </div>
+                  }
+                />
               </Suspense>
             </AspectRatio>
             <div className="flex flex-col justify-between p-6 gap-8 border-l">
               <Suspense>
-                <div className="flex gap-2">
-                  <ChooseImages className="grow" />
-                  <ReverseImages />
-                </div>
-                <Controls/>
+                <ChooseImages inputProps={{ id: "image-files" }} />
+                <Controls />
                 <Download />
               </Suspense>
             </div>

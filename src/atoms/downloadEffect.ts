@@ -6,7 +6,7 @@ export const downloadEffect = atomEffect((get, set) => {
   if (raster) {
     const downloadLink = document.createElement("a");
     downloadLink.href = raster;
-    downloadLink.download = "output.png";
+    downloadLink.download = "shadowave.png";
     downloadLink.click();
     set(rasterAtom, null);
   }
