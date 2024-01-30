@@ -17,26 +17,26 @@ export interface AtomSliderProps
 export function AtomSlider(props: AtomSliderProps) {
   const { label, atom, className, min, max, disabled, ...other } = props;
   const [value, setValue] = useAtom(atom);
-  const id = useId();
+  const labelId = useId();
 
   return (
     <div className={cn('grid', 'gap-4', className)}>
       {label && (
         <div className="flex items-center justify-between">
-          <Label htmlFor={id}>{label}</Label>
+          <Label id={labelId}>{label}</Label>
           <Input
             type="number"
             value={value}
             onChange={e => setValue(e.target.valueAsNumber)}
-            className="w-14 h-6 rounded-md border border-transparent px-2 py-0.5 text-right text-sm text-muted-foreground hover:border-border"
+            className="w-auto h-6 rounded-md border border-transparent px-2 py-0.5 text-right text-sm text-muted-foreground hover:border-border [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             min={min}
             max={max}
             disabled={disabled}
+            aria-labelledby={labelId}
           />
         </div>
       )}
       <Slider
-        id={id}
         value={[value]}
         onValueChange={([v]) => setValue(v)}
         min={min}

@@ -17,12 +17,17 @@ msgstr ""
 msgid "{0, plural, one {# image} other {# images}}"
 msgstr ""
 
-#: src/components/Controls.tsx:35
+#: src/components/Controls.tsx:44
+#: src/components/Controls.tsx:50
 msgid "Amplitude"
 msgstr ""
 
 #: src/App.tsx:68
 msgid "Built by <0>gzukas</0>. The source code is available on <1>GitHub</1>."
+msgstr ""
+
+#: src/components/ChangeTheme.tsx:22
+msgid "Change theme"
 msgstr ""
 
 #: src/App.tsx:46
@@ -34,7 +39,7 @@ msgstr ""
 msgid "Choose screenshots featuring both light and dark themes to start waving."
 msgstr ""
 
-#: src/components/ChangeTheme.tsx:28
+#: src/components/ChangeTheme.tsx:31
 msgid "Dark"
 msgstr ""
 
@@ -42,11 +47,12 @@ msgstr ""
 msgid "Download PNG"
 msgstr ""
 
-#: src/components/Controls.tsx:28
+#: src/components/Controls.tsx:34
+#: src/components/Controls.tsx:40
 msgid "Frequncy"
 msgstr ""
 
-#: src/components/ChangeTheme.tsx:25
+#: src/components/ChangeTheme.tsx:28
 msgid "Light"
 msgstr ""
 
@@ -54,11 +60,13 @@ msgstr ""
 msgid "Remove images"
 msgstr ""
 
-#: src/components/ReverseImages.tsx:38
+#: src/components/ReverseImages.tsx:36
+#: src/components/ReverseImages.tsx:41
 msgid "Reverse images"
 msgstr ""
 
-#: src/components/Controls.tsx:21
+#: src/components/Controls.tsx:24
+#: src/components/Controls.tsx:30
 msgid "Rotation"
 msgstr ""
 
@@ -66,6 +74,6 @@ msgstr ""
 msgid "See Example"
 msgstr ""
 
-#: src/components/ChangeTheme.tsx:31
+#: src/components/ChangeTheme.tsx:34
 msgid "System"
 msgstr ""

@@ -32,6 +32,9 @@ export function ReverseImages() {
           disabled={images.length < 2}
         >
           <Icon className="w-4 h-4" />
+          <span className="sr-only">
+            <Trans>Reverse images</Trans>
+          </span>
         </Button>
       </TooltipTrigger>
       <TooltipContent>

@@ -50,7 +50,7 @@ export function ChooseImages(props: ChooseImagesProps) {
     >
       <ReverseImages />
       <Button variant="secondary" asChild>
-        <label role="button" className="grow">
+        <label className="grow cursor-pointer">
           {images.length ? (
             <Plural value={images.length} one="# image" other="# images" />
           ) : (

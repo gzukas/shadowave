@@ -1,5 +1,6 @@
 import { useAtom, useAtomValue } from 'jotai';
-import { Trans } from '@lingui/macro';
+import { Trans, msg } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 import { cn } from '@/lib/utils';
 import { sensibleDefaultsEffect } from '@/atoms/sensibleDefaultsEffect';
 import { amplitudeAtom } from '@/atoms/amplitudeAtom';
@@ -13,6 +14,8 @@ export type ControlsProp = React.ComponentPropsWithoutRef<'div'>;
 export function Controls(props: ControlsProp) {
   const { className, ...other } = props;
   const images = useAtomValue(imagesAtom);
+  const { _ } = useLingui();
+
   useAtom(sensibleDefaultsEffect);
 
   return (
@@ -23,6 +26,9 @@ export function Controls(props: ControlsProp) {
         min={0}
         max={360}
         disabled={!images.length}
+        ThumbProps={{
+          'aria-label': _(msg`Rotation`)
+        }}
       />
       <AtomSlider
         label={<Trans>Frequncy</Trans>}
@@ -30,6 +36,9 @@ export function Controls(props: ControlsProp) {
         min={1}
         max={1000}
         disabled={!images.length}
+        ThumbProps={{
+          'aria-label': _(msg`Frequncy`)
+        }}
       />
       <AtomSlider
         label={<Trans>Amplitude</Trans>}
@@ -37,6 +46,9 @@ export function Controls(props: ControlsProp) {
         min={0}
         max={1000}
         disabled={!images.length}
+        ThumbProps={{
+          'aria-label': _(msg`Amplitude`)
+        }}
       />
     </div>
   );

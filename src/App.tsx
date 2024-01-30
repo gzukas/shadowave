@@ -42,7 +42,10 @@ export function App() {
                       </p>
                       <div className="flex gap-4">
                         <Button variant="outline" asChild>
-                          <label htmlFor="image-files" role="button">
+                          <label
+                            htmlFor="image-files"
+                            className="cursor-pointer"
+                          >
                             <Trans>Choose Images</Trans>
                           </label>
                         </Button>
