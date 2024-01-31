@@ -1,9 +1,9 @@
 import { useRef } from 'react';
-import { useAtom } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { Trash } from 'lucide-react';
 import { Trans, Plural } from '@lingui/macro';
 import { cn } from '@/lib/utils';
-import { imagesAtom } from '@/atoms/imagesAtom';
+import { filesOrLinksAtom, imagesAtom } from '@/atoms/imagesAtom';
 import { Button } from '@/components/ui/Button';
 import {
   Tooltip,
@@ -22,7 +22,8 @@ export interface ChooseImagesProps
 
 export function ChooseImages(props: ChooseImagesProps) {
   const { className, inputProps, ...other } = props;
-  const [images, setImages] = useAtom(imagesAtom);
+  const setImages = useSetAtom(imagesAtom);
+  const filesOrLinks = useAtomValue(filesOrLinksAtom);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = e => {
@@ -49,25 +50,31 @@ export function ChooseImages(props: ChooseImagesProps) {
       {...other}
     >
       <ReverseImages />
-      <Button variant="secondary" asChild>
-        <label className="grow cursor-pointer">
-          {images.length ? (
-            <Plural value={images.length} one="# image" other="# images" />
-          ) : (
-            <Trans>Choose Images</Trans>
-          )}
-          <input
-            ref={inputRef}
-            type="file"
-            onChange={handleChange}
-            className="hidden"
-            accept="image/*"
-            multiple
-            {...inputProps}
-          />
-        </label>
-      </Button>
-      {images.length ? (
+      <label className="grow">
+        <Button variant="secondary" className="flex justify-start" asChild>
+          <div role="button">
+            {filesOrLinks.length ? (
+              <Plural
+                value={filesOrLinks.length}
+                one="# image"
+                other="# images"
+              />
+            ) : (
+              <Trans>Choose Images</Trans>
+            )}
+          </div>
+        </Button>
+        <input
+          ref={inputRef}
+          type="file"
+          onChange={handleChange}
+          className="hidden"
+          accept="image/*"
+          multiple
+          {...inputProps}
+        />
+      </label>
+      {filesOrLinks.length ? (
         <Tooltip>
           <TooltipTrigger asChild>
             <Button variant="secondary" size="icon" onClick={handleRemoveClick}>

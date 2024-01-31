@@ -1,8 +1,9 @@
 import { ExtractAtomValue, atom } from 'jotai';
 import { loadImage } from '@/utils/loadImage';
 import { readFile } from '@/utils/readFile';
+import { unwrap } from 'jotai/utils';
 
-const filesOrLinksAtom = atom<FileList | string[]>([]);
+export const filesOrLinksAtom = atom<FileList | string[]>([]);
 
 export const imagesAtom = atom(
   async get => {
@@ -28,3 +29,7 @@ export const imagesAtom = atom(
     set(filesOrLinksAtom, filesOrLinks);
   }
 );
+
+export const imageCountAtom = atom(get => {
+  return get(unwrap(imagesAtom))?.length ?? 0;
+});

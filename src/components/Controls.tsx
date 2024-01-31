@@ -6,14 +6,14 @@ import { sensibleDefaultsEffect } from '@/atoms/sensibleDefaultsEffect';
 import { amplitudeAtom } from '@/atoms/amplitudeAtom';
 import { rotationAtom } from '@/atoms/rotationAtom';
 import { frequencyAtom } from '@/atoms/frequencyAtom';
-import { imagesAtom } from '@/atoms/imagesAtom';
+import { imageCountAtom } from '@/atoms/imagesAtom';
 import { AtomSlider } from './AtomSlider';
 
 export type ControlsProp = React.ComponentPropsWithoutRef<'div'>;
 
 export function Controls(props: ControlsProp) {
   const { className, ...other } = props;
-  const images = useAtomValue(imagesAtom);
+  const imageCount = useAtomValue(imageCountAtom);
   const { _ } = useLingui();
 
   useAtom(sensibleDefaultsEffect);
@@ -25,7 +25,7 @@ export function Controls(props: ControlsProp) {
         atom={rotationAtom}
         min={0}
         max={360}
-        disabled={!images.length}
+        disabled={!imageCount}
         ThumbProps={{
           'aria-label': _(msg`Rotation`)
         }}
@@ -35,7 +35,7 @@ export function Controls(props: ControlsProp) {
         atom={frequencyAtom}
         min={1}
         max={1000}
-        disabled={!images.length}
+        disabled={!imageCount}
         ThumbProps={{
           'aria-label': _(msg`Frequncy`)
         }}
@@ -45,7 +45,7 @@ export function Controls(props: ControlsProp) {
         atom={amplitudeAtom}
         min={0}
         max={1000}
-        disabled={!images.length}
+        disabled={!imageCount}
         ThumbProps={{
           'aria-label': _(msg`Amplitude`)
         }}

@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { useAtom } from 'jotai';
 import { DevTools } from 'jotai-devtools';
-import { Eclipse } from 'lucide-react';
+import { Eclipse, Loader2 } from 'lucide-react';
 import { Trans } from '@lingui/macro';
 import { AspectRatio } from '@/components/ui/AspectRatio';
 import { themeEffect } from '@/atoms/themeEffect';
@@ -26,12 +26,14 @@ export function App() {
           <div className="grid md:grid-cols-[1fr_320px] overflow-hidden rounded-xl border shadow-md md:shadow-xl">
             <AspectRatio
               ratio={16 / 9}
-              className="bg-muted flex flex-col justify-center px-3 py-6"
+              className="bg-muted flex justify-center items-center px-3 py-6"
             >
-              <Suspense>
+              <Suspense
+                fallback={<Loader2 className="animate-spin h-12 w-12" />}
+              >
                 <Graphics
                   fallback={
-                    <div className="flex flex-col items-center gap-3 lg:gap-6 text-muted-foreground">
+                    <div className="flex flex-col gap-3 items-center lg:gap-6">
                       <Eclipse className="h-12 w-12 lg:h-24 lg:w-24" />
                       <h1 className="text-2xl lg:text-4xl">Shadowave</h1>
                       <p className="max-w-[350px] text-center">
@@ -57,11 +59,9 @@ export function App() {
               </Suspense>
             </AspectRatio>
             <div className="flex flex-col justify-between p-6 gap-8 border-l">
-              <Suspense>
-                <ChooseImages inputProps={{ id: 'image-files' }} />
-                <Controls />
-                <Download />
-              </Suspense>
+              <ChooseImages inputProps={{ id: 'image-files' }} />
+              <Controls />
+              <Download />
             </div>
           </div>
           <DevTools />
