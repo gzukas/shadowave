@@ -32,7 +32,9 @@ export function App() {
             >
               {filesOrLinks.length ? (
                 <Suspense
-                  fallback={<Loader2 className="animate-spin h-12 w-12" />}
+                  fallback={
+                    <Loader2 className="h-12 w-12 text-muted-foreground animate-spin" />
+                  }
                 >
                   <Graphics />
                 </Suspense>
