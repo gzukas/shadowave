@@ -1,11 +1,10 @@
 import { Suspense } from 'react';
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtomValue } from 'jotai';
 import { DevTools } from 'jotai-devtools';
 import { Eclipse, Loader2 } from 'lucide-react';
 import { Trans } from '@lingui/macro';
 import { siteConfig } from '@/config/site';
 import { filesOrLinksAtom } from '@/atoms/imagesAtom';
-import { themeEffect } from '@/atoms/themeEffect';
 import { AspectRatio } from '@/components/ui/AspectRatio';
 import { Controls } from '@/components/Controls';
 import { Graphics } from '@/components/Graphics';
@@ -16,10 +15,11 @@ import { TooltipProvider } from '@/components/ui/Tooltip';
 import { ChangeTheme } from '@/components/ChangeTheme';
 import { Button } from '@/components/ui/Button';
 import { SeeExample } from '@/components/SeeExample';
+import { useThemeEffect } from './hooks/useThemeEffect';
 
 export function App() {
   const filesOrLinks = useAtomValue(filesOrLinksAtom);
-  useAtom(themeEffect);
+  useThemeEffect();
 
   return (
     <I18nProvider>
