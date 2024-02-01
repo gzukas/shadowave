@@ -41,7 +41,7 @@ export function Graphics(props: GraphicsProps) {
       {orderedImages.map((image, index) => (
         <image
           key={image.id}
-          xlinkHref={image.src}
+          href={image.src}
           {...(index === orderedImages.length - 1 && {
             clipPath: `url(#${maskId})`
           })}

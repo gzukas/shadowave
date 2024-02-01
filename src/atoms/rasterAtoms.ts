@@ -23,7 +23,7 @@ export const rasterizeAtom = atom(null, async (get, set) => {
   const svgString = new XMLSerializer().serializeToString(graphics);
   const image = await loadImage(`data:image/svg+xml;base64,${btoa(svgString)}`);
 
-  context!.drawImage(image, 0, 0);
+  context!.drawImage(image, 0, 0, width, height);
 
   set(rasterAtom, canvas.toDataURL('image/png'));
   set(resterizingAtom, false);
