@@ -5,6 +5,7 @@ import { orderedImagesAtom } from '@/atoms/orderedImagesAtom';
 import { rotationAtom } from '@/atoms/rotationAtom';
 import { largestImageAtom } from '@/atoms/largestImageAtom';
 import { graphicsAtom } from '@/atoms/graphicsAtom';
+import { scaleAtom } from '@/atoms/scaleAtom';
 
 export interface GraphicsProps extends React.ComponentPropsWithoutRef<'svg'> {
   fallback?: React.ReactNode;
@@ -18,6 +19,7 @@ export function Graphics(props: GraphicsProps) {
   const largestImage = useAtomValue(largestImageAtom);
   const rotation = useAtomValue(rotationAtom);
   const setGraphics = useSetAtom(graphicsAtom);
+  const scale = useAtomValue(scaleAtom);
 
   const maskId = useId();
 
@@ -32,10 +34,10 @@ export function Graphics(props: GraphicsProps) {
       <defs>
         <clipPath
           id={maskId}
-          transform={`rotate(-${rotation}) scale(2)`}
+          transform={`rotate(${rotation}) scale(${scale})`}
           transform-origin="50% 50%"
         >
-          <path d={wave.join(' ')} />
+          <path d={wave} />
         </clipPath>
       </defs>
       {orderedImages.map((image, index) => (

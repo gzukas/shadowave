@@ -9,17 +9,17 @@ export const waveAtom = atom(async get => {
   const largestImage = await get(largestImageAtom);
 
   if (!largestImage) {
-    return [];
+    return '';
   }
 
   const { width, height } = largestImage;
-  const path = [];
+  const path: Array<[string, string]> = [];
 
   for (let x = 0; x <= width; x++) {
     const y = height / 2 + amplitude * Math.sin(x / frequency);
-    path.push((x == 0 ? 'M' : 'L') + x.toFixed(2) + ',' + y.toFixed(2));
+    path.push([x.toFixed(1), y.toFixed(1)]);
   }
-  path.push(`L${width},${0} L0,0`);
 
-  return path;
+  const [m, ...ls] = path;
+  return `M${m}L${ls}V0H0Z`;
 });
