@@ -3,6 +3,11 @@ import { frequencyAtom } from './frequencyAtom';
 import { amplitudeAtom } from './amplitudeAtom';
 import { largestImageAtom } from './largestImageAtom';
 
+function round(n: number) {
+  const f = Number(n.toFixed(2));
+  return f > 0 && f < 1 ? String(f).substring(1) : String(f);
+}
+
 export const waveAtom = atom(async get => {
   const frequency = get(frequencyAtom);
   const amplitude = get(amplitudeAtom);
@@ -13,13 +18,16 @@ export const waveAtom = atom(async get => {
   }
 
   const { width, height } = largestImage;
-  const path: Array<[string, string]> = [];
+  let d = '';
+  let px = 0;
+  let py = 0;
 
   for (let x = 0; x <= width; x++) {
     const y = height / 2 + amplitude * Math.sin(x / frequency);
-    path.push([x.toFixed(1), y.toFixed(1)]);
+    d += x ? `${round(x - px)} ${round(y - py)} ` : `m${round(x)} ${round(y)} `;
+    px = x;
+    py = y;
   }
 
-  const [m, ...ls] = path;
-  return `M${m}L${ls}V0H0Z`;
+  return `${d}V0H0Z`;
 });
