@@ -17,14 +17,15 @@ export interface AtomSliderProps
 export function AtomSlider(props: AtomSliderProps) {
   const { label, atom, className, min, max, disabled, ...other } = props;
   const [value, setValue] = useAtom(atom);
-  const labelId = useId();
+  const inputId = useId();
 
   return (
     <div className={cn('grid', 'gap-4', className)}>
       {label && (
         <div className="flex items-center justify-between">
-          <Label id={labelId}>{label}</Label>
+          <Label htmlFor={inputId}>{label}</Label>
           <Input
+            id={inputId}
             type="number"
             value={value}
             onChange={e => setValue(e.target.valueAsNumber)}
@@ -32,7 +33,6 @@ export function AtomSlider(props: AtomSliderProps) {
             min={min}
             max={max}
             disabled={disabled}
-            aria-labelledby={labelId}
           />
         </div>
       )}
