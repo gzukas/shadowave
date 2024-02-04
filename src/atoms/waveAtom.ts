@@ -5,7 +5,7 @@ import { largestImageAtom } from './largestImageAtom';
 
 function round(n: number) {
   const f = Number(n.toFixed(2));
-  return f > 0 && f < 1 ? String(f).substring(1) : String(f);
+  return f > -1 && f < 1 ? String(f).replace(/^(-)?0\./, '$1.') : String(f);
 }
 
 export const waveAtom = atom(async get => {
