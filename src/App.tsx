@@ -24,8 +24,8 @@ export function App() {
   return (
     <I18nProvider>
       <TooltipProvider>
-        <main className="container">
-          <div className="grid md:grid-cols-[1fr_320px] overflow-hidden rounded-xl border shadow-md md:shadow-xl">
+        <main className="sm:container">
+          <div className="grid lg:grid-cols-[1fr_320px] sm:border sm:rounded-xl sm:shadow-md md:shadow-xl overflow-hidden">
             <AspectRatio
               ratio={16 / 9}
               className="bg-muted flex justify-center items-center px-3 py-6"
@@ -61,7 +61,7 @@ export function App() {
                 </div>
               )}
             </AspectRatio>
-            <div className="flex flex-col justify-between p-6 gap-8 border-l">
+            <div className="flex flex-col justify-between p-6 gap-8 border-t lg:border-t-0 lg:border-l">
               <ChooseImages inputProps={{ id: 'image-files' }} />
               <Controls />
               <Download />
@@ -69,8 +69,8 @@ export function App() {
           </div>
           <DevTools />
         </main>
-        <footer className="container py-6 flex items-center justify-between">
-          <p className="text-sm text-center text-muted-foreground">
+        <footer className="sm:container py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-center text-muted-foreground ">
             <Trans>
               Built by{' '}
               <a href={siteConfig.links.author} target="_blank">
