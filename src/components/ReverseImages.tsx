@@ -31,7 +31,7 @@ export function ReverseImages() {
           onClick={handleClick}
           disabled={imageCount < 2}
         >
-          <Icon className="w-4 h-4" />
+          <Icon className="h-4 w-4" />
           <span className="sr-only">
             <Trans>Reverse images</Trans>
           </span>

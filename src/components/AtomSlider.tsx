@@ -29,7 +29,7 @@ export function AtomSlider(props: AtomSliderProps) {
             type="number"
             value={value}
             onChange={e => setValue(e.target.valueAsNumber)}
-            className="w-auto h-6 rounded-md border border-transparent px-2 py-0.5 text-right text-sm text-muted-foreground hover:border-border [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            className="h-6 w-auto rounded-md border border-transparent px-2 py-0.5 text-right text-sm text-muted-foreground [appearance:textfield] hover:border-border [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
             min={min}
             max={max}
             disabled={disabled}
