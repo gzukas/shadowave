@@ -7,8 +7,6 @@ export const scaleAtom = atom(async get => {
     return 1;
   }
   const { width, height } = largestImage;
-  const diagonal = Math.sqrt(width ** 2 + height ** 2);
-  return Math.max(
-    ...[largestImage.width, largestImage.height].map(x => diagonal / x)
-  );
+  const diagonal = Math.hypot(width, height);
+  return Math.max(diagonal / width, diagonal / height);
 });
