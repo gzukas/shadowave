@@ -1,41 +1,23 @@
-import { useRef } from 'react';
-import { useAtomValue, useSetAtom } from 'jotai';
+import { useAtomValue } from 'jotai';
 import { Trash } from 'lucide-react';
 import { Trans, Plural } from '@lingui/macro';
 import { cn } from '@/lib/utils';
-import { filesOrLinksAtom, imagesAtom } from '@/atoms/imagesAtom';
+import { filesOrLinksAtom } from '@/atoms/imagesAtom';
 import { Button } from '@/components/ui/Button';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger
 } from '@/components/ui/Tooltip';
+import { useImagesDisclosure } from '@/hooks/useImagesDisclosure';
 import { ReverseImages } from './ReverseImages';
 
-export interface ChooseImagesProps
-  extends React.ComponentPropsWithoutRef<'div'> {
-  inputProps?: Omit<
-    Partial<React.ComponentPropsWithoutRef<'input'>>,
-    'type' | 'onChange' | 'className'
-  >;
-}
+export type ChooseImagesProps = React.ComponentPropsWithoutRef<'div'>;
 
 export function ChooseImages(props: ChooseImagesProps) {
-  const { className, inputProps, ...other } = props;
-  const setImages = useSetAtom(imagesAtom);
+  const { className, ...other } = props;
+  const [openImages, closeImages] = useImagesDisclosure();
   const filesOrLinks = useAtomValue(filesOrLinksAtom);
-  const inputRef = useRef<HTMLInputElement | null>(null);
-
-  const handleChange: React.ChangeEventHandler<HTMLInputElement> = e => {
-    setImages(e.target.files ?? []);
-  };
-
-  const handleRemoveClick = () => {
-    setImages([]);
-    if (inputRef.current) {
-      inputRef.current.value = '';
-    }
-  };
 
   return (
     <div
@@ -50,34 +32,28 @@ export function ChooseImages(props: ChooseImagesProps) {
       {...other}
     >
       <ReverseImages />
-      <label className="grow">
-        <Button variant="secondary" className="flex justify-start" asChild>
-          <div role="button">
-            {filesOrLinks.length ? (
-              <Plural
-                value={filesOrLinks.length}
-                one="# image"
-                other="# images"
-              />
-            ) : (
-              <Trans>Choose Images</Trans>
-            )}
-          </div>
-        </Button>
-        <input
-          ref={inputRef}
-          type="file"
-          onChange={handleChange}
-          className="hidden"
-          accept="image/*"
-          multiple
-          {...inputProps}
-        />
-      </label>
+      <Button
+        variant="secondary"
+        className="flex grow justify-start"
+        onClick={openImages}
+        asChild
+      >
+        <div role="button">
+          {filesOrLinks.length ? (
+            <Plural
+              value={filesOrLinks.length}
+              one="# image"
+              other="# images"
+            />
+          ) : (
+            <Trans>Choose Images</Trans>
+          )}
+        </div>
+      </Button>
       {filesOrLinks.length ? (
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button variant="secondary" size="icon" onClick={handleRemoveClick}>
+            <Button variant="secondary" size="icon" onClick={closeImages}>
               <Trash className="h-4 w-4" />
             </Button>
           </TooltipTrigger>

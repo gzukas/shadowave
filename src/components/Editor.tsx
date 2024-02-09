@@ -7,16 +7,18 @@ import { filesOrLinksAtom } from '@/atoms/imagesAtom';
 import { AspectRatio } from '@/components/ui/AspectRatio';
 import { Controls } from '@/components/Controls';
 import { Graphics } from '@/components/Graphics';
-import { Download } from '@/components/Download';
+import { Export } from '@/components/Export';
 import { ChooseImages } from '@/components/ChooseImages';
 import { Button } from '@/components/ui/Button';
 import { SeeExample } from '@/components/SeeExample';
+import { useImagesDisclosure } from '@/hooks/useImagesDisclosure';
 
 export type EditorProps = React.ComponentPropsWithoutRef<'div'>;
 
 export function Editor(props: EditorProps) {
   const { className, ...other } = props;
   const filesOrLinks = useAtomValue(filesOrLinksAtom);
+  const [openImages] = useImagesDisclosure();
 
   return (
     <div
@@ -55,22 +57,18 @@ export function Editor(props: EditorProps) {
               </Trans>
             </p>
             <div className="flex gap-4">
-              <label htmlFor="image-files">
-                <Button variant="outline" asChild>
-                  <div role="button">
-                    <Trans>Choose Images</Trans>
-                  </div>
-                </Button>
-              </label>
+              <Button variant="outline" onClick={openImages}>
+                <Trans>Choose Images</Trans>
+              </Button>
               <SeeExample />
             </div>
           </div>
         )}
       </AspectRatio>
       <div className="flex flex-col justify-between gap-8 border-t p-6 lg:border-l lg:border-t-0">
-        <ChooseImages inputProps={{ id: 'image-files' }} />
+        <ChooseImages />
         <Controls />
-        <Download />
+        <Export />
       </div>
     </div>
   );

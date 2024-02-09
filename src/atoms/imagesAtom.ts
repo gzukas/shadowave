@@ -3,7 +3,7 @@ import { loadImage } from '@/utils/loadImage';
 import { readFile } from '@/utils/readFile';
 import { unwrap } from 'jotai/utils';
 
-export const filesOrLinksAtom = atom<FileList | string[]>([]);
+export const filesOrLinksAtom = atom<File[] | string[]>([]);
 
 export const imagesAtom = atom(
   async get => {

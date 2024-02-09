@@ -25,7 +25,6 @@ export function ReverseImages() {
     <Tooltip>
       <TooltipTrigger asChild>
         <Button
-          type="button"
           variant="secondary"
           size="icon"
           onClick={handleClick}

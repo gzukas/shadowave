@@ -13,7 +13,7 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/components/ChooseImages.tsx:55
+#: src/components/ChooseImages.tsx:43
 msgid "{0, plural, one {# image} other {# images}}"
 msgstr ""
 
@@ -22,7 +22,7 @@ msgstr ""
 msgid "Amplitude"
 msgstr ""
 
-#: src/App.tsx:68
+#: src/App.tsx:21
 msgid "Built by <0>gzukas</0>. The source code is available on <1>GitHub</1>."
 msgstr ""
 
@@ -30,21 +30,21 @@ msgstr ""
 msgid "Change theme"
 msgstr ""
 
-#: src/App.tsx:46
-#: src/components/ChooseImages.tsx:57
+#: src/components/ChooseImages.tsx:49
+#: src/components/Editor.tsx:61
 msgid "Choose Images"
 msgstr ""
 
-#: src/App.tsx:38
+#: src/components/Editor.tsx:54
 msgid "Choose screenshots featuring both light and dark themes to start waving."
 msgstr ""
 
-#: src/components/ChangeTheme.tsx:31
+#: src/components/ChangeTheme.tsx:33
 msgid "Dark"
 msgstr ""
 
-#: src/components/Download.tsx:31
-msgid "Download PNG"
+#: src/components/Export.tsx:28
+msgid "Export"
 msgstr ""
 
 #: src/components/Controls.tsx:34
@@ -52,16 +52,16 @@ msgstr ""
 msgid "Frequncy"
 msgstr ""
 
-#: src/components/ChangeTheme.tsx:28
+#: src/components/ChangeTheme.tsx:29
 msgid "Light"
 msgstr ""
 
-#: src/components/ChooseImages.tsx:78
+#: src/components/ChooseImages.tsx:61
 msgid "Remove images"
 msgstr ""
 
-#: src/components/ReverseImages.tsx:36
-#: src/components/ReverseImages.tsx:41
+#: src/components/ReverseImages.tsx:35
+#: src/components/ReverseImages.tsx:40
 msgid "Reverse images"
 msgstr ""
 
@@ -74,6 +74,6 @@ msgstr ""
 msgid "See Example"
 msgstr ""
 
-#: src/components/ChangeTheme.tsx:34
+#: src/components/ChangeTheme.tsx:37
 msgid "System"
 msgstr ""
