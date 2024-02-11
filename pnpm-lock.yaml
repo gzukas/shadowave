@@ -54,11 +54,11 @@ dependencies:
     specifier: ^0.7.1
     version: 0.7.1(@emotion/react@11.11.3)(@types/react@18.2.55)(react-dom@18.2.0)(react@18.2.0)(redux@5.0.1)
   jotai-effect:
-    specifier: ^0.3.2
-    version: 0.3.2(jotai@2.6.4)
+    specifier: ^0.5.0
+    version: 0.5.0(jotai@2.6.4)
   lucide-react:
-    specifier: ^0.314.0
-    version: 0.314.0(react@18.2.0)
+    specifier: ^0.323.0
+    version: 0.323.0(react@18.2.0)
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -131,11 +131,11 @@ devDependencies:
     specifier: ^8.4.35
     version: 8.4.35
   prettier:
-    specifier: 3.2.4
-    version: 3.2.4
+    specifier: 3.2.5
+    version: 3.2.5
   prettier-plugin-tailwindcss:
     specifier: ^0.5.11
-    version: 0.5.11(prettier@3.2.4)
+    version: 0.5.11(prettier@3.2.5)
   tailwindcss:
     specifier: ^3.4.1
     version: 3.4.1
@@ -3600,8 +3600,8 @@ packages:
       - redux
     dev: false
 
-  /jotai-effect@0.3.2(jotai@2.6.4):
-    resolution: {integrity: sha512-gfHYmA8Xbru2phaPI7DLB7su2EKpJcVyZZCK+xuLuA+1v5BxKJOmR80q9x2W0W0pHn1HMUa3wYTGPsjg9z23Ag==}
+  /jotai-effect@0.5.0(jotai@2.6.4):
+    resolution: {integrity: sha512-3ZuJxc2t8S7OjYc0FcI21BIm8a4nOeK1GQPSq8Hzt5mcC0YxjAVEMXdF+C8wHJEiuRevtcjBfWyVBeCUuTENJA==}
     peerDependencies:
       jotai: '>=2.5.0'
     dependencies:
@@ -3809,8 +3809,8 @@ packages:
       yallist: 4.0.0
     dev: true
 
-  /lucide-react@0.314.0(react@18.2.0):
-    resolution: {integrity: sha512-c2zOW7TOyKxPCaSs1og2lFdoI3SR4iii3yrZJU2Zpdc78nOw4fUmrcFNultaCiwZcr4CyiKdzjMdvKNlBBk+UQ==}
+  /lucide-react@0.323.0(react@18.2.0):
+    resolution: {integrity: sha512-rTXZFILl2Y4d1SG9p1Mdcf17AcPvPvpc/egFIzUrp7IUy60MUQo3Oi1mu8LGYXUVwuRZYsSMt3csHRW5mAovJg==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:
@@ -4163,7 +4163,7 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier-plugin-tailwindcss@0.5.11(prettier@3.2.4):
+  /prettier-plugin-tailwindcss@0.5.11(prettier@3.2.5):
     resolution: {integrity: sha512-AvI/DNyMctyyxGOjyePgi/gqj5hJYClZ1avtQvLlqMT3uDZkRbi4HhGUpok3DRzv9z7Lti85Kdj3s3/1CeNI0w==}
     engines: {node: '>=14.21.3'}
     peerDependencies:
@@ -4212,11 +4212,11 @@ packages:
       prettier-plugin-twig-melody:
         optional: true
     dependencies:
-      prettier: 3.2.4
+      prettier: 3.2.5
     dev: true
 
-  /prettier@3.2.4:
-    resolution: {integrity: sha512-FWu1oLHKCrtpO1ypU6J0SbK2d9Ckwysq6bHj/uaCP26DxrPpppCLQRGVuqAxSTvhF00AcvDRyYrLNW7ocBhFFQ==}
+  /prettier@3.2.5:
+    resolution: {integrity: sha512-3/GWa9aOC0YeD7LUfvOG2NiDyhOWRvt1k+rcKhOuYnMY24iiCphgneUfJDyFXd6rZCAnuLBv6UeAULtrhT/F4A==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
