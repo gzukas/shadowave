@@ -7,12 +7,19 @@ export function useImagesDisclosure() {
   const setImages = useSetAtom(imagesAtom);
 
   const open = useCallback(async () => {
-    setImages(
-      await fileOpen({
-        mimeTypes: ['image/*'],
-        multiple: true
-      })
-    );
+    try {
+      setImages(
+        await fileOpen({
+          mimeTypes: ['image/*'],
+          multiple: true
+        })
+      );
+    } catch (error) {
+      // Disregard errors if file opening is canceled.
+      if (!(error instanceof DOMException)) {
+        throw error;
+      }
+    }
   }, [setImages]);
 
   const close = useCallback(() => {
