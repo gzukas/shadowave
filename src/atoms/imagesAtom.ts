@@ -1,7 +1,7 @@
 import { ExtractAtomValue, atom } from 'jotai';
+import { unwrap } from 'jotai/utils';
 import { loadImage } from '@/utils/loadImage';
 import { readFile } from '@/utils/readFile';
-import { unwrap } from 'jotai/utils';
 
 export const filesOrLinksAtom = atom<File[] | string[]>([]);
 

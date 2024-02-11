@@ -20,7 +20,6 @@ export function Graphics(props: GraphicsProps) {
   const rotation = useAtomValue(rotationAtom);
   const setGraphics = useSetAtom(graphicsAtom);
   const scale = useAtomValue(scaleAtom);
-
   const maskId = useId();
 
   return largestImage ? (

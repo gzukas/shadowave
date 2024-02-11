@@ -36,19 +36,12 @@ export function ChooseImages(props: ChooseImagesProps) {
         variant="secondary"
         className="flex grow justify-start"
         onClick={openImages}
-        asChild
       >
-        <div role="button">
-          {filesOrLinks.length ? (
-            <Plural
-              value={filesOrLinks.length}
-              one="# image"
-              other="# images"
-            />
-          ) : (
-            <Trans>Choose Images</Trans>
-          )}
-        </div>
+        {filesOrLinks.length ? (
+          <Plural value={filesOrLinks.length} one="# image" other="# images" />
+        ) : (
+          <Trans>Choose Images</Trans>
+        )}
       </Button>
       {filesOrLinks.length ? (
         <Tooltip>
