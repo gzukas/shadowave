@@ -27,5 +27,5 @@ export const waveAtom = atom(async get => {
     py = y;
   }
 
-  return `M0 ${ys.join(' 1 ')} V0H0Z`;
+  return `m0 ${ys.join(' 1 ')} V0H0Z`;
 });
