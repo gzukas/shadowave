@@ -24,13 +24,7 @@ export function Editor(props: EditorProps) {
   return (
     <div
       className={cn(
-        'grid',
-        'overflow-hidden',
-        'sm:rounded-xl',
-        'sm:border',
-        'sm:shadow-md',
-        'md:shadow-xl',
-        'lg:grid-cols-[1fr_320px]',
+        'grid divide-y sm:rounded-xl sm:border sm:shadow-md md:shadow-xl lg:grid-cols-[1fr_320px] lg:divide-x lg:divide-y-0',
         className
       )}
       {...other}
@@ -66,7 +60,7 @@ export function Editor(props: EditorProps) {
           </div>
         )}
       </AspectRatio>
-      <div className="flex flex-col justify-between gap-8 border-t p-6 lg:border-l lg:border-t-0">
+      <div className="flex flex-col justify-between gap-8 p-6">
         <ChooseImages />
         <Controls />
         <div className="flex gap-2">
