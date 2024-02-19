@@ -50,6 +50,9 @@ export function CopyImage() {
               'animate-spin': state === 'copying'
             })}
           />
+          <span className="sr-only">
+            <Trans>Copy PNG</Trans>
+          </span>
         </Button>
       </TooltipTrigger>
       <TooltipContent>

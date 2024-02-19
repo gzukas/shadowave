@@ -48,6 +48,9 @@ export function ChooseImages(props: ChooseImagesProps) {
             disabled={!filesOrLinks.length}
           >
             <Trash2 className="h-4 w-4" />
+            <span className="sr-only">
+              <Trans>Remove images</Trans>
+            </span>
           </Button>
         </TooltipTrigger>
         <TooltipContent>
