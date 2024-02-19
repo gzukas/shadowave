@@ -1,17 +1,16 @@
-import { useAtomValue, useSetAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import { ImageDown, Loader2 } from 'lucide-react';
 import { Trans } from '@lingui/macro';
 import { cn } from '@/lib/utils';
 import { graphicsAtom } from '@/atoms/graphicsAtom';
-import { exportAtom, exportingAtom } from '@/atoms/exportAtoms';
+import { exportAtom } from '@/atoms/exportAtoms';
 import { Button, ButtonProps } from '@/components/ui/Button';
 
-export type ExportProps = ButtonProps;
+export type ExportImageProps = ButtonProps;
 
-export function Export(props: ExportProps) {
+export function ExportImage(props: ExportImageProps) {
   const graphics = useAtomValue(graphicsAtom);
-  const exportAsImage = useSetAtom(exportAtom);
-  const isExporting = useAtomValue(exportingAtom);
+  const [isExporting, exportAsImage] = useAtom(exportAtom);
   const Icon = isExporting ? Loader2 : ImageDown;
 
   return (
@@ -21,7 +20,7 @@ export function Export(props: ExportProps) {
       {...props}
     >
       <Icon
-        className={cn('mr-2', 'h-4', 'w-4', {
+        className={cn('mr-2 h-4 w-4', {
           'animate-spin': isExporting
         })}
       />

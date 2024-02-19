@@ -7,11 +7,12 @@ import { filesOrLinksAtom } from '@/atoms/imagesAtom';
 import { AspectRatio } from '@/components/ui/AspectRatio';
 import { Controls } from '@/components/Controls';
 import { Graphics } from '@/components/Graphics';
-import { Export } from '@/components/Export';
+import { ExportImage } from '@/components/ExportImage';
 import { ChooseImages } from '@/components/ChooseImages';
 import { Button } from '@/components/ui/Button';
 import { SeeExample } from '@/components/SeeExample';
 import { useImagesDisclosure } from '@/hooks/useImagesDisclosure';
+import { CopyImage } from './CopyImage';
 
 export type EditorProps = React.ComponentPropsWithoutRef<'div'>;
 
@@ -68,7 +69,10 @@ export function Editor(props: EditorProps) {
       <div className="flex flex-col justify-between gap-8 border-t p-6 lg:border-l lg:border-t-0">
         <ChooseImages />
         <Controls />
-        <Export />
+        <div className="flex gap-2">
+          <ExportImage className="grow" />
+          <CopyImage />
+        </div>
       </div>
     </div>
   );

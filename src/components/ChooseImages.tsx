@@ -1,5 +1,5 @@
 import { useAtomValue } from 'jotai';
-import { Trash } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
 import { Trans, Plural } from '@lingui/macro';
 import { cn } from '@/lib/utils';
 import { filesOrLinksAtom } from '@/atoms/imagesAtom';
@@ -24,7 +24,7 @@ export function ChooseImages(props: ChooseImagesProps) {
       className={cn(
         'flex',
         'items-center',
-        'space-x-1',
+        'gap-1',
         'rounded-md',
         'bg-secondary',
         className
@@ -32,29 +32,28 @@ export function ChooseImages(props: ChooseImagesProps) {
       {...other}
     >
       <ReverseImages />
-      <Button
-        variant="secondary"
-        className="flex grow justify-start"
-        onClick={openImages}
-      >
+      <Button variant="secondary" className="flex grow" onClick={openImages}>
         {filesOrLinks.length ? (
           <Plural value={filesOrLinks.length} one="# image" other="# images" />
         ) : (
           <Trans>Choose Images</Trans>
         )}
       </Button>
-      {filesOrLinks.length ? (
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button variant="secondary" size="icon" onClick={closeImages}>
-              <Trash className="h-4 w-4" />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>
-            <Trans>Remove images</Trans>
-          </TooltipContent>
-        </Tooltip>
-      ) : null}
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            variant="secondary"
+            size="icon"
+            onClick={closeImages}
+            disabled={!filesOrLinks.length}
+          >
+            <Trash2 className="h-4 w-4" />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <Trans>Remove images</Trans>
+        </TooltipContent>
+      </Tooltip>
     </div>
   );
 }
