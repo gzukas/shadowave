@@ -13,7 +13,7 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/components/ChooseImages.tsx:43
+#: src/components/ChooseImages.tsx:37
 msgid "{0, plural, one {# image} other {# images}}"
 msgstr ""
 
@@ -30,20 +30,24 @@ msgstr ""
 msgid "Change theme"
 msgstr ""
 
-#: src/components/ChooseImages.tsx:49
-#: src/components/Editor.tsx:61
+#: src/components/ChooseImages.tsx:39
+#: src/components/Editor.tsx:62
 msgid "Choose Images"
 msgstr ""
 
-#: src/components/Editor.tsx:54
+#: src/components/Editor.tsx:55
 msgid "Choose screenshots featuring both light and dark themes to start waving."
+msgstr ""
+
+#: src/components/CopyImage.tsx:56
+msgid "Copy PNG"
 msgstr ""
 
 #: src/components/ChangeTheme.tsx:33
 msgid "Dark"
 msgstr ""
 
-#: src/components/Export.tsx:28
+#: src/components/ExportImage.tsx:27
 msgid "Export"
 msgstr ""
 
@@ -56,7 +60,7 @@ msgstr ""
 msgid "Light"
 msgstr ""
 
-#: src/components/ChooseImages.tsx:61
+#: src/components/ChooseImages.tsx:54
 msgid "Remove images"
 msgstr ""
 
