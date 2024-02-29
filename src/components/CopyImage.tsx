@@ -1,32 +1,26 @@
 import { useAtomValue } from 'jotai';
-import { Ban, Check, Copy, Loader2, LucideIcon } from 'lucide-react';
+import { Copy } from 'lucide-react';
 import { Trans } from '@lingui/macro';
 import { cn } from '@/lib/utils';
 import { graphicsAtom } from '@/atoms/graphicsAtom';
-import { Button } from '@/components/ui/Button';
+import { Button, ButtonProps } from '@/components/ui/Button';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger
 } from '@/components/ui/Tooltip';
-import {
-  CopyState,
-  isClipboardSupported,
-  useClipboard
-} from '@/hooks/useClipboard';
-import { MIME_TYPES } from '@/constants';
+import { isClipboardSupported, useClipboard } from '@/hooks/useClipboard';
+import { LOADABLE_STATE, MIME_TYPES } from '@/constants';
 import { rasterize } from '@/utils/rasterize';
+import { LoadableIcon } from './LoadableIcon';
 
-const iconMapping: Record<CopyState, LucideIcon> = {
-  copying: Loader2,
-  copied: Check,
-  error: Ban
-};
+export type CopyImageProps = Omit<ButtonProps, 'onClick' | 'disabled'>;
 
-export function CopyImage() {
+export function CopyImage(props: CopyImageProps) {
   const graphics = useAtomValue(graphicsAtom);
   const { copy, state } = useClipboard();
-  const Icon = state ? iconMapping[state] : Copy;
+
+  const isCopying = state === LOADABLE_STATE.LOADING;
 
   const handleClick = async () => {
     if (graphics) {
@@ -43,11 +37,14 @@ export function CopyImage() {
           variant="ghost"
           size="icon"
           onClick={handleClick}
-          disabled={!graphics || state === 'copying'}
+          disabled={!graphics || isCopying}
+          {...props}
         >
-          <Icon
+          <LoadableIcon
+            state={state}
+            fallback={Copy}
             className={cn('h-4 w-4', {
-              'animate-spin': state === 'copying'
+              'animate-spin': isCopying
             })}
           />
           <span className="sr-only">

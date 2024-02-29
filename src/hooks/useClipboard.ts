@@ -1,14 +1,14 @@
 import { useCallback } from 'react';
+import { LoadableState } from '@/types';
+import { DEFAULT_LOADABLE_STATE_TIMEOUT, LOADABLE_STATE } from '@/constants';
 import { useExpireAtom } from './useExpireAtom';
 
 export const isClipboardSupported =
   navigator.clipboard && typeof window.ClipboardItem === 'function';
 
-export type CopyState = 'copying' | 'copied' | 'error';
-
 export interface UseClipboardResult {
   copy: (...args: ConstructorParameters<typeof ClipboardItem>) => Promise<void>;
-  state: 'copying' | 'copied' | 'error';
+  state: LoadableState;
 }
 
 export interface UseClipboardOptions {
@@ -16,18 +16,18 @@ export interface UseClipboardOptions {
 }
 
 export function useClipboard(options: UseClipboardOptions = {}) {
-  const { timeout = 1000 } = options;
-  const [state, setState] = useExpireAtom<CopyState | undefined>(undefined);
+  const { timeout = DEFAULT_LOADABLE_STATE_TIMEOUT } = options;
+  const [state, setState] = useExpireAtom<LoadableState | null>(null);
   const copy = useCallback<UseClipboardResult['copy']>(async (...args) => {
-    setState('copying');
+    setState(LOADABLE_STATE.LOADING);
     try {
       if (!isClipboardSupported) {
         throw new Error('useClipboard: the ClipboardItem API is not supported');
       }
       await navigator.clipboard.write([new window.ClipboardItem(...args)]);
-      setState('copied', timeout);
+      setState(LOADABLE_STATE.LOADED, timeout);
     } catch (error) {
-      setState('error', timeout);
+      setState(LOADABLE_STATE.ERROR, timeout);
     }
   }, []);
   return { copy, state };

@@ -24,7 +24,7 @@ export function Editor(props: EditorProps) {
   return (
     <div
       className={cn(
-        'grid divide-y sm:rounded-xl sm:border sm:shadow-md md:shadow-xl lg:grid-cols-[1fr_320px] lg:divide-x lg:divide-y-0',
+        'grid divide-y sm:rounded-xl sm:border sm:shadow-md md:shadow-xl lg:grid-cols-[1fr_340px] lg:divide-x lg:divide-y-0',
         className
       )}
       {...other}
@@ -65,7 +65,7 @@ export function Editor(props: EditorProps) {
         <Controls />
         <div className="flex gap-2">
           <ExportImage className="grow" />
-          <CopyImage />
+          <CopyImage className="shrink-0" />
         </div>
       </div>
     </div>

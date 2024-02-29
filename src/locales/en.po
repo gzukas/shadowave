@@ -6,6 +6,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: en\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
 
 #: src/components/ChooseImages.tsx:37
 msgid "{0, plural, one {# image} other {# images}}"
@@ -24,6 +30,11 @@ msgstr ""
 msgid "Change theme"
 msgstr ""
 
+#: src/components/ExportImage.tsx:85
+#: src/components/ExportImage.tsx:90
+msgid "Choose file"
+msgstr ""
+
 #: src/components/ChooseImages.tsx:39
 #: src/components/Editor.tsx:56
 msgid "Choose Images"
@@ -33,8 +44,8 @@ msgstr ""
 msgid "Choose screenshots featuring both light and dark themes to start waving."
 msgstr ""
 
+#: src/components/CopyImage.tsx:49
 #: src/components/CopyImage.tsx:54
-#: src/components/CopyImage.tsx:59
 msgid "Copy PNG"
 msgstr ""
 
@@ -42,7 +53,7 @@ msgstr ""
 msgid "Dark"
 msgstr ""
 
-#: src/components/ExportImage.tsx:27
+#: src/components/ExportImage.tsx:63
 msgid "Export"
 msgstr ""
 
@@ -68,6 +79,10 @@ msgstr ""
 #: src/components/Controls.tsx:24
 #: src/components/Controls.tsx:30
 msgid "Rotation"
+msgstr ""
+
+#: src/components/ExportImage.tsx:68
+msgid "Save to"
 msgstr ""
 
 #: src/components/SeeExample.tsx:18

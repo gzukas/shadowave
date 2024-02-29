@@ -1,37 +1,52 @@
-import { atom } from 'jotai';
-import { graphicsAtom } from './graphicsAtom';
 import { fileSave } from 'browser-fs-access';
+import { atom } from 'jotai';
 import { rasterize } from '@/utils/rasterize';
+import { atomWithExpire } from '@/utils/atomWithExpire';
+import { LoadableState } from '@/types';
+import {
+  DEFAULT_FILENAME,
+  DEFAULT_LOADABLE_STATE_TIMEOUT,
+  LOADABLE_STATE
+} from '@/constants';
+import { graphicsAtom } from './graphicsAtom';
 
-const exportingAtom = atom(false);
+export type ExportFileHandle = Awaited<ReturnType<typeof fileSave>>;
 
-export const exportFileHandleAtom =
-  atom<Awaited<ReturnType<typeof fileSave>>>(null);
+const exportingAtom = atomWithExpire<LoadableState | null>(null);
+export const exportFileHandleAtom = atom<ExportFileHandle>(null);
 
 export const exportAtom = atom(
   get => get(exportingAtom),
-  async (get, set) => {
+  async (
+    get,
+    set,
+    exportFileHandle: ExportFileHandle = get(exportFileHandleAtom)
+  ) => {
     const graphics = get(graphicsAtom);
     if (!graphics) {
       return;
     }
-    set(exportingAtom, true);
     try {
+      set(exportingAtom, LOADABLE_STATE.LOADING);
       set(
         exportFileHandleAtom,
-        await fileSave(rasterize(graphics), {
-          fileName: 'shadowave.png',
-          startIn: 'downloads',
-          extensions: ['.png']
-        })
+        await fileSave(
+          rasterize(graphics),
+          {
+            fileName: DEFAULT_FILENAME,
+            extensions: ['.png']
+          },
+          exportFileHandle
+        )
       );
+      set(exportingAtom, LOADABLE_STATE.LOADED, DEFAULT_LOADABLE_STATE_TIMEOUT);
     } catch (error) {
       // Disregard errors if file saving is canceled.
-      if (!(error instanceof DOMException)) {
-        throw error;
-      }
-    } finally {
-      set(exportingAtom, false);
+      set(
+        exportingAtom,
+        error instanceof DOMException ? null : LOADABLE_STATE.ERROR,
+        DEFAULT_LOADABLE_STATE_TIMEOUT
+      );
     }
   }
 );
