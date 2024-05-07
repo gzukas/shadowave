@@ -1,3 +1,3 @@
-import { atom } from 'jotai';
+import { atomWithReset } from 'jotai/utils';
 
-export const rotationAtom = atom(0);
+export const rotationAtom = atomWithReset(0);
