@@ -17,8 +17,8 @@ msgstr ""
 msgid "{0, plural, one {# image} other {# images}}"
 msgstr ""
 
-#: src/components/Controls.tsx:44
-#: src/components/Controls.tsx:50
+#: src/components/Controls.tsx:60
+#: src/components/Controls.tsx:67
 msgid "Amplitude"
 msgstr ""
 
@@ -30,8 +30,8 @@ msgstr ""
 msgid "Change theme"
 msgstr ""
 
-#: src/components/ExportImage.tsx:85
-#: src/components/ExportImage.tsx:90
+#: src/components/ExportImage.tsx:83
+#: src/components/ExportImage.tsx:88
 msgid "Choose file"
 msgstr ""
 
@@ -44,8 +44,8 @@ msgstr ""
 msgid "Choose screenshots featuring both light and dark themes to start waving."
 msgstr ""
 
-#: src/components/CopyImage.tsx:49
-#: src/components/CopyImage.tsx:54
+#: src/components/CopyImage.tsx:51
+#: src/components/CopyImage.tsx:56
 msgid "Copy PNG"
 msgstr ""
 
@@ -53,13 +53,8 @@ msgstr ""
 msgid "Dark"
 msgstr ""
 
-#: src/components/ExportImage.tsx:63
+#: src/components/ExportImage.tsx:61
 msgid "Export"
-msgstr ""
-
-#: src/components/Controls.tsx:34
-#: src/components/Controls.tsx:40
-msgid "Frequncy"
 msgstr ""
 
 #: src/components/ChangeTheme.tsx:29
@@ -76,12 +71,12 @@ msgstr ""
 msgid "Reverse images"
 msgstr ""
 
-#: src/components/Controls.tsx:24
-#: src/components/Controls.tsx:30
+#: src/components/Controls.tsx:38
+#: src/components/Controls.tsx:45
 msgid "Rotation"
 msgstr ""
 
-#: src/components/ExportImage.tsx:68
+#: src/components/ExportImage.tsx:66
 msgid "Save to"
 msgstr ""
 
@@ -91,4 +86,9 @@ msgstr ""
 
 #: src/components/ChangeTheme.tsx:37
 msgid "System"
+msgstr ""
+
+#: src/components/Controls.tsx:49
+#: src/components/Controls.tsx:56
+msgid "Wavelength"
 msgstr ""
