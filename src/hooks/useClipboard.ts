@@ -18,17 +18,22 @@ export interface UseClipboardOptions {
 export function useClipboard(options: UseClipboardOptions = {}) {
   const { timeout = DEFAULT_LOADABLE_STATE_TIMEOUT } = options;
   const [state, setState] = useExpireAtom<LoadableState | null>(null);
-  const copy = useCallback<UseClipboardResult['copy']>(async (...args) => {
-    setState(LOADABLE_STATE.LOADING);
-    try {
-      if (!isClipboardSupported) {
-        throw new Error('useClipboard: the ClipboardItem API is not supported');
+  const copy = useCallback<UseClipboardResult['copy']>(
+    async (...args) => {
+      setState(LOADABLE_STATE.LOADING);
+      try {
+        if (!isClipboardSupported) {
+          throw new Error(
+            'useClipboard: the ClipboardItem API is not supported'
+          );
+        }
+        await navigator.clipboard.write([new window.ClipboardItem(...args)]);
+        setState(LOADABLE_STATE.LOADED, timeout);
+      } catch (error) {
+        setState(LOADABLE_STATE.ERROR, timeout);
       }
-      await navigator.clipboard.write([new window.ClipboardItem(...args)]);
-      setState(LOADABLE_STATE.LOADED, timeout);
-    } catch (error) {
-      setState(LOADABLE_STATE.ERROR, timeout);
-    }
-  }, []);
+    },
+    [setState, timeout]
+  );
   return { copy, state };
 }

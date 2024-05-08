@@ -1,4 +1,3 @@
-import { DevTools } from 'jotai-devtools';
 import { Trans } from '@lingui/macro';
 import { siteConfig } from '@/config/site';
 import { I18nProvider } from '@/components/I18nProvider';
@@ -6,6 +5,7 @@ import { TooltipProvider } from '@/components/ui/Tooltip';
 import { ChangeTheme } from '@/components/ChangeTheme';
 import { useThemeEffect } from './hooks/useThemeEffect';
 import { Editor } from './components/Editor';
+import { JotaiDevTools } from './JotaiDevTools';
 
 export function App() {
   useThemeEffect();
@@ -32,7 +32,7 @@ export function App() {
           </p>
           <ChangeTheme />
         </footer>
-        <DevTools />
+        <JotaiDevTools />
       </TooltipProvider>
     </I18nProvider>
   );

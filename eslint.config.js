@@ -7,6 +7,9 @@ import globals from 'globals';
 
 export default tseslint.config(
   {
+    files: ['**/*.ts', '**/*.tsx']
+  },
+  {
     languageOptions: {
       globals: {
         ...globals.browser,
