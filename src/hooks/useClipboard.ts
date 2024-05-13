@@ -29,7 +29,7 @@ export function useClipboard(options: UseClipboardOptions = {}) {
         }
         await navigator.clipboard.write([new window.ClipboardItem(...args)]);
         setState(LOADABLE_STATE.LOADED, timeout);
-      } catch (error) {
+      } catch (_error) {
         setState(LOADABLE_STATE.ERROR, timeout);
       }
     },

@@ -34,6 +34,14 @@ export default tseslint.config(
     }
   },
   {
+    rules: {
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { caughtErrorsIgnorePattern: '^_' }
+      ]
+    }
+  },
+  {
     ignores: ['dist', 'eslint.config.js']
   }
 );
