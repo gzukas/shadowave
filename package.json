@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint . --max-warnings 0 --fix",
+    "lint": "eslint . --max-warnings 0",
     "test": "vitest",
     "messages:extract": "lingui extract --clean",
     "messages:compile": "lingui compile --typescript",
