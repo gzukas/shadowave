@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --max-warnings 0 --fix",
+    "test": "vitest",
     "messages:extract": "lingui extract --clean",
     "messages:compile": "lingui compile --typescript",
     "preview": "vite preview",
@@ -54,6 +55,7 @@
     "eslint-plugin-react-hooks": "5.1.0-beta-04b058868c-20240508",
     "eslint-plugin-react-refresh": "^0.4.7",
     "globals": "^15.2.0",
+    "happy-dom": "^14.11.4",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
     "postcss": "^8.4.38",
@@ -62,7 +64,8 @@
     "tailwindcss": "^3.4.3",
     "typescript": "^5.4.5",
     "typescript-eslint": "8.0.0-alpha.10",
-    "vite": "^5.1.4"
+    "vite": "^5.1.4",
+    "vitest": "^1.6.0"
   },
   "pnpm": {
     "overrides": {
