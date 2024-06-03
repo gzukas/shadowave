@@ -8,11 +8,7 @@ import { lingui } from '@lingui/vite-plugin';
 export default defineConfig({
   plugins: [
     react({
-      plugins: [
-        ['@swc-jotai/debug-label', {}],
-        ['@swc-jotai/react-refresh', {}],
-        ['@lingui/swc-plugin', {}]
-      ]
+      plugins: [['@lingui/swc-plugin', {}]]
     }),
     lingui()
   ],
