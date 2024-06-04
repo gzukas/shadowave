@@ -87,12 +87,6 @@ importers:
       '@lingui/vite-plugin':
         specifier: ^4.11.1
         version: 4.11.1(typescript@5.4.5)(vite@5.2.12(@types/node@20.14.0))
-      '@swc-jotai/debug-label':
-        specifier: ^0.1.0
-        version: 0.1.0
-      '@swc-jotai/react-refresh':
-        specifier: ^0.1.0
-        version: 0.1.0
       '@types/node':
         specifier: ^20.14.0
         version: 20.14.0
@@ -1150,12 +1144,6 @@ packages:
 
   '@sinclair/typebox@0.27.8':
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
-
-  '@swc-jotai/debug-label@0.1.0':
-    resolution: {integrity: sha512-Fe0ag02uBaVBIS/ySKkLSyiMhTUKyw3F0pTAcH+Yc29wZgIt//yFuPv1+p0QrlV6n411BJ0sxq2ei89tvwpFXQ==}
-
-  '@swc-jotai/react-refresh@0.1.0':
-    resolution: {integrity: sha512-CWV4W06GdfQo3cW3CoUM2fp7avH4Z/suR7SvECNJnQbr6Sa9U3p7o10nXjNv2zT6z09bbNUPM55HBw5Nwd24Iw==}
 
   '@swc/core-darwin-arm64@1.5.24':
     resolution: {integrity: sha512-M7oLOcC0sw+UTyAuL/9uyB9GeO4ZpaBbH76JSH6g1m0/yg7LYJZGRmplhDmwVSDAR5Fq4Sjoi1CksmmGkgihGA==}
@@ -4047,10 +4035,6 @@ snapshots:
     optional: true
 
   '@sinclair/typebox@0.27.8': {}
-
-  '@swc-jotai/debug-label@0.1.0': {}
-
-  '@swc-jotai/react-refresh@0.1.0': {}
 
   '@swc/core-darwin-arm64@1.5.24':
     optional: true
