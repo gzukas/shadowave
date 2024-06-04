@@ -50,7 +50,7 @@
     "autoprefixer": "^10.4.19",
     "eslint": "^9.4.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-react-hooks": "5.1.0-beta-04b058868c-20240508",
+    "eslint-plugin-react-hooks": "5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.7",
     "globals": "^15.3.0",
     "happy-dom": "^14.12.0",
@@ -61,7 +61,7 @@
     "prettier-plugin-tailwindcss": "^0.6.1",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.4.5",
-    "typescript-eslint": "8.0.0-alpha.10",
+    "typescript-eslint": "8.0.0-alpha.26",
     "vite": "^5.2.12",
     "vitest": "^1.6.0"
   }
