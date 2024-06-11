@@ -26,5 +26,5 @@ export function useImagesDisclosure() {
     setImages([]);
   }, [setImages]);
 
-  return [open, close];
+  return { open, close };
 }

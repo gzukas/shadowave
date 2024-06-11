@@ -1,4 +1,4 @@
-import { readFile } from '../readFile';
+import { readFile } from '@/utils/readFile';
 
 describe('readFile', () => {
   it('should resolve with the result on successful read', async () => {

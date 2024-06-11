@@ -19,7 +19,7 @@ export type EditorProps = React.ComponentPropsWithoutRef<'div'>;
 export function Editor(props: EditorProps) {
   const { className, ...other } = props;
   const filesOrLinks = useAtomValue(filesOrLinksAtom);
-  const [openImages] = useImagesDisclosure();
+  const { open: openImages } = useImagesDisclosure();
 
   return (
     <div

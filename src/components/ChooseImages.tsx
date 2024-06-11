@@ -16,7 +16,7 @@ export type ChooseImagesProps = React.ComponentPropsWithoutRef<'div'>;
 
 export function ChooseImages(props: ChooseImagesProps) {
   const { className, ...other } = props;
-  const [openImages, closeImages] = useImagesDisclosure();
+  const { open, close } = useImagesDisclosure();
   const filesOrLinks = useAtomValue(filesOrLinksAtom);
 
   return (
@@ -32,7 +32,7 @@ export function ChooseImages(props: ChooseImagesProps) {
       {...other}
     >
       <ReverseImages />
-      <Button variant="secondary" className="flex grow" onClick={openImages}>
+      <Button variant="secondary" className="flex grow" onClick={open}>
         {filesOrLinks.length ? (
           <Plural value={filesOrLinks.length} one="# image" other="# images" />
         ) : (
@@ -44,7 +44,7 @@ export function ChooseImages(props: ChooseImagesProps) {
           <Button
             variant="secondary"
             size="icon"
-            onClick={closeImages}
+            onClick={close}
             disabled={!filesOrLinks.length}
           >
             <Trash2 className="h-4 w-4" />
