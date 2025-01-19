@@ -1,6 +1,6 @@
 import { useSetAtom } from 'jotai';
 import { Laptop, Moon, Sun } from 'lucide-react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { themeAtom } from '@/atoms/themeAtom';
 import { Button } from '@/components/ui/Button';
 import {

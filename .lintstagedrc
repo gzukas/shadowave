@@ -1,6 +1,4 @@
 {
-  "**/*.{ts,tsx}": [
-    "prettier --write --ignore-unknown",
-    "eslint --fix"
-  ]
+  "**/*.{ts,tsx}": ["turbo run lint -- --fix"],
+  "**/*.{ts,tsx,md}": ["prettier --write"]
 }

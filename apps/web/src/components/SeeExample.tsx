@@ -1,5 +1,5 @@
 import { useSetAtom } from 'jotai';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { imagesAtom } from '@/atoms/imagesAtom';
 import { Button, ButtonProps } from '@/components/ui/Button';
 import { siteConfig } from '@/config/site';

@@ -1,6 +1,6 @@
 import { useAtom, useAtomValue } from 'jotai';
 import { ArrowDownUp, ArrowUpDown } from 'lucide-react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { areImagesReversedAtom } from '@/atoms/areImagesReversedAtom';
 import { imageCountAtom } from '@/atoms/imagesAtom';
 import { Button } from '@/components/ui/Button';

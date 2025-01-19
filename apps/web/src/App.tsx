@@ -1,4 +1,4 @@
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { siteConfig } from '@/config/site';
 import { I18nProvider } from '@/components/I18nProvider';
 import { TooltipProvider } from '@/components/ui/Tooltip';

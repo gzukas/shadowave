@@ -1,5 +1,5 @@
-/// <reference types="vitest" />
-import path from 'path';
+/// <reference types="vitest/config" />
+import path from 'node:path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import { lingui } from '@lingui/vite-plugin';
@@ -10,7 +10,10 @@ export default defineConfig({
     react({
       plugins: [['@lingui/swc-plugin', {}]]
     }),
-    lingui()
+    lingui({
+      // Specify the config path as the Vitest VS Code extension uses a different CWD and may miss it otherwise.
+      configPath: path.join(__dirname, 'lingui.config.ts')
+    })
   ],
   resolve: {
     alias: {
@@ -20,5 +23,8 @@ export default defineConfig({
   test: {
     environment: 'happy-dom',
     globals: true
+  },
+  server: {
+    port: 3000
   }
 });

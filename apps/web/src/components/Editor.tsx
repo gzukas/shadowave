@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { useAtomValue } from 'jotai';
 import { Eclipse, Loader2 } from 'lucide-react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { cn } from '@/lib/utils';
 import { filesOrLinksAtom } from '@/atoms/imagesAtom';
 import { AspectRatio } from '@/components/ui/AspectRatio';

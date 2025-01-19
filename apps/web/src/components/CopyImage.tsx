@@ -1,6 +1,6 @@
 import { useAtomValue } from 'jotai';
 import { Copy } from 'lucide-react';
-import { Trans } from '@lingui/macro';
+import { Trans } from '@lingui/react/macro';
 import { cn } from '@/lib/utils';
 import { graphicsAtom } from '@/atoms/graphicsAtom';
 import { Button, ButtonProps } from '@/components/ui/Button';
