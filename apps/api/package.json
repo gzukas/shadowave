@@ -2,17 +2,20 @@
   "name": "@shadowave/api",
   "private": true,
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "dev": "bun run --watch src/index.ts",
+    "dev": "bun run --hot src/index.ts",
     "start": "bun run src/index.ts"
   },
   "dependencies": {
     "@elysiajs/cors": "^1.2.0",
+    "@workspace/schema": "workspace:*",
     "close-with-grace": "^2.2.0",
-    "elysia": "latest",
+    "elysia": "^1.2.10",
     "puppeteer": "^24.1.0"
   },
   "devDependencies": {
+    "@tsconfig/bun": "^1.0.7",
     "bun-types": "latest"
   },
   "module": "src/index.js"

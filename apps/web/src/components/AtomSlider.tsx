@@ -1,8 +1,8 @@
 import { PrimitiveAtom, useAtom } from 'jotai';
-import { cn } from '@/lib/utils';
-import { Label } from '@/components/ui/Label';
-import { Slider } from '@/components/ui/Slider';
 import { LabelProps } from '@radix-ui/react-label';
+import { cn } from '@workspace/ui/lib/utils';
+import { Label } from '@workspace/ui/components/label';
+import { Slider } from '@workspace/ui/components/slider';
 
 export interface AtomSliderProps
   extends Omit<

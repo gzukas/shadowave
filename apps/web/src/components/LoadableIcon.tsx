@@ -1,4 +1,3 @@
-import { LoadableState } from '@/types';
 import {
   Ban,
   Check,
@@ -6,16 +5,17 @@ import {
   LucideProps,
   type LucideIcon
 } from 'lucide-react';
+import { LoadableState } from '@/types';
 
 const defaultIconMapping: Record<LoadableState, LucideIcon> = {
   loading: Loader2,
-  loaded: Check,
-  error: Ban
+  hasData: Check,
+  hasError: Ban
 };
 
 export interface LoadableIconProps extends LucideProps {
   fallback: LucideIcon;
-  iconMapping?: typeof defaultIconMapping;
+  iconMapping?: Partial<typeof defaultIconMapping>;
   state?: LoadableState | null;
 }
 

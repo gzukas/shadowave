@@ -1,8 +1,8 @@
 import { atom } from 'jotai';
-import { largestImageAtom } from './largestImageAtom';
+import { largestImageAtom } from '@/atoms/largestImageAtom';
 
-export const scaleAtom = atom(async get => {
-  const largestImage = await get(largestImageAtom);
+export const scaleAtom = atom(get => {
+  const largestImage = get(largestImageAtom);
   if (!largestImage) {
     return 1;
   }

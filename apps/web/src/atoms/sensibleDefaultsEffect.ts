@@ -1,24 +1,16 @@
 import { atomEffect } from 'jotai-effect';
-import { largestImageAtom } from './largestImageAtom';
-import { amplitudeAtom, maxAmplitudeAtom } from './amplitudeAtoms';
-import { wavelengthAtom, maxWavelengthAtom } from './wavelengthAtoms';
-import { rotationAtom } from './rotationAtom';
 import { RESET } from 'jotai/utils';
+import { largestImageAtom } from '@/atoms/largestImageAtom';
+import { amplitudeAtom, maxAmplitudeAtom } from '@/atoms/amplitudeAtoms';
+import { wavelengthAtom, maxWavelengthAtom } from '@/atoms/wavelengthAtoms';
+import { rotationAtom } from '@/atoms/rotationAtom';
 
 export const sensibleDefaultsEffect = atomEffect((get, set) => {
-  const abortController = new AbortController();
-  (async () => {
-    const largestImage = await get(largestImageAtom);
-    const maxWavelength = await get(maxWavelengthAtom);
-    const maxAmplitude = await get(maxAmplitudeAtom);
-    if (!abortController.signal.aborted) {
-      set(rotationAtom, RESET);
-      set(wavelengthAtom, largestImage ? maxWavelength : RESET);
-      set(amplitudeAtom, largestImage ? maxAmplitude : RESET);
-    }
-  })();
+  const largestImage = get(largestImageAtom);
+  const maxWavelength = get(maxWavelengthAtom);
+  const maxAmplitude = get(maxAmplitudeAtom);
 
-  return () => {
-    abortController.abort();
-  };
+  set(rotationAtom, RESET);
+  set(wavelengthAtom, largestImage ? maxWavelength : RESET);
+  set(amplitudeAtom, largestImage ? maxAmplitude : RESET);
 });

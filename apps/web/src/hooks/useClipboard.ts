@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { LoadableState } from '@/types';
 import { DEFAULT_LOADABLE_STATE_TIMEOUT, LOADABLE_STATE } from '@/constants';
-import { useExpireAtom } from './useExpireAtom';
+import { useExpireAtom } from '@/hooks/useExpireAtom';
 
 export const isClipboardSupported =
   navigator.clipboard && typeof window.ClipboardItem === 'function';
@@ -28,9 +28,9 @@ export function useClipboard(options: UseClipboardOptions = {}) {
           );
         }
         await navigator.clipboard.write([new window.ClipboardItem(...args)]);
-        setState(LOADABLE_STATE.LOADED, timeout);
+        setState(LOADABLE_STATE.HAS_DATA, timeout);
       } catch (_error) {
-        setState(LOADABLE_STATE.ERROR, timeout);
+        setState(LOADABLE_STATE.HAS_ERROR, timeout);
       }
     },
     [setState, timeout]

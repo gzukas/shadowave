@@ -2,13 +2,13 @@ import { fileSave } from 'browser-fs-access';
 import { atom } from 'jotai';
 import { rasterize } from '@/utils/rasterize';
 import { atomWithExpire } from '@/utils/atomWithExpire';
+import { graphicsAtom } from '@/atoms/graphicsAtom';
 import { LoadableState } from '@/types';
 import {
   DEFAULT_FILENAME,
   DEFAULT_LOADABLE_STATE_TIMEOUT,
   LOADABLE_STATE
 } from '@/constants';
-import { graphicsAtom } from './graphicsAtom';
 
 export type ExportFileHandle = Awaited<ReturnType<typeof fileSave>>;
 
@@ -39,12 +39,12 @@ export const exportAtom = atom(
           exportFileHandle
         )
       );
-      set(exportingAtom, LOADABLE_STATE.LOADED, DEFAULT_LOADABLE_STATE_TIMEOUT);
+      set(exportingAtom, LOADABLE_STATE.HAS_DATA, DEFAULT_LOADABLE_STATE_TIMEOUT);
     } catch (error) {
       // Disregard errors if file saving is canceled.
       set(
         exportingAtom,
-        error instanceof DOMException ? null : LOADABLE_STATE.ERROR,
+        error instanceof DOMException ? null : LOADABLE_STATE.HAS_ERROR,
         DEFAULT_LOADABLE_STATE_TIMEOUT
       );
     }

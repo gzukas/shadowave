@@ -1,12 +1,14 @@
 /// <reference types="vitest/config" />
 import path from 'node:path';
 import { defineConfig } from 'vite';
+import tsconfigPaths from 'vite-tsconfig-paths'
 import react from '@vitejs/plugin-react-swc';
 import { lingui } from '@lingui/vite-plugin';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    tsconfigPaths(),
     react({
       plugins: [['@lingui/swc-plugin', {}]]
     }),
@@ -15,11 +17,6 @@ export default defineConfig({
       configPath: path.join(__dirname, 'lingui.config.ts')
     })
   ],
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src')
-    }
-  },
   test: {
     environment: 'happy-dom',
     globals: true

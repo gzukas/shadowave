@@ -1,14 +1,14 @@
 import { useSetAtom } from 'jotai';
 import { Laptop, Moon, Sun } from 'lucide-react';
 import { Trans } from '@lingui/react/macro';
-import { themeAtom } from '@/atoms/themeAtom';
-import { Button } from '@/components/ui/Button';
+import { Button } from '@workspace/ui/components/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger
-} from '@/components/ui/DropdownMenu';
+} from '@workspace/ui/components/dropdown-menu';
+import { themeAtom } from '@/atoms/themeAtom';
 
 export function ChangeTheme() {
   const setTheme = useSetAtom(themeAtom);

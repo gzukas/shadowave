@@ -1,12 +1,11 @@
 import { Elysia, form, t } from 'elysia';
-import puppeteer, { type Browser, type Device, KnownDevices } from 'puppeteer';
-
-const deviceType = t.Union([t.Literal('mobile'), t.Literal('tablet')]);
+import puppeteer, { type Device, KnownDevices } from 'puppeteer';
+import { url, deviceType } from '@workspace/schema';
 
 type ColorScheme = 'light' | 'dark';
 type DeviceType = typeof deviceType.static;
 
-const defaultDeviceMapping: Record<DeviceType, Device> = {
+const defaultDeviceMapping: Partial<Record<DeviceType, Device>> = {
   mobile: KnownDevices['iPhone 15'],
   tablet: KnownDevices['iPad']
 };
@@ -20,7 +19,7 @@ interface ScreenshotsOptions {
 }
 
 const screenshotService = new Elysia({ name: 'Service.Screenshot' })
-  .decorate('browser', await puppeteer.launch({ headless: 'shell'}))
+  .decorate('browser', await puppeteer.launch({ headless: 'shell' }))
   .derive({ as: 'scoped' }, ({ browser }) => ({
     async *screenshots(url: string, options: ScreenshotsOptions) {
       const {
@@ -30,8 +29,9 @@ const screenshotService = new Elysia({ name: 'Service.Screenshot' })
       } = options;
 
       const page = await browser.newPage();
-      if (deviceType) {
-        const device = deviceMapping[deviceType];
+      const device = deviceType ? deviceMapping[deviceType] : null;
+
+      if (device) {
         await page.emulate(device);
       }
 
@@ -51,9 +51,7 @@ const screenshotService = new Elysia({ name: 'Service.Screenshot' })
     }
   }))
   .onStop(async ({ decorator: { browser } }) => {
-    console.log('closing browser');
     await browser.close();
-    console.log('closed');
   });
 
 export const screenshots = new Elysia().use(screenshotService).get(
@@ -64,13 +62,23 @@ export const screenshots = new Elysia().use(screenshotService).get(
       decodeURIComponent(url),
       query
     )) {
-      formData.append(colorScheme, new Blob([screenshot]));
+      formData.append(
+        colorScheme,
+        new Blob([screenshot]),
+        `${colorScheme}.webp`
+      );
     }
     return formData;
   },
   {
+    params: t.Object({
+      url
+    }),
     query: t.Object({
       deviceType: t.Optional(deviceType)
-    })
+    }),
+    transform({ params }) {
+      params.url = decodeURIComponent(params.url)
+    },
   }
 );

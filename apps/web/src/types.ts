@@ -1,4 +1,4 @@
-import { LOADABLE_STATE } from './constants';
+import { LOADABLE_STATE } from '@/constants';
 
 type ValueOf<T> = T[keyof T];
 

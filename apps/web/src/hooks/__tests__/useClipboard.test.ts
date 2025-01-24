@@ -15,7 +15,7 @@ describe('useClipboard hook', () => {
       });
     });
 
-    expect(result.current.state).toBe(LOADABLE_STATE.LOADED);
+    expect(result.current.state).toBe(LOADABLE_STATE.HAS_DATA);
     await expect(navigator.clipboard.readText()).resolves.toBe('Data');
 
     act(() => {
@@ -36,7 +36,7 @@ describe('useClipboard hook', () => {
       await result.current.copy({});
     });
 
-    expect(result.current.state).toBe(LOADABLE_STATE.ERROR);
+    expect(result.current.state).toBe(LOADABLE_STATE.HAS_ERROR);
 
     act(() => {
       vi.advanceTimersByTime(DEFAULT_LOADABLE_STATE_TIMEOUT);

@@ -5,8 +5,8 @@ export const MIME_TYPES = {
 
 export const LOADABLE_STATE = {
   LOADING: 'loading',
-  LOADED: 'loaded',
-  ERROR: 'error'
+  HAS_DATA: 'hasData',
+  HAS_ERROR: 'hasError'
 } as const;
 
 export const DEFAULT_LOADABLE_STATE_TIMEOUT = 1000;

@@ -1,20 +1,18 @@
 import { useSetAtom } from 'jotai';
 import { Trans } from '@lingui/react/macro';
-import { imagesAtom } from '@/atoms/imagesAtom';
-import { Button, ButtonProps } from '@/components/ui/Button';
+import { Button } from '@workspace/ui/components/button';
 import { siteConfig } from '@/config/site';
+import { importAtom } from '@/atoms/importAtom';
 
-export type SeeExampleProps = Omit<ButtonProps, 'onClick'>;
-
-export function SeeExample(props: SeeExampleProps) {
-  const setImages = useSetAtom(imagesAtom);
+export function SeeExample() {
+  const importImage = useSetAtom(importAtom);
 
   const handleClick = () => {
-    setImages(siteConfig.example);
+    importImage(siteConfig.example);
   };
 
   return (
-    <Button onClick={handleClick} variant="ghost" {...props}>
+    <Button onClick={handleClick} variant="outline">
       <Trans>See Example</Trans>
     </Button>
   );

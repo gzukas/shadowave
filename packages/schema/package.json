@@ -1,0 +1,12 @@
+{
+  "name": "@workspace/schema",
+  "private": true,
+  "author": "Gediminas Zukas",
+  "license": "MIT",
+  "exports": {
+    ".": "./src/schema.ts"
+  },
+  "peerDependencies": {
+    "@sinclair/typebox": "^0.34.14"
+  }
+}

@@ -1,7 +1,6 @@
 import { useAtom, useAtomValue } from 'jotai';
-import { Trans, msg } from '@lingui/macro';
-import { useLingui } from '@lingui/react';
-import { cn } from '@/lib/utils';
+import { Trans, useLingui } from '@lingui/react/macro';
+import { cn } from '@workspace/ui/lib/utils';
 import { sensibleDefaultsEffect } from '@/atoms/sensibleDefaultsEffect';
 import { rotationAtom } from '@/atoms/rotationAtom';
 import {
@@ -14,16 +13,16 @@ import {
   amplitudeAtom,
   maxAmplitudeAtom
 } from '@/atoms/amplitudeAtoms';
-import { imageCountAtom } from '@/atoms/imagesAtom';
+import { imagesAtom } from '@/atoms/imagesAtom';
 import { scaleAtom } from '@/atoms/scaleAtom';
-import { AtomSlider } from './AtomSlider';
+import { AtomSlider } from '@/components/AtomSlider';
 
 export type ControlsProp = React.ComponentPropsWithoutRef<'div'>;
 
 export function Controls(props: ControlsProp) {
   const { className, ...other } = props;
-  const { _ } = useLingui();
-  const imageCount = useAtomValue(imageCountAtom);
+  const { t } = useLingui();
+  const images = useAtomValue(imagesAtom);
   const maxAmplitude = useAtomValue(maxAmplitudeAtom);
   const maxWavelength = useAtomValue(maxWavelengthAtom);
   const scale = useAtomValue(scaleAtom);
@@ -40,9 +39,9 @@ export function Controls(props: ControlsProp) {
         renderValue={rotation => `${rotation}°`}
         min={0}
         max={360}
-        disabled={!imageCount}
+        disabled={!images.length}
         ThumbProps={{
-          'aria-label': _(msg`Rotation`)
+          'aria-label': t`Rotation`
         }}
       />
       <AtomSlider
@@ -51,9 +50,9 @@ export function Controls(props: ControlsProp) {
         renderValue={renderValueInPx}
         min={MIN_WAVELENGTH}
         max={maxWavelength}
-        disabled={!imageCount}
+        disabled={!images.length}
         ThumbProps={{
-          'aria-label': _(msg`Wavelength`)
+          'aria-label': t`Wavelength`
         }}
       />
       <AtomSlider
@@ -62,9 +61,9 @@ export function Controls(props: ControlsProp) {
         renderValue={renderValueInPx}
         min={MIN_AMPLITUDE}
         max={maxAmplitude}
-        disabled={!imageCount}
+        disabled={!images.length}
         ThumbProps={{
-          'aria-label': _(msg`Amplitude`)
+          'aria-label': t`Amplitude`
         }}
       />
     </div>

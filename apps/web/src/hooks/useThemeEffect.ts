@@ -1,6 +1,6 @@
-import { themeAtom } from '@/atoms/themeAtom';
-import { useAtomValue } from 'jotai';
 import { useLayoutEffect } from 'react';
+import { useAtomValue } from 'jotai';
+import { themeAtom } from '@/atoms/themeAtom';
 
 export function useThemeEffect() {
   const theme = useAtomValue(themeAtom);

@@ -1,20 +1,17 @@
 import { useAtom, useAtomValue } from 'jotai';
 import { ArrowDownUp, ArrowUpDown } from 'lucide-react';
-import { Trans } from '@lingui/react/macro';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { areImagesReversedAtom } from '@/atoms/areImagesReversedAtom';
-import { imageCountAtom } from '@/atoms/imagesAtom';
-import { Button } from '@/components/ui/Button';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger
-} from '@/components/ui/Tooltip';
+import { imagesAtom } from '@/atoms/imagesAtom';
+import { Button } from '@workspace/ui/components/button';
+import { Tooltip } from '@workspace/ui/components/tooltip';
 
 export function ReverseImages() {
+  const { t } = useLingui();
   const [areImagesReversed, toggleImagesReversed] = useAtom(
     areImagesReversedAtom
   );
-  const imageCount = useAtomValue(imageCountAtom);
+  const images = useAtomValue(imagesAtom);
   const Icon = areImagesReversed ? ArrowDownUp : ArrowUpDown;
 
   const handleClick = () => {
@@ -22,23 +19,15 @@ export function ReverseImages() {
   };
 
   return (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <Button
-          variant="secondary"
-          size="icon"
-          onClick={handleClick}
-          disabled={imageCount < 2}
-        >
-          <Icon className="h-4 w-4" />
-          <span className="sr-only">
-            <Trans>Reverse images</Trans>
-          </span>
-        </Button>
-      </TooltipTrigger>
-      <TooltipContent>
-        <Trans>Reverse images</Trans>
-      </TooltipContent>
+    <Tooltip title={<Trans>Reverse images</Trans>}>
+      <Button
+        size="icon"
+        onClick={handleClick}
+        disabled={images.length < 2}
+        aria-label={t`Reverse images`}
+      >
+        <Icon className="size-4" />
+      </Button>
     </Tooltip>
   );
 }

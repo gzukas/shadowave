@@ -1,14 +1,10 @@
 import { useAtomValue } from 'jotai';
 import { Copy } from 'lucide-react';
 import { Trans } from '@lingui/react/macro';
-import { cn } from '@/lib/utils';
+import { cn } from '@workspace/ui/lib/utils';
+import { Button, ButtonProps } from '@workspace/ui/components/button';
+import { Tooltip } from '@workspace/ui/components/tooltip';
 import { graphicsAtom } from '@/atoms/graphicsAtom';
-import { Button, ButtonProps } from '@/components/ui/Button';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger
-} from '@/components/ui/Tooltip';
 import { isClipboardSupported, useClipboard } from '@/hooks/useClipboard';
 import { LOADABLE_STATE, MIME_TYPES } from '@/constants';
 import { rasterize } from '@/utils/rasterize';
@@ -31,30 +27,25 @@ export function CopyImage(props: CopyImageProps) {
   };
 
   return isClipboardSupported ? (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={handleClick}
-          disabled={!graphics || isCopying}
-          {...props}
-        >
-          <LoadableIcon
-            state={state}
-            fallback={Copy}
-            className={cn('h-4 w-4', {
-              'animate-spin': isCopying
-            })}
-          />
-          <span className="sr-only">
-            <Trans>Copy PNG</Trans>
-          </span>
-        </Button>
-      </TooltipTrigger>
-      <TooltipContent>
-        <Trans>Copy PNG</Trans>
-      </TooltipContent>
+    <Tooltip title={<Trans>Copy PNG</Trans>}>
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={handleClick}
+        disabled={!graphics || isCopying}
+        {...props}
+      >
+        <LoadableIcon
+          state={state}
+          fallback={Copy}
+          className={cn('size-4', {
+            'animate-spin': isCopying
+          })}
+        />
+        <span className="sr-only">
+          <Trans>Copy PNG</Trans>
+        </span>
+      </Button>
     </Tooltip>
   ) : null;
 }

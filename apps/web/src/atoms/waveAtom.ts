@@ -1,16 +1,16 @@
 import { atom } from 'jotai';
-import { amplitudeAtom } from './amplitudeAtoms';
-import { largestImageAtom } from './largestImageAtom';
-import { wavelengthAtom } from './wavelengthAtoms';
+import { amplitudeAtom } from '@/atoms/amplitudeAtoms';
+import { largestImageAtom } from '@/atoms/largestImageAtom';
+import { wavelengthAtom } from '@/atoms/wavelengthAtoms';
 
 function round(num: number) {
   return Math.round((num + Number.EPSILON) * 100) / 100;
 }
 
-export const waveAtom = atom(async get => {
+export const waveAtom = atom(get => {
   const wavelength = get(wavelengthAtom);
   const amplitude = get(amplitudeAtom);
-  const largestImage = await get(largestImageAtom);
+  const largestImage = get(largestImageAtom);
 
   if (!largestImage) {
     return '';

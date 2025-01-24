@@ -1,5 +1,5 @@
 import { MIME_TYPES } from '@/constants';
-import { loadImage } from './loadImage';
+import { loadImage } from '@/utils/loadImage';
 
 export interface RasterizeOptions {
   type?: string;

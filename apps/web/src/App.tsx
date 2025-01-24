@@ -1,11 +1,10 @@
 import { Trans } from '@lingui/react/macro';
+import { TooltipProvider } from '@workspace/ui/components/tooltip';
 import { siteConfig } from '@/config/site';
 import { I18nProvider } from '@/components/I18nProvider';
-import { TooltipProvider } from '@/components/ui/Tooltip';
 import { ChangeTheme } from '@/components/ChangeTheme';
-import { useThemeEffect } from './hooks/useThemeEffect';
-import { Editor } from './components/Editor';
-import { JotaiDevTools } from './JotaiDevTools';
+import { Editor } from '@/components/Editor';
+import { useThemeEffect } from '@/hooks/useThemeEffect';
 
 export function App() {
   useThemeEffect();
@@ -17,7 +16,7 @@ export function App() {
           <Editor />
         </main>
         <footer className="flex flex-col items-center justify-between gap-4 py-8 sm:container sm:flex-row">
-          <p className="text-center text-sm text-muted-foreground ">
+          <p className="text-muted-foreground text-center text-sm">
             <Trans>
               Built by{' '}
               <a href={siteConfig.links.author} target="_blank">
@@ -32,7 +31,6 @@ export function App() {
           </p>
           <ChangeTheme />
         </footer>
-        <JotaiDevTools />
       </TooltipProvider>
     </I18nProvider>
   );
