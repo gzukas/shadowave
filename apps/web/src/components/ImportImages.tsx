@@ -1,6 +1,5 @@
 import { useAtom, useAtomValue } from 'jotai';
 import { Camera, Monitor, Smartphone, Tablet } from 'lucide-react';
-import { FileWithHandle } from 'browser-fs-access';
 import { useForm } from 'react-hook-form';
 import { typeboxResolver } from '@hookform/resolvers/typebox';
 import { Type } from '@sinclair/typebox';
