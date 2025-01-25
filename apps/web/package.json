@@ -30,8 +30,8 @@
     "jotai": "^2.11.1",
     "jotai-effect": "^1.1.0",
     "lucide-react": "^0.474.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@lingui/cli": "^5.1.2",
@@ -42,8 +42,8 @@
     "@tsconfig/vite-react": "^3.4.0",
     "@types/bun": "^1.2.0",
     "@types/node": "^22.10.10",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.1",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
     "@vitejs/plugin-react-swc": "3.7.2",
     "autoprefixer": "^10.4.20",
     "elysia": "^1.2.10",
