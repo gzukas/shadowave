@@ -16,7 +16,6 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@workspace/ui/components/dialog';
-import { isImportOpenAtom } from '@/atoms/isImportOpenAtom';
 import {
   Form,
   FormControl,
@@ -32,10 +31,11 @@ import {
   ToggleGroupItem
 } from '@workspace/ui/components/toggle-group';
 import { ChooseFiles } from '@/components/ChooseFiles';
-import { LoadableIcon } from './LoadableIcon';
-import { ImageSource, importAtom, Site } from '@/atoms/importAtom';
+import { LoadableIcon } from '@/components/LoadableIcon';
+import { importAtom, importSignalAtom } from '@/atoms/importAtoms';
 import { imagesAtom } from '@/atoms/imagesAtom';
 import { LOADABLE_STATE } from '@/constants';
+import { ImageSource, Site } from '@/types';
 
 const importSchema = Type.Object({
   url,
@@ -45,8 +45,8 @@ const importSchema = Type.Object({
 export function ImportImages() {
   const { t } = useLingui();
   const images = useAtomValue(imagesAtom);
-  const [isImportOpen, toggleImportOpen] = useAtom(isImportOpenAtom);
   const [importState, importImages] = useAtom(importAtom);
+  const [importSignal, toggleImportSignal] = useAtom(importSignalAtom);
 
   const isImporting = importState === LOADABLE_STATE.LOADING;
 
@@ -58,10 +58,14 @@ export function ImportImages() {
     }
   });
 
-  const handleSubmitOrFilesChange = async (imageSource: ImageSource | ImageSource[]) => {
-    await importImages(Array.isArray(imageSource) ? imageSource : [imageSource]);
-    toggleImportOpen(false)
-  }
+  const handleSubmitOrFilesChange = async (
+    imageSource: ImageSource | ImageSource[]
+  ) => {
+    await importImages(
+      Array.isArray(imageSource) ? imageSource : [imageSource]
+    );
+    toggleImportSignal(false);
+  };
 
   const handleDeviceTypeChange =
     (handler: (...event: any[]) => void) => (deviceType?: string) => {
@@ -71,15 +75,11 @@ export function ImportImages() {
     };
 
   return (
-    <Dialog open={isImportOpen} onOpenChange={toggleImportOpen}>
+    <Dialog open={Boolean(importSignal)} onOpenChange={toggleImportSignal}>
       <DialogTrigger asChild>
         <Button className="flex grow">
           {images.length ? (
-            <Plural
-              value={images.length}
-              one="# image"
-              other="# images"
-            />
+            <Plural value={images.length} one="# image" other="# images" />
           ) : (
             <Trans>Import</Trans>
           )}
@@ -110,10 +110,7 @@ export function ImportImages() {
                 <FormItem>
                   <FormLabel>Site URL</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder={t`https://example.com`}
-                      {...field}
-                    />
+                    <Input placeholder={t`https://example.com`} {...field} />
                   </FormControl>
                   {fieldState.invalid ? (
                     <FormMessage />

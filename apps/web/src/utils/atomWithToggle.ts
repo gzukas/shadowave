@@ -6,5 +6,5 @@ export function atomWithToggle(initialValue?: boolean) {
     set(anAtom, update);
   });
 
-  return anAtom as WritableAtom<boolean, [boolean?], void>;
+  return anAtom// as WritableAtom<boolean, [boolean?], void>;
 }
