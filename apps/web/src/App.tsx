@@ -4,11 +4,8 @@ import { siteConfig } from '@/config/site';
 import { I18nProvider } from '@/components/I18nProvider';
 import { ChangeTheme } from '@/components/ChangeTheme';
 import { Editor } from '@/components/Editor';
-import { useThemeEffect } from '@/hooks/useThemeEffect';
 
 export function App() {
-  useThemeEffect();
-
   return (
     <I18nProvider>
       <TooltipProvider>
