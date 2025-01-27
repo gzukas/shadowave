@@ -5,43 +5,42 @@ import { url, deviceType } from '@workspace/schema';
 type ColorScheme = 'light' | 'dark';
 type DeviceType = typeof deviceType.static;
 
-const defaultDeviceMapping: Partial<Record<DeviceType, Device>> = {
+const TIMEOUT = 100000;
+
+const defaultColorSchemes: ColorScheme[] = ['dark', 'light'];
+const deviceMapping: Partial<Record<DeviceType, Device>> = {
   mobile: KnownDevices['iPhone 15'],
   tablet: KnownDevices['iPad']
 };
 
-const defaultColorSchemes: ColorScheme[] = ['dark', 'light'];
-
 interface ScreenshotsOptions {
   deviceType?: DeviceType;
-  deviceMapping?: Record<DeviceType, Device>;
   colorSchemes?: ColorScheme[];
 }
 
 const screenshotService = new Elysia({ name: 'Service.Screenshot' })
-  .decorate('browser', await puppeteer.launch({ headless: 'shell' }))
+  .decorate('browser', await (puppeteer.launch({ headless: 'shell' })))
   .derive({ as: 'scoped' }, ({ browser }) => ({
     async *screenshots(url: string, options: ScreenshotsOptions) {
-      const {
-        deviceType,
-        deviceMapping = defaultDeviceMapping,
-        colorSchemes = defaultColorSchemes
-      } = options;
+      const { deviceType, colorSchemes = defaultColorSchemes } = options;
 
       const page = await browser.newPage();
-      const device = deviceType ? deviceMapping[deviceType] : null;
+      page.setCacheEnabled(false);
 
+      const device = deviceType ? deviceMapping[deviceType] : null;
       if (device) {
         await page.emulate(device);
       }
+
+      await page.goto(url, { timeout: TIMEOUT, waitUntil: 'networkidle0' });
 
       for (const colorScheme of colorSchemes) {
         await page.emulateMediaFeatures([
           { name: 'prefers-color-scheme', value: colorScheme }
         ]);
-        await page.goto(url, { timeout: 100000, waitUntil: 'networkidle0' });
+        await page.waitForNetworkIdle({ timeout: TIMEOUT });
         const screenshot = await page.screenshot({
-          fullPage: true,
+          // fullPage: true,
           type: 'webp'
         });
         yield [colorScheme, screenshot] as const;
@@ -78,7 +77,7 @@ export const screenshots = new Elysia().use(screenshotService).get(
       deviceType: t.Optional(deviceType)
     }),
     transform({ params }) {
-      params.url = decodeURIComponent(params.url)
-    },
+      params.url = decodeURIComponent(params.url);
+    }
   }
 );
