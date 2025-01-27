@@ -19,7 +19,7 @@ export const ChooseFiles = React.forwardRef(function ChooseFiles(
       onFilesChange?.(
         await fileOpen({
           multiple: true,
-          ...props.options
+          ...options
         })
       );
     } catch (error) {

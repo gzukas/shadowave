@@ -28,7 +28,7 @@
     "browser-fs-access": "^0.35.0",
     "clsx": "^2.1.1",
     "jotai": "^2.11.1",
-    "jotai-effect": "^1.1.0",
+    "jotai-effect": "^1.1.4",
     "lucide-react": "^0.474.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
@@ -45,6 +45,7 @@
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "@vitejs/plugin-react-swc": "3.7.2",
+    "@workspace/eslint-config": "workspace:*",
     "autoprefixer": "^10.4.20",
     "elysia": "^1.2.10",
     "postcss": "^8.5.1",

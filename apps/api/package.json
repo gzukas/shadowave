@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "bun run --hot src/index.ts",
-    "start": "bun run src/index.ts"
+    "start": "bun run src/index.ts",
+    "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
     "@elysiajs/cors": "^1.2.0",
@@ -16,6 +17,7 @@
   },
   "devDependencies": {
     "@tsconfig/bun": "^1.0.7",
+    "@workspace/eslint-config": "workspace:*",
     "bun-types": "latest"
   },
   "module": "src/index.js"

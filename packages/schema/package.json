@@ -6,6 +6,9 @@
   "exports": {
     ".": "./src/schema.ts"
   },
+  "scripts": {
+    "lint": "eslint . --max-warnings 0"
+  },
   "peerDependencies": {
     "@sinclair/typebox": "^0.34.14"
   }

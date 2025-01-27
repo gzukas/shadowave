@@ -70,7 +70,7 @@ export function ImportImages(props: ImportImagesProps) {
   };
 
   const handleDeviceTypeChange =
-    (handler: (...event: any[]) => void) => (deviceType?: string) => {
+    (handler: (...event: unknown[]) => void) => (deviceType?: string) => {
       if (deviceType) {
         handler(deviceType);
       }
