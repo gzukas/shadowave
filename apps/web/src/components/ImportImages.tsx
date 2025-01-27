@@ -6,7 +6,7 @@ import { Type } from '@sinclair/typebox';
 import { Trans, Plural, useLingui } from '@lingui/react/macro';
 import { url, deviceType } from '@workspace/schema';
 import { cn } from '@workspace/ui/lib/utils';
-import { Button } from '@workspace/ui/components/button';
+import { Button, ButtonProps } from '@workspace/ui/components/button';
 import {
   Dialog,
   DialogContent,
@@ -42,7 +42,9 @@ const importSchema = Type.Object({
   deviceType
 });
 
-export function ImportImages() {
+export type ImportImagesProps = ButtonProps;
+
+export function ImportImages(props: ImportImagesProps) {
   const { t } = useLingui();
   const images = useAtomValue(imagesAtom);
   const [importState, importImages] = useAtom(importAtom);
@@ -77,7 +79,7 @@ export function ImportImages() {
   return (
     <Dialog open={Boolean(importSignal)} onOpenChange={toggleImportSignal}>
       <DialogTrigger asChild>
-        <Button className="flex grow">
+        <Button {...props}>
           {images.length ? (
             <Plural value={images.length} one="# image" other="# images" />
           ) : (

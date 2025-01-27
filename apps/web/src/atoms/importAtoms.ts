@@ -1,10 +1,12 @@
+import { atom } from 'jotai';
 import { client } from '@/utils/client';
 import { readFile } from '@/utils/readFile';
 import { loadImage } from '@/utils/loadImage';
 import { imagesAtom } from '@/atoms/imagesAtom';
 import { atomWithExpiringWriteState } from '@/utils/atomWithExpiringWriteState';
 import { ImageSource } from '@/types';
-import { atom } from 'jotai';
+
+let imageId = 0;
 
 const importAbortController = atom<AbortController | null>(null);
 
@@ -19,31 +21,34 @@ export const importSignalAtom = atom(
 export const importAtom = atomWithExpiringWriteState(
   async (get, set, imageSources: ImageSource[]) => {
     const signal = get(importSignalAtom);
-    const blobsByName = await Promise.all(
-      imageSources.flatMap<Promise<Array<[string, Blob]>>>(async source => {
-        if (source instanceof File) {
-          return [[source.name, source]];
-        }
-        if (typeof source === 'string') {
-          const blob = await (await fetch(source, { signal })).blob();
-          return [[source, blob]];
-        }
-        const { data } = await client
-          .screenshots({
-            url: encodeURIComponent(source.url)
-          })
-          .get({ query: source, fetch: { signal } });
+    const blobs = (
+      await Promise.all(
+        imageSources.map<Promise<Blob | Blob[]>>(async source => {
+          if (source instanceof File) {
+            return source;
+          }
+          if (typeof source === 'string') {
+            return (await fetch(source, { signal })).blob();
+          }
+          const { url, deviceType } = source;
+          const { data } = await client
+            .screenshots({
+              url: encodeURIComponent(url)
+            })
+            .get({ query: { deviceType }, fetch: { signal } });
 
-        return Object.entries(data || {});
-      })
-    );
+          return Object.values(data || {});
+        })
+      )
+    ).flat();
+
     const images = await Promise.all(
-      blobsByName.flat().map(async ([name, blob]) => {
+      blobs.map(async blob => {
         const dataUrl = (await readFile(fr => fr.readAsDataURL(blob), {
           signal
         })) as string;
         const image = await loadImage(dataUrl);
-        image.id = name;
+        image.id = `${imageId++}`;
         return image;
       })
     );

@@ -42,10 +42,10 @@ export function Graphics(props: GraphicsProps) {
       <defs>
         <path id={waveId} d={wave} />
         {orderedImages.map(
-          (_, i) =>
+          (image, i) =>
             i !== orderedImages.length - 1 && (
               <clipPath
-                key={i}
+                key={image.id}
                 id={waveId + (i + 1)}
                 transform={`rotate(${rotation})`}
                 transform-origin="50% 50%"
@@ -60,12 +60,12 @@ export function Graphics(props: GraphicsProps) {
         )}
       </defs>
 
-      {orderedImages.map((image, index) => (
+      {orderedImages.map((image, i) => (
         <image
           key={image.id}
           href={image.src}
-          {...(index >= 1 && {
-            clipPath: `url(#${waveId}${orderedImages.length - index})`
+          {...(i >= 1 && {
+            clipPath: `url(#${waveId}${orderedImages.length - i})`
           })}
         />
       ))}
