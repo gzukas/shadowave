@@ -44,9 +44,9 @@ export function Editor(props: EditorProps) {
         />
       </AspectRatio>
       <div className="flex flex-col justify-between gap-8 p-6">
-        <div className="bg-primary flex items-center gap-1 rounded-md">
+        <div className="bg-primary flex gap-1 rounded-md">
           <ReverseImages />
-          <ImportImages />
+          <ImportImages className="grow" />
           <RemoveImages />
         </div>
         <Controls />
