@@ -4,14 +4,16 @@ import { atomWithExpire } from './atomWithExpire';
 import { LoadableState } from '@/types';
 
 export interface AtomWithExpiringWriteStateOptions {
+  expireInMs?: number;
   shouldIgnoreError?: (error: unknown) => boolean;
 }
 
 export function atomWithExpiringWriteState<Args extends unknown[], Result>(
   write: (get: Getter, set: Setter, ...args: Args) => Result,
-  expireInMs = DEFAULT_LOADABLE_STATE_TIMEOUT,
-  options?: AtomWithExpiringWriteStateOptions
+  options: AtomWithExpiringWriteStateOptions = {}
 ) {
+  const { expireInMs = DEFAULT_LOADABLE_STATE_TIMEOUT, shouldIgnoreError } =
+    options;
   const writeStateAtom = atomWithExpire<LoadableState | null>(null);
   return atom(
     get => get(writeStateAtom),
@@ -23,7 +25,7 @@ export function atomWithExpiringWriteState<Args extends unknown[], Result>(
       } catch (error) {
         set(
           writeStateAtom,
-          options?.shouldIgnoreError?.(error) ? null : LOADABLE_STATE.HAS_ERROR,
+          shouldIgnoreError?.(error) ? null : LOADABLE_STATE.HAS_ERROR,
           expireInMs
         );
       }
