@@ -8,13 +8,13 @@ import { ImageSource } from '@/types';
 
 let imageId = 0;
 
-const importAbortController = atom<AbortController | null>(null);
+const importAbortControllerAtom = atom<AbortController | null>(null);
 
 export const importSignalAtom = atom(
-  get => get(importAbortController)?.signal,
+  get => get(importAbortControllerAtom)?.signal,
   (get, set, refresh: boolean) => {
-    get(importAbortController)?.abort();
-    set(importAbortController, refresh ? new AbortController() : null);
+    get(importAbortControllerAtom)?.abort();
+    set(importAbortControllerAtom, refresh ? new AbortController() : null);
   }
 );
 

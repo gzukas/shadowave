@@ -27,6 +27,7 @@
       },
       "devDependencies": {
         "@tsconfig/bun": "^1.0.7",
+        "@workspace/eslint-config": "workspace:*",
         "bun-types": "latest",
       },
     },
@@ -48,7 +49,6 @@
         "browser-fs-access": "^0.35.0",
         "clsx": "^2.1.1",
         "jotai": "^2.11.1",
-        "jotai-effect": "^1.1.4",
         "lucide-react": "^0.474.0",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
@@ -65,6 +65,7 @@
         "@types/react": "^19.0.8",
         "@types/react-dom": "^19.0.3",
         "@vitejs/plugin-react-swc": "3.7.2",
+        "@workspace/eslint-config": "workspace:*",
         "autoprefixer": "^10.4.20",
         "elysia": "^1.2.10",
         "postcss": "^8.5.1",
@@ -880,8 +881,6 @@
     "jiti": ["jiti@1.21.7", "", { "bin": { "jiti": "bin/jiti.js" } }, "sha512-/imKNG4EbWNrVjoNC/1H5/9GFy+tqjGBHCaSsN+P2RnPqjsLmv6UD3Ej+Kj8nBWaRAwyk7kK5ZUc+OEatnTR3A=="],
 
     "jotai": ["jotai@2.11.1", "", { "peerDependencies": { "@types/react": ">=17.0.0", "react": ">=17.0.0" }, "optionalPeers": ["@types/react", "react"] }, "sha512-41Su098mpHIX29hF/XOpDb0SqF6EES7+HXfrhuBqVSzRkxX48hD5i8nGsEewWZNAsBWJCTTmuz8M946Ih2PfcQ=="],
-
-    "jotai-effect": ["jotai-effect@1.1.4", "", { "peerDependencies": { "jotai": ">=2.5.0" } }, "sha512-kEdxcmU6XSxHdEvig9jBUmD27F7hkIpFAaZnOwcrHNORf/M3/DNtXlUJwt8VndoipVgGqNDYLsCXJIRdROXZbA=="],
 
     "js-sha256": ["js-sha256@0.10.1", "", {}, "sha512-5obBtsz9301ULlsgggLg542s/jqtddfOpV5KJc4hajc9JV8GeY2gZHSVpYBn4nWqAUTJ9v+xwtbJ1mIBgIH5Vw=="],
 

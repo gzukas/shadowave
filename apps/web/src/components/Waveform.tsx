@@ -1,7 +1,5 @@
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtomValue } from 'jotai';
 import { Trans, useLingui } from '@lingui/react/macro';
-import { cn } from '@workspace/ui/lib/utils';
-import { sensibleDefaultsEffect } from '@/atoms/sensibleDefaultsEffect';
 import { rotationAtom } from '@/atoms/rotationAtom';
 import {
   MIN_WAVELENGTH,
@@ -17,22 +15,17 @@ import { imagesAtom } from '@/atoms/imagesAtom';
 import { scaleAtom } from '@/atoms/scaleAtom';
 import { AtomSlider } from '@/components/AtomSlider';
 
-export type ControlsProp = React.ComponentPropsWithoutRef<'div'>;
-
-export function Controls(props: ControlsProp) {
-  const { className, ...other } = props;
+export function Waveform() {
   const { t } = useLingui();
   const images = useAtomValue(imagesAtom);
   const maxAmplitude = useAtomValue(maxAmplitudeAtom);
   const maxWavelength = useAtomValue(maxWavelengthAtom);
   const scale = useAtomValue(scaleAtom);
 
-  useAtom(sensibleDefaultsEffect);
-
   const renderValueInPx = (value: number) => `${Math.round(value * scale)}px`;
 
   return (
-    <div className={cn('space-y-6', className)} {...other}>
+    <>
       <AtomSlider
         label={<Trans>Rotation</Trans>}
         atom={rotationAtom}
@@ -66,6 +59,6 @@ export function Controls(props: ControlsProp) {
           'aria-label': t`Amplitude`
         }}
       />
-    </div>
+    </>
   );
 }

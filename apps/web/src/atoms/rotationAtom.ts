@@ -1,3 +1,6 @@
-import { atomWithReset } from 'jotai/utils';
+import { atom } from 'jotai';
+import { atomWithDefault } from 'jotai/utils';
 
-export const rotationAtom = atomWithReset(0);
+export const defaultRotationAtom = atom(0);
+
+export const rotationAtom = atomWithDefault(get => get(defaultRotationAtom));

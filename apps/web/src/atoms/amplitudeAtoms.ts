@@ -1,10 +1,15 @@
 import { atom } from 'jotai';
-import { atomWithReset } from 'jotai/utils';
+import { atomWithDefault } from 'jotai/utils';
 import { largestImageAtom } from '@/atoms/largestImageAtom';
 
 export const MIN_AMPLITUDE = 0;
 
-export const amplitudeAtom = atomWithReset(MIN_AMPLITUDE);
+export const defaultAmplitudeAtom = atom(get => {
+  const largestImage = get(largestImageAtom);
+  return largestImage ? get(maxAmplitudeAtom) : MIN_AMPLITUDE;
+});
+
+export const amplitudeAtom = atomWithDefault(get => get(defaultAmplitudeAtom));
 
 export const maxAmplitudeAtom = atom(get => {
   const largestImage = get(largestImageAtom);

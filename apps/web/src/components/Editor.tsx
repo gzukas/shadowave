@@ -2,7 +2,7 @@ import { Eclipse } from 'lucide-react';
 import { Trans } from '@lingui/react/macro';
 import { cn } from '@workspace/ui/lib/utils';
 import { AspectRatio } from '@workspace/ui/components/aspect-ratio';
-import { Controls } from '@/components/Controls';
+import { Waveform } from '@/components/Waveform';
 import { Graphics } from '@/components/Graphics';
 import { ExportImage } from '@/components/ExportImage';
 import { SeeExample } from '@/components/SeeExample';
@@ -10,6 +10,8 @@ import { CopyImage } from '@/components/CopyImage';
 import { ReverseImages } from '@/components/ReverseImages';
 import { ImportImages } from '@/components/ImportImages';
 import { RemoveImages } from '@/components/RemoveImages';
+import { ChangeWaveFunction } from '@/components/ChangeWaveFunction';
+import { Reset } from '@/components/Reset';
 
 export type EditorProps = React.ComponentPropsWithoutRef<'div'>;
 
@@ -49,7 +51,13 @@ export function Editor(props: EditorProps) {
           <ImportImages className="grow" />
           <RemoveImages />
         </div>
-        <Controls />
+        <div className="space-y-6">
+          <div className="flex flex-row justify-between">
+            <ChangeWaveFunction />
+            <Reset />
+          </div>
+          <Waveform />
+        </div>
         <div className="flex gap-2">
           <ExportImage className="grow" />
           <CopyImage className="shrink-0" />

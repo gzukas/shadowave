@@ -9,6 +9,11 @@ export const LOADABLE_STATE = {
   HAS_ERROR: 'hasError'
 } as const;
 
+export const WAVE_FUNCTION = {
+  SIN: 'sin',
+  COS: 'cos'
+} as const;
+
 export const DEFAULT_LOADABLE_STATE_TIMEOUT = 1000;
 
 export const DEFAULT_FILENAME = 'shadowave';
