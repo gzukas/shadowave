@@ -14,25 +14,21 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. placeholder {0}: images.length
-#: src/components/ImportImages.tsx:79
+#: src/components/ImportImages.tsx:84
 msgid "{0, plural, one {# image} other {# images}}"
 msgstr ""
 
-#: src/components/Controls.tsx:59
-#: src/components/Controls.tsx:66
+#: src/components/Waveform.tsx:52
+#: src/components/Waveform.tsx:59
 msgid "Amplitude"
 msgstr ""
 
-#: src/App.tsx:20
+#: src/App.tsx:17
 msgid "Built by <0>gzukas</0>. The source code is available on <1>GitHub</1>."
 msgstr ""
 
-#: src/components/RemoveImages.tsx:47
+#: src/components/RemoveImages.tsx:49
 msgid "Cancel"
-msgstr ""
-
-#: src/components/ChangeTheme.tsx:22
-msgid "Change theme"
 msgstr ""
 
 #: src/components/ExportImage.tsx:63
@@ -40,7 +36,7 @@ msgstr ""
 msgid "Choose file"
 msgstr ""
 
-#: src/components/ImportImages.tsx:183
+#: src/components/ImportImages.tsx:180
 msgid "Choose Files"
 msgstr ""
 
@@ -49,12 +45,12 @@ msgstr ""
 msgid "Copy PNG"
 msgstr ""
 
-#: src/components/ChangeTheme.tsx:33
-msgid "Dark"
+#: src/components/ChangeWaveFunction.tsx:37
+msgid "Cosine"
 msgstr ""
 
-#: src/components/ImportImages.tsx:147
-#: src/components/ImportImages.tsx:151
+#: src/components/ImportImages.tsx:144
+#: src/components/ImportImages.tsx:148
 msgid "Desktop"
 msgstr ""
 
@@ -62,36 +58,35 @@ msgstr ""
 msgid "Export"
 msgstr ""
 
-#: src/components/ImportImages.tsx:116
+#: src/components/ImportImages.tsx:115
 msgid "https://example.com"
 msgstr ""
 
-#: src/components/ImportImages.tsx:85
-#: src/components/ImportImages.tsx:92
-#: src/components/ImportImages.tsx:197
+#: src/components/ImportImages.tsx:86
+#: src/components/ImportImages.tsx:93
+#: src/components/ImportImages.tsx:194
 msgid "Import"
 msgstr ""
 
-#: src/components/Editor.tsx:37
+#: src/components/Editor.tsx:39
 msgid "Import images featuring both light and dark themes to start."
 msgstr ""
 
-#: src/components/ChangeTheme.tsx:29
-msgid "Light"
-msgstr ""
-
-#: src/components/ImportImages.tsx:163
-#: src/components/ImportImages.tsx:167
+#: src/components/ImportImages.tsx:160
+#: src/components/ImportImages.tsx:164
 msgid "Mobile"
 msgstr ""
 
-#: src/components/RemoveImages.tsx:50
+#: src/components/RemoveImages.tsx:52
 msgid "Remove"
 msgstr ""
 
-#: src/components/RemoveImages.tsx:26
-#: src/components/RemoveImages.tsx:32
+#: src/components/RemoveImages.tsx:30
 msgid "Remove images"
+msgstr ""
+
+#: src/components/RemoveImages.tsx:38
+msgid "Remove images?"
 msgstr ""
 
 #: src/components/ReverseImages.tsx:22
@@ -99,8 +94,8 @@ msgstr ""
 msgid "Reverse images"
 msgstr ""
 
-#: src/components/Controls.tsx:37
-#: src/components/Controls.tsx:44
+#: src/components/Waveform.tsx:30
+#: src/components/Waveform.tsx:37
 msgid "Rotation"
 msgstr ""
 
@@ -112,24 +107,32 @@ msgstr ""
 msgid "See Example"
 msgstr ""
 
-#: src/components/ImportImages.tsx:124
+#: src/components/ChangeWaveFunction.tsx:33
+msgid "Sine"
+msgstr ""
+
+#: src/components/ImportImages.tsx:121
 msgid "Start with web protocol, e.g. <0>https://</0>"
 msgstr ""
 
-#: src/components/ChangeTheme.tsx:37
-msgid "System"
-msgstr ""
-
-#: src/components/ImportImages.tsx:155
-#: src/components/ImportImages.tsx:159
+#: src/components/ImportImages.tsx:152
+#: src/components/ImportImages.tsx:156
 msgid "Tablet"
 msgstr ""
 
-#: src/components/ImportImages.tsx:95
+#: src/components/ImportImages.tsx:96
 msgid "The side should respond to the light and dark themes using the <0>prefers-color-scheme</0> media query. If it does not, choose files instead."
 msgstr ""
 
-#: src/components/Controls.tsx:48
-#: src/components/Controls.tsx:55
+#: src/components/RemoveImages.tsx:41
+msgid "These images will be permanently removed. This action cannot be undone."
+msgstr ""
+
+#: src/components/ChangeTheme.tsx:23
+msgid "Toggle theme"
+msgstr ""
+
+#: src/components/Waveform.tsx:41
+#: src/components/Waveform.tsx:48
 msgid "Wavelength"
 msgstr ""
