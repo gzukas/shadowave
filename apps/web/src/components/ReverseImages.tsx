@@ -1,21 +1,23 @@
+import { startTransition } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { ArrowDownUp, ArrowUpDown } from 'lucide-react';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { areImagesReversedAtom } from '@/atoms/areImagesReversedAtom';
-import { imagesAtom } from '@/atoms/imagesAtom';
 import { Button } from '@workspace/ui/components/button';
 import { Tooltip } from '@workspace/ui/components/tooltip';
+import { unwrappedImagesAtom } from '@/atoms/imagesAtom';
 
 export function ReverseImages() {
   const { t } = useLingui();
+  const images = useAtomValue(unwrappedImagesAtom);
   const [areImagesReversed, toggleImagesReversed] = useAtom(
     areImagesReversedAtom
   );
-  const images = useAtomValue(imagesAtom);
-  const Icon = areImagesReversed ? ArrowDownUp : ArrowUpDown;
 
   const handleClick = () => {
-    toggleImagesReversed();
+    startTransition(() => {
+      toggleImagesReversed();
+    });
   };
 
   return (
@@ -26,7 +28,7 @@ export function ReverseImages() {
         disabled={images.length < 2}
         aria-label={t`Reverse images`}
       >
-        <Icon className="size-4" />
+        {areImagesReversed ? <ArrowDownUp /> : <ArrowUpDown />}
       </Button>
     </Tooltip>
   );

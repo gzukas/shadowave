@@ -1,31 +1,27 @@
 import { useAtomValue } from 'jotai';
 import { Trans, useLingui } from '@lingui/react/macro';
-import { rotationAtom } from '@/atoms/rotationAtom';
 import {
-  MIN_WAVELENGTH,
-  maxWavelengthAtom,
-  wavelengthAtom
-} from '@/atoms/wavelengthAtoms';
-import {
-  MIN_AMPLITUDE,
+  rotationAtom,
+  wavelengthAtom,
+  wavelengthMaxAtom,
   amplitudeAtom,
-  maxAmplitudeAtom
-} from '@/atoms/amplitudeAtoms';
-import { imagesAtom } from '@/atoms/imagesAtom';
-import { scaleAtom } from '@/atoms/scaleAtom';
+  amplitudeMaxAtom,
+  MIN_WAVELENGTH,
+  MIN_AMPLITUDE
+} from '@/atoms/waveformAtoms';
 import { AtomSlider } from '@/components/AtomSlider';
+import { unwrappedImagesAtom } from '@/atoms/imagesAtom';
 
-export function Waveform() {
+export type WaveformProps = React.ComponentPropsWithoutRef<'div'>;
+
+export function Waveform(props: WaveformProps) {
   const { t } = useLingui();
-  const images = useAtomValue(imagesAtom);
-  const maxAmplitude = useAtomValue(maxAmplitudeAtom);
-  const maxWavelength = useAtomValue(maxWavelengthAtom);
-  const scale = useAtomValue(scaleAtom);
-
-  const renderValueInPx = (value: number) => `${Math.round(value * scale)}px`;
+  const images = useAtomValue(unwrappedImagesAtom);
+  const wavelengthMax = useAtomValue(wavelengthMaxAtom);
+  const amplitudeMax = useAtomValue(amplitudeMaxAtom);
 
   return (
-    <>
+    <div {...props}>
       <AtomSlider
         label={<Trans>Rotation</Trans>}
         atom={rotationAtom}
@@ -40,9 +36,8 @@ export function Waveform() {
       <AtomSlider
         label={<Trans>Wavelength</Trans>}
         atom={wavelengthAtom}
-        renderValue={renderValueInPx}
         min={MIN_WAVELENGTH}
-        max={maxWavelength}
+        max={wavelengthMax}
         disabled={!images.length}
         ThumbProps={{
           'aria-label': t`Wavelength`
@@ -51,14 +46,13 @@ export function Waveform() {
       <AtomSlider
         label={<Trans>Amplitude</Trans>}
         atom={amplitudeAtom}
-        renderValue={renderValueInPx}
         min={MIN_AMPLITUDE}
-        max={maxAmplitude}
+        max={amplitudeMax}
         disabled={!images.length}
         ThumbProps={{
           'aria-label': t`Amplitude`
         }}
       />
-    </>
+    </div>
   );
 }

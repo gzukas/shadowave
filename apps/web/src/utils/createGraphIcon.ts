@@ -11,6 +11,6 @@ export function createGraphIcon(iconName: string, getY: (x: number) => number) {
   }
 
   return createLucideIcon(iconName, [
-    ['polyline', { points: points.join(' ') }]
+    ['polyline', { key: 'points', points: points.join(' ') }]
   ]);
 }

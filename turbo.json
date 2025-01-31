@@ -4,7 +4,8 @@
   "tasks": {
     "build": {
       "dependsOn": [
-        "^build"
+        "^build",
+        "typecheck"
       ],
       "outputs": [
         "dist/**"
@@ -24,6 +25,7 @@
       "persistent": true
     },
     "lint": {},
-    "test": {}
+    "test": {},
+    "typecheck": {}
   }
 }

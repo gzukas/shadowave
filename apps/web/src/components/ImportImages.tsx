@@ -33,7 +33,7 @@ import {
 import { ChooseFiles } from '@/components/ChooseFiles';
 import { LoadableIcon } from '@/components/LoadableIcon';
 import { importAtom, importSignalAtom } from '@/atoms/importAtoms';
-import { imagesAtom } from '@/atoms/imagesAtom';
+import { unwrappedImagesAtom } from '@/atoms/imagesAtom';
 import { LOADABLE_STATE } from '@/constants';
 import { ImageSource, Site } from '@/types';
 
@@ -46,7 +46,7 @@ export type ImportImagesProps = ButtonProps;
 
 export function ImportImages(props: ImportImagesProps) {
   const { t } = useLingui();
-  const images = useAtomValue(imagesAtom);
+  const images = useAtomValue(unwrappedImagesAtom);
   const [importState, importImages] = useAtom(importAtom);
   const [importSignal, toggleImportSignal] = useAtom(importSignalAtom);
 
@@ -63,9 +63,7 @@ export function ImportImages(props: ImportImagesProps) {
   const handleSubmitOrFilesChange = async (
     imageSource: ImageSource | ImageSource[]
   ) => {
-    await importImages(
-      Array.isArray(imageSource) ? imageSource : [imageSource]
-    );
+    await importImages(imageSource);
     toggleImportSignal(false);
   };
 

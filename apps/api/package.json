@@ -1,12 +1,13 @@
 {
-  "name": "@shadowave/api",
+  "name": "@workspace/api",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "bun run --hot src/index.ts",
     "start": "bun run src/index.ts",
-    "lint": "eslint . --max-warnings 0"
+    "lint": "eslint . --max-warnings 0",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@elysiajs/cors": "^1.2.0",

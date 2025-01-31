@@ -9,7 +9,10 @@
   "scripts": {
     "lint": "eslint . --max-warnings 0"
   },
+  "devDependencies": {
+    "@sinclair/typebox": "^0.34.15"
+  },
   "peerDependencies": {
-    "@sinclair/typebox": "^0.34.14"
+    "@sinclair/typebox": "*"
   }
 }

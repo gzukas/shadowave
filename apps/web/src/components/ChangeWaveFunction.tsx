@@ -9,10 +9,10 @@ import { Sin } from '@/components/Sin';
 import { Cos } from '@/components/Cos';
 import { WAVE_FUNCTION } from '@/constants';
 import { WaveFunction } from '@/types';
-import { imagesAtom } from '@/atoms/imagesAtom';
+import { unwrappedImagesAtom } from '@/atoms/imagesAtom';
 
 export function ChangeWaveFunction() {
-  const images = useAtomValue(imagesAtom);
+  const images = useAtomValue(unwrappedImagesAtom);
   const [waveFunction, setWaveFunction] = useAtom(waveFunctionAtom);
 
   const handleWaveFunctionChange = (waveFunction: WaveFunction) => {

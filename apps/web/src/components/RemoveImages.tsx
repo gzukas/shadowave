@@ -1,3 +1,4 @@
+import { useTransition } from 'react';
 import { useAtomValue } from 'jotai';
 import { Trash2 } from 'lucide-react';
 import { useResetAtom } from 'jotai/utils';
@@ -14,22 +15,32 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger
 } from '@workspace/ui/components/alert-dialog';
-import { imagesAtom } from '@/atoms/imagesAtom';
+import { imagesAtom, unwrappedImagesAtom } from '@/atoms/imagesAtom';
+import { waveformAtom } from '@/atoms/waveformAtoms';
 
 export function RemoveImages() {
   const { t } = useLingui();
-  const images = useAtomValue(imagesAtom);
+  const [isPending, startTransition] = useTransition();
+  const images = useAtomValue(unwrappedImagesAtom);
   const resetImages = useResetAtom(imagesAtom);
+  const resetWaveform = useResetAtom(waveformAtom);
+
+  const handleConfirm = () => {
+    startTransition(() => {
+      resetWaveform();
+      resetImages();
+    });
+  };
 
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button
           size="icon"
-          disabled={!images.length}
+          disabled={!images.length || isPending}
           aria-label={t`Remove images`}
         >
-          <Trash2 className="size-4" />
+          <Trash2 />
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
@@ -48,7 +59,7 @@ export function RemoveImages() {
           <AlertDialogCancel>
             <Trans>Cancel</Trans>
           </AlertDialogCancel>
-          <AlertDialogAction onClick={resetImages}>
+          <AlertDialogAction onClick={handleConfirm}>
             <Trans>Remove</Trans>
           </AlertDialogAction>
         </AlertDialogFooter>

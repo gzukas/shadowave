@@ -1,11 +1,17 @@
 import { Elysia, form, t } from 'elysia';
 import puppeteer, { type Device, KnownDevices } from 'puppeteer';
-import { url, deviceType } from '@workspace/schema';
+import { url } from '@workspace/schema';
 
 type ColorScheme = 'light' | 'dark';
 type DeviceType = typeof deviceType.static;
 
 const TIMEOUT = 100000;
+
+const deviceType = t.Union([
+  t.Literal('desktop'),
+  t.Literal('tablet'),
+  t.Literal('mobile')
+]);
 
 const defaultColorSchemes: ColorScheme[] = ['dark', 'light'];
 const deviceMapping: Partial<Record<DeviceType, Device>> = {
@@ -40,7 +46,6 @@ const screenshotService = new Elysia({ name: 'Service.Screenshot' })
         ]);
         await page.waitForNetworkIdle({ timeout: TIMEOUT });
         const screenshot = await page.screenshot({
-          // fullPage: true,
           type: 'webp'
         });
         yield [colorScheme, screenshot] as const;

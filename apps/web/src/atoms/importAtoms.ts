@@ -1,12 +1,10 @@
 import { atom } from 'jotai';
 import { client } from '@/utils/client';
-import { readFile } from '@/utils/readFile';
-import { loadImage } from '@/utils/loadImage';
-import { imagesAtom } from '@/atoms/imagesAtom';
 import { atomWithExpiringWriteState } from '@/utils/atomWithExpiringWriteState';
 import { ImageSource } from '@/types';
-
-let imageId = 0;
+import { largestImageAtom } from './largestImageAtom';
+import { optimizeWaveformAtom } from './waveformAtoms';
+import { imagesAtom } from './imagesAtom';
 
 const importAbortControllerAtom = atom<AbortController | null>(null);
 
@@ -19,8 +17,12 @@ export const importSignalAtom = atom(
 );
 
 export const importAtom = atomWithExpiringWriteState(
-  async (get, set, imageSources: ImageSource[]) => {
+  async (get, set, imageSource: ImageSource | ImageSource[]) => {
     const signal = get(importSignalAtom);
+    const imageSources = Array.isArray(imageSource)
+      ? imageSource
+      : [imageSource];
+
     const blobs = (
       await Promise.all(
         imageSources.map<Promise<Blob | Blob[]>>(async source => {
@@ -42,16 +44,7 @@ export const importAtom = atomWithExpiringWriteState(
       )
     ).flat();
 
-    const images = await Promise.all(
-      blobs.map(async blob => {
-        const dataUrl = (await readFile(fr => fr.readAsDataURL(blob), {
-          signal
-        })) as string;
-        const image = await loadImage(dataUrl);
-        image.id = `${imageId++}`;
-        return image;
-      })
-    );
-    set(imagesAtom, images);
+    set(imagesAtom, blobs);
+    set(optimizeWaveformAtom, await get(largestImageAtom));
   }
 );

@@ -1,23 +1,29 @@
 import React, { useId } from 'react';
-import { useAtomValue, useSetAtom } from 'jotai';
+import { useAtomValue } from 'jotai';
 import { waveAtom } from '@/atoms/waveAtom';
 import { orderedImagesAtom } from '@/atoms/orderedImagesAtom';
-import { rotationAtom } from '@/atoms/rotationAtom';
+import { rotationAtom } from '@/atoms/waveformAtoms';
 import { largestImageAtom } from '@/atoms/largestImageAtom';
-import { graphicsAtom } from '@/atoms/graphicsAtom';
 import { scaleAtom } from '@/atoms/scaleAtom';
+
+declare module "react" {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  interface SVGAttributes<T> {
+    transformOrigin?: string | undefined;
+  }
+}
 
 export interface GraphicsProps extends React.ComponentPropsWithoutRef<'svg'> {
   fallback?: React.ReactNode;
+  ref?: React.Ref<SVGSVGElement>;
 }
 
 export function Graphics(props: GraphicsProps) {
-  const { fallback, ...other } = props;
+  const { fallback, ref, ...other } = props;
 
   const orderedImages = useAtomValue(orderedImagesAtom);
   const wave = useAtomValue(waveAtom);
   const largestImage = useAtomValue(largestImageAtom);
-  const setGraphics = useSetAtom(graphicsAtom);
   const rotation = useAtomValue(rotationAtom);
   const scale = useAtomValue(scaleAtom);
   const waveId = useId();
@@ -33,14 +39,14 @@ export function Graphics(props: GraphicsProps) {
 
   return (
     <svg
-      ref={setGraphics}
+      ref={ref}
       viewBox={`0 0 ${width} ${height}`}
       width="100%"
       height="100%"
       {...other}
     >
       <defs>
-        <path id={waveId} d={wave} />
+        <path id={waveId} d={wave}/>
         {orderedImages.map(
           (image, i) =>
             i !== orderedImages.length - 1 && (
@@ -48,12 +54,12 @@ export function Graphics(props: GraphicsProps) {
                 key={image.id}
                 id={waveId + (i + 1)}
                 transform={`rotate(${rotation})`}
-                transform-origin="50% 50%"
+                transformOrigin="50% 50%"
               >
                 <use
                   href={`#${waveId}`}
                   transform={`translate(0, ${((i + 1) * sectionHeight - height / 2) * sectionRotationScale}) scale(${scale})`}
-                  transform-origin="50% 50%"
+                  transformOrigin="50% 50%"
                 />
               </clipPath>
             )

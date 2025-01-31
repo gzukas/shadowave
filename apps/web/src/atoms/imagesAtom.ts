@@ -1,19 +1,33 @@
 import { atom } from 'jotai';
-import { atomWithReset, RESET } from 'jotai/utils';
-import { rotationAtom } from './rotationAtom';
-import { wavelengthAtom } from './wavelengthAtoms';
-import { amplitudeAtom } from './amplitudeAtoms';
+import { atomWithStorage, RESET, unwrap } from 'jotai/utils';
+import { readFile } from '@/utils/readFile';
+import { loadImage } from '@/utils/loadImage';
+import { createIndexedDbStorage } from '@/utils/createIndexedDbStorage';
 
-const baseImagesAtom = atomWithReset<HTMLImageElement[]>([]);
+let imageId = 0;
+
+const filesAtom = atomWithStorage<Blob[]>(
+  'files',
+  [],
+  createIndexedDbStorage<Blob[]>(),
+  { getOnInit: true }
+);
 
 export const imagesAtom = atom(
-  get => get(baseImagesAtom),
-  (_get, set, value: HTMLImageElement[] | typeof RESET) => {
-    set(baseImagesAtom, value);
-    if (value === RESET) {
-      set(rotationAtom, value);
-      set(wavelengthAtom, value);
-      set(amplitudeAtom, value);
-    }
+  async get => {
+    const files = await get(filesAtom);
+    return Promise.all(
+      files.map(async file => {
+        const dataUrl = (await readFile(r => r.readAsDataURL(file))) as string;
+        const image = await loadImage(dataUrl);
+        image.id = `${imageId++}`;
+        return image;
+      })
+    );
+  },
+  (_get, set, files: Blob[] | typeof RESET) => {
+    set(filesAtom, files);
   }
 );
+
+export const unwrappedImagesAtom = unwrap(imagesAtom, prev => prev ?? []);

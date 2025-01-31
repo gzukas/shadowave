@@ -20,8 +20,9 @@ export function atomWithExpiringWriteState<Args extends unknown[], Result>(
     async (get, set, ...args: Args) => {
       set(writeStateAtom, LOADABLE_STATE.LOADING);
       try {
-        await write(get, set, ...args);
+        const result = await write(get, set, ...args);
         set(writeStateAtom, LOADABLE_STATE.HAS_DATA, expireInMs);
+        return result;
       } catch (error) {
         set(
           writeStateAtom,

@@ -16,24 +16,22 @@ export interface AtomSliderProps
 }
 
 export function AtomSlider(props: AtomSliderProps) {
-  const {
-    atom,
-    className,
-    label,
-    LabelProps,
-    renderValue = value => value,
-    ...other
-  } = props;
+  const { atom, className, label, LabelProps, renderValue, ...other } = props;
   const [value, setValue] = useAtom(atom);
+
+  const handleValueChange = ([value]: number[]) => {
+    setValue(value);
+  };
+
   return (
     <div className={cn('grid gap-4', className)}>
       <div className="flex items-center justify-between">
         <Label {...LabelProps}>{label}</Label>
-        <span className="text-right text-sm text-muted-foreground">
-          {renderValue(value)}
+        <span className="text-muted-foreground text-right text-sm">
+          {renderValue?.(value)}
         </span>
       </div>
-      <Slider value={[value]} onValueChange={([v]) => setValue(v)} {...other} />
+      <Slider value={[value]} onValueChange={handleValueChange} {...other} />
     </div>
   );
 }
