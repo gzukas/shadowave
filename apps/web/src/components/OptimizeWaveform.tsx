@@ -3,8 +3,10 @@ import { WandSparkles } from 'lucide-react';
 import { optimizeWaveformAtom } from '@/atoms/waveformAtoms';
 import { Button } from '@workspace/ui/components/button';
 import { unwrappedLargestImageAtom } from '@/atoms/largestImageAtom';
+import { useLingui } from '@lingui/react/macro';
 
 export function OptimizeWaveform() {
+  const { t } = useLingui();
   const largestImage = useAtomValue(unwrappedLargestImageAtom);
   const optimizeWaveform = useSetAtom(optimizeWaveformAtom);
 
@@ -19,6 +21,7 @@ export function OptimizeWaveform() {
       variant="ghost"
       className="group"
       disabled={!largestImage}
+      aria-label={t`Optimize waveform`}
     >
       <WandSparkles className="group-active:rotate-12" />
     </Button>

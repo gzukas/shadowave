@@ -24,11 +24,13 @@ export function atomWithExpiringWriteState<Args extends unknown[], Result>(
         set(writeStateAtom, LOADABLE_STATE.HAS_DATA, expireInMs);
         return result;
       } catch (error) {
-        set(
-          writeStateAtom,
-          shouldIgnoreError?.(error) ? null : LOADABLE_STATE.HAS_ERROR,
-          expireInMs
-        );
+        const errorState = shouldIgnoreError?.(error)
+          ? null
+          : LOADABLE_STATE.HAS_ERROR;
+        set(writeStateAtom, errorState, expireInMs);
+        if (errorState) {
+          throw error;
+        }
       }
     }
   );

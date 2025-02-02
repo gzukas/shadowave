@@ -33,11 +33,15 @@ export const importAtom = atomWithExpiringWriteState(
             return (await fetch(source, { signal })).blob();
           }
           const { url, deviceType } = source;
-          const { data } = await client
+          const { data, error } = await client
             .screenshots({
               url: encodeURIComponent(url)
             })
             .get({ query: { deviceType }, fetch: { signal } });
+
+          if (error) {
+            throw error.value;
+          }
 
           return Object.values(data || {});
         })

@@ -18,8 +18,8 @@ msgstr ""
 msgid "{0, plural, one {# image} other {# images}}"
 msgstr ""
 
-#: src/components/Waveform.tsx:52
-#: src/components/Waveform.tsx:59
+#: src/components/Waveform.tsx:47
+#: src/components/Waveform.tsx:53
 msgid "Amplitude"
 msgstr ""
 
@@ -27,7 +27,7 @@ msgstr ""
 msgid "Built by <0>gzukas</0>. The source code is available on <1>GitHub</1>."
 msgstr ""
 
-#: src/components/RemoveImages.tsx:49
+#: src/components/RemoveImages.tsx:60
 msgid "Cancel"
 msgstr ""
 
@@ -36,7 +36,7 @@ msgstr ""
 msgid "Choose file"
 msgstr ""
 
-#: src/components/ImportImages.tsx:180
+#: src/components/ImportImages.tsx:181
 msgid "Choose Files"
 msgstr ""
 
@@ -64,11 +64,11 @@ msgstr ""
 
 #: src/components/ImportImages.tsx:86
 #: src/components/ImportImages.tsx:93
-#: src/components/ImportImages.tsx:194
+#: src/components/ImportImages.tsx:195
 msgid "Import"
 msgstr ""
 
-#: src/components/Editor.tsx:39
+#: src/components/Editor.tsx:49
 msgid "Import images featuring both light and dark themes to start."
 msgstr ""
 
@@ -77,25 +77,29 @@ msgstr ""
 msgid "Mobile"
 msgstr ""
 
-#: src/components/RemoveImages.tsx:52
+#: src/components/OptimizeWaveform.tsx:24
+msgid "Optimize waveform"
+msgstr ""
+
+#: src/components/RemoveImages.tsx:63
 msgid "Remove"
 msgstr ""
 
-#: src/components/RemoveImages.tsx:30
+#: src/components/RemoveImages.tsx:41
 msgid "Remove images"
 msgstr ""
 
-#: src/components/RemoveImages.tsx:38
+#: src/components/RemoveImages.tsx:49
 msgid "Remove images?"
 msgstr ""
 
-#: src/components/ReverseImages.tsx:22
-#: src/components/ReverseImages.tsx:27
+#: src/components/ReverseImages.tsx:24
+#: src/components/ReverseImages.tsx:29
 msgid "Reverse images"
 msgstr ""
 
-#: src/components/Waveform.tsx:30
-#: src/components/Waveform.tsx:37
+#: src/components/Waveform.tsx:26
+#: src/components/Waveform.tsx:33
 msgid "Rotation"
 msgstr ""
 
@@ -124,7 +128,7 @@ msgstr ""
 msgid "The side should respond to the light and dark themes using the <0>prefers-color-scheme</0> media query. If it does not, choose files instead."
 msgstr ""
 
-#: src/components/RemoveImages.tsx:41
+#: src/components/RemoveImages.tsx:52
 msgid "These images will be permanently removed. This action cannot be undone."
 msgstr ""
 
@@ -132,7 +136,7 @@ msgstr ""
 msgid "Toggle theme"
 msgstr ""
 
-#: src/components/Waveform.tsx:41
-#: src/components/Waveform.tsx:48
+#: src/components/Waveform.tsx:37
+#: src/components/Waveform.tsx:43
 msgid "Wavelength"
 msgstr ""

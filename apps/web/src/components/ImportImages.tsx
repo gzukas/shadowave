@@ -1,10 +1,7 @@
 import { useAtom, useAtomValue } from 'jotai';
 import { Camera, Monitor, Smartphone, Tablet } from 'lucide-react';
 import { useForm } from 'react-hook-form';
-import { typeboxResolver } from '@hookform/resolvers/typebox';
-import { Type } from '@sinclair/typebox';
 import { Trans, Plural, useLingui } from '@lingui/react/macro';
-import { url, deviceType } from '@workspace/schema';
 import { cn } from '@workspace/ui/lib/utils';
 import { Button, ButtonProps } from '@workspace/ui/components/button';
 import {
@@ -34,13 +31,9 @@ import { ChooseFiles } from '@/components/ChooseFiles';
 import { LoadableIcon } from '@/components/LoadableIcon';
 import { importAtom, importSignalAtom } from '@/atoms/importAtoms';
 import { unwrappedImagesAtom } from '@/atoms/imagesAtom';
+import { isValidationError } from '@/utils/client';
 import { LOADABLE_STATE } from '@/constants';
-import { ImageSource, Site } from '@/types';
-
-const importSchema = Type.Object({
-  url,
-  deviceType
-});
+import { Site } from '@/types';
 
 export type ImportImagesProps = ButtonProps;
 
@@ -53,18 +46,27 @@ export function ImportImages(props: ImportImagesProps) {
   const isImporting = importState === LOADABLE_STATE.LOADING;
 
   const form = useForm<Site>({
-    resolver: typeboxResolver(importSchema),
     defaultValues: {
       url: '',
       deviceType: 'desktop'
     }
   });
 
-  const handleSubmitOrFilesChange = async (
-    imageSource: ImageSource | ImageSource[]
-  ) => {
-    await importImages(imageSource);
-    toggleImportSignal(false);
+  const handleSubmitOrFilesChange = async (imageSource: Site | File[]) => {
+    try {
+      await importImages(imageSource);
+      toggleImportSignal(false);
+    } catch (error) {
+      if (isValidationError(error)) {
+        switch (error.property) {
+          case '/url':
+            form.setError('url', error);
+            break;
+          case '/deviceType':
+            form.setError('deviceType', error);
+        }
+      }
+    }
   };
 
   const handleDeviceTypeChange =
@@ -138,7 +140,7 @@ export function ImportImages(props: ImportImagesProps) {
                       size="sm"
                     >
                       <ToggleGroupItem
-                        value="desktop"
+                        value="desktop3444"
                         aria-label={t`Desktop`}
                         className="flex-grow"
                       >
@@ -163,6 +165,7 @@ export function ImportImages(props: ImportImagesProps) {
                       </ToggleGroupItem>
                     </ToggleGroup>
                   </FormControl>
+                  <FormMessage />
                   <FormDescription></FormDescription>
                 </FormItem>
               )}
