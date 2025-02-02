@@ -77,8 +77,9 @@ msgstr ""
 msgid "Mobile"
 msgstr ""
 
-#: src/components/OptimizeWaveform.tsx:24
-msgid "Optimize waveform"
+#: src/components/OptimizeWaveform.tsx:19
+#: src/components/OptimizeWaveform.tsx:26
+msgid "Optimize"
 msgstr ""
 
 #: src/components/RemoveImages.tsx:63

@@ -1,5 +1,5 @@
 import { useAtomValue } from 'jotai';
-import { Trans, useLingui } from '@lingui/react/macro';
+import { useLingui } from '@lingui/react/macro';
 import {
   rotationAtom,
   wavelengthAtom,
@@ -23,7 +23,7 @@ export function Waveform(props: WaveformProps) {
   return (
     <div {...props}>
       <AtomSlider
-        label={<Trans>Rotation</Trans>}
+        label={t`Rotation`}
         atom={rotationAtom}
         renderValue={rotation => `${rotation}°`}
         min={0}
@@ -34,7 +34,7 @@ export function Waveform(props: WaveformProps) {
         }}
       />
       <AtomSlider
-        label={<Trans>Wavelength</Trans>}
+        label={t`Wavelength`}
         atom={wavelengthAtom}
         min={MIN_WAVELENGTH}
         max={wavelengthMax}
@@ -44,7 +44,7 @@ export function Waveform(props: WaveformProps) {
         }}
       />
       <AtomSlider
-        label={<Trans>Amplitude</Trans>}
+        label={t`Amplitude`}
         atom={amplitudeAtom}
         min={MIN_AMPLITUDE}
         max={amplitudeMax}

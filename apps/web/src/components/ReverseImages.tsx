@@ -1,7 +1,7 @@
 import { startTransition } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { ArrowDownUp, ArrowUpDown } from 'lucide-react';
-import { Trans, useLingui } from '@lingui/react/macro';
+import { useLingui } from '@lingui/react/macro';
 import { areImagesReversedAtom } from '@/atoms/areImagesReversedAtom';
 import { Button } from '@workspace/ui/components/button';
 import { Tooltip } from '@workspace/ui/components/tooltip';
@@ -21,7 +21,7 @@ export function ReverseImages() {
   };
 
   return (
-    <Tooltip title={<Trans>Reverse images</Trans>}>
+    <Tooltip title={t`Reverse images`}>
       <Button
         size="icon"
         onClick={handleClick}
