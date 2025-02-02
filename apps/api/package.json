@@ -13,7 +13,7 @@
     "@elysiajs/cors": "^1.2.0",
     "@workspace/schema": "workspace:*",
     "close-with-grace": "^2.2.0",
-    "elysia": "^1.2.10",
+    "elysia": "^1.2.11",
     "puppeteer": "^24.1.1"
   },
   "devDependencies": {
