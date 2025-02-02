@@ -8,9 +8,17 @@ type DeviceType = typeof deviceType.static;
 const TIMEOUT = 100000;
 
 const defaultColorSchemes: ColorScheme[] = ['dark', 'light'];
-const deviceMapping: Partial<Record<DeviceType, Device>> = {
+const deviceMapping: Record<DeviceType, Device> = {
   mobile: KnownDevices['iPhone 15'],
-  tablet: KnownDevices['iPad']
+  tablet: KnownDevices['iPad'],
+  desktop: {
+    userAgent:
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/132.0.6834.110 Safari/537.36',
+    viewport: {
+      width: 1200,
+      height: 630
+    }
+  }
 };
 
 interface ScreenshotsOptions {
@@ -22,16 +30,12 @@ const screenshotService = new Elysia({ name: 'Service.Screenshot' })
   .decorate('browser', await puppeteer.launch({ headless: 'shell' }))
   .derive({ as: 'scoped' }, ({ browser }) => ({
     async *screenshots(url: string, options: ScreenshotsOptions) {
-      const { deviceType, colorSchemes = defaultColorSchemes } = options;
+      const { deviceType = 'desktop', colorSchemes = defaultColorSchemes } =
+        options;
 
       const page = await browser.newPage();
-      page.setCacheEnabled(false);
-
-      const device = deviceType ? deviceMapping[deviceType] : null;
-      if (device) {
-        await page.emulate(device);
-      }
-
+      await page.setCacheEnabled(false);
+      await page.emulate(deviceMapping[deviceType]);
       await page.goto(url, { timeout: TIMEOUT, waitUntil: 'networkidle0' });
 
       for (const colorScheme of colorSchemes) {

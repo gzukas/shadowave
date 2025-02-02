@@ -140,7 +140,7 @@ export function ImportImages(props: ImportImagesProps) {
                       size="sm"
                     >
                       <ToggleGroupItem
-                        value="desktop3444"
+                        value="desktop"
                         aria-label={t`Desktop`}
                         className="flex-grow"
                       >
