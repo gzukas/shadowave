@@ -22,6 +22,6 @@
     "eslint-plugin-react-hooks": "5.2.0-canary-de1eaa26-20250124",
     "eslint-plugin-react-refresh": "^0.4.18",
     "globals": "^15.14.0",
-    "typescript-eslint": "8.22.0"
+    "typescript-eslint": "8.23.0"
   }
 }
