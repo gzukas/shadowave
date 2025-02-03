@@ -6,7 +6,7 @@
       "@/*": ["./src/*"],
       "@workspace/schema/*": ["../../packages/schema/src/*"],
       "@workspace/ui/*": ["../../packages/ui/src/*"]
-    },
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

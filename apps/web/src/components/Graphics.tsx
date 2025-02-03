@@ -6,7 +6,7 @@ import { rotationAtom } from '@/atoms/waveformAtoms';
 import { largestImageAtom } from '@/atoms/largestImageAtom';
 import { scaleAtom } from '@/atoms/scaleAtom';
 
-declare module "react" {
+declare module 'react' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface SVGAttributes<T> {
     transformOrigin?: string | undefined;
@@ -46,7 +46,7 @@ export function Graphics(props: GraphicsProps) {
       {...other}
     >
       <defs>
-        <path id={waveId} d={wave}/>
+        <path id={waveId} d={wave} />
         {orderedImages.map(
           (image, i) =>
             i !== orderedImages.length - 1 && (

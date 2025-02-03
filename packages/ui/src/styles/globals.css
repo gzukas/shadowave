@@ -71,7 +71,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground antialiased min-h-dvh flex flex-col sm:justify-center;
+    @apply bg-background text-foreground flex min-h-dvh flex-col antialiased sm:justify-center;
   }
   a {
     @apply font-medium underline underline-offset-4;

@@ -1,4 +1,4 @@
 {
-  "**/*.{ts,tsx}": ["turbo run lint -- --fix"],
+  "**/*.{ts,tsx}": ["turbo run lint -- --fix --no-warn-ignored"],
   "**/*.{ts,tsx,md}": ["prettier --write"]
 }

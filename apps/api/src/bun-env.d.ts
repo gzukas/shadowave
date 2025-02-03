@@ -1,4 +1,4 @@
-declare module "bun" {
+declare module 'bun' {
   interface Env {
     SHADOWAVE_HOST?: string;
     SHADOWAVE_PORT?: string;
