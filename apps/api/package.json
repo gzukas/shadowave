@@ -1,0 +1,25 @@
+{
+  "name": "@workspace/api",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --watch src/index.ts",
+    "start": "bun run src/index.ts",
+    "lint": "eslint . --max-warnings 0",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@elysiajs/cors": "^1.2.0",
+    "@workspace/schema": "workspace:*",
+    "close-with-grace": "^2.2.0",
+    "elysia": "^1.2.11",
+    "puppeteer": "^24.1.1"
+  },
+  "devDependencies": {
+    "@tsconfig/bun": "^1.0.7",
+    "@workspace/eslint-config": "workspace:*",
+    "bun-types": "latest"
+  },
+  "module": "src/index.js"
+}

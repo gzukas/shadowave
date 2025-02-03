@@ -1,0 +1,12 @@
+{
+  "extends": "@tsconfig/bun",
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "types": ["bun-types"],
+    "paths": {
+      "@/*": ["./src/*"],
+      "@workspace/schema/*": ["../../packages/schema/src/*"]
+    }
+  }
+}
