@@ -13,6 +13,6 @@ jobs:
         with:
           bun-version: latest
       - run: bun install --no-save
-      - run: bun lint
-      - run: bun build
-      - run: bun test
+      - run: bun run lint
+      - run: bun run build
+      - run: bun run test
