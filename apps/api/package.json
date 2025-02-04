@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "bun run --watch src/index.ts",
     "start": "bun run src/index.ts",
-    "build": "bun build ./src/index.ts --compile --target bun --outfile shadowave-api --minify-whitespace --minify-syntax",
+    "build": "bun build ./src/index.ts --compile --target bun --outfile ./dist/shadowave-api --minify-whitespace --minify-syntax",
     "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
