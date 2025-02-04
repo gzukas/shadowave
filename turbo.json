@@ -4,11 +4,18 @@
   "tasks": {
     "build": {
       "dependsOn": [
-        "^build",
-        "typecheck"
+        "^build"
       ],
       "outputs": [
         "dist/**"
+      ]
+    },
+    "api#build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "env": [
+        "SHADOWAVE_*"
       ]
     },
     "web#build": {
@@ -25,7 +32,6 @@
       "persistent": true
     },
     "lint": {},
-    "test": {},
-    "typecheck": {}
+    "test": {}
   }
 }
