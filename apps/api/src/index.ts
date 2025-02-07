@@ -9,7 +9,11 @@ const app = new Elysia()
       origin: process.env.SHADOWAVE_CORS_ORIGIN?.split(',') ?? true
     })
   )
-  .use(screenshots)
+  .use(
+    screenshots({
+      browserURL: process.env.SHADOWAVE_BROWSER_URL ?? 'http://localhost:9222'
+    })
+  )
   .listen({
     hostname: process.env.SHADOWAVE_HOST || '0.0.0.0',
     port: process.env.SHADOWAVE_PORT || 3001

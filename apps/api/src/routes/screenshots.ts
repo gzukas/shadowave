@@ -1,8 +1,15 @@
+import { dns } from 'bun';
 import { Elysia, form, t } from 'elysia';
-import puppeteer, { type Device, KnownDevices } from 'puppeteer';
+import puppeteer, {
+  type Device,
+  type Browser,
+  KnownDevices
+} from 'puppeteer-core';
 import { url, deviceType } from '@workspace/schema';
 
 type DeviceType = typeof deviceType.static;
+
+const colorSchemes = ['dark', 'light'] as const;
 
 const deviceMapping: Record<DeviceType, Device> = {
   mobile: KnownDevices['iPhone 15'],
@@ -18,41 +25,65 @@ const deviceMapping: Record<DeviceType, Device> = {
 };
 
 interface ScreenshotsOptions {
-  colorScheme: 'light' | 'dark';
-  deviceType?: DeviceType;
+  browserURL: string;
 }
 
-export const screenshots = async () => {
-  const browser = await puppeteer.launch({
-    headless: 'shell'
-  });
+function keepAlive(browser: Browser, everyMs: number) {
+  return setInterval(() => {
+    if (!browser.connected) {
+      console.error('Browser disconnected');
+    }
+  }, everyMs);
+}
 
-  const screenshot = async (url: string, options: ScreenshotsOptions) => {
-    const { deviceType = 'desktop', colorScheme } = options;
-    const page = await browser.newPage();
-    await Promise.all([
-      page.emulate(deviceMapping[deviceType]),
-      page.emulateMediaFeatures([
-        { name: 'prefers-color-scheme', value: colorScheme }
-      ])
+async function* takeScreenshots(
+  browser: Browser,
+  url: string,
+  options: { deviceType?: DeviceType }
+) {
+  const { deviceType = 'desktop' } = options;
+  const page = await browser.newPage();
+  await page.emulate(deviceMapping[deviceType]);
+
+  for (const colorScheme of colorSchemes) {
+    await page.emulateMediaFeatures([
+      { name: 'prefers-color-scheme', value: colorScheme }
     ]);
     await page.goto(url, { waitUntil: 'networkidle0' });
     const screenshot = await page.screenshot({
       type: 'webp'
     });
-    await page.close();
-    return [colorScheme, new Blob([screenshot])] as const;
-  };
+    yield [colorScheme, new Blob([screenshot])] as const;
+  }
+
+  await page.close();
+}
+
+export const screenshots = async (options: ScreenshotsOptions) => {
+  const { protocol, hostname, port } = new URL(options.browserURL);
+  const [{ address }] = await dns.lookup(hostname);
+  const browser = await puppeteer.connect({
+    browserURL: `${protocol}//${address}:${port}`,
+    downloadBehavior: {
+      policy: 'deny'
+    }
+  });
+
+  const aliveTimer = keepAlive(browser, 60_000 /* 1 minute */);
 
   return new Elysia()
     .get(
       '/screenshots/:url',
       async ({ params: { url }, query }) => {
-        const screenshots = await Promise.all([
-          screenshot(url, { ...query, colorScheme: 'dark' }),
-          screenshot(url, { ...query, colorScheme: 'light' })
-        ]);
-        return form(Object.fromEntries(screenshots));
+        const formData = form({});
+        for await (const [colorScheme, screenshot] of takeScreenshots(
+          browser,
+          url,
+          query
+        )) {
+          formData.append(colorScheme, screenshot, `${colorScheme}.webp`);
+        }
+        return formData;
       },
       {
         params: t.Object({
@@ -66,5 +97,5 @@ export const screenshots = async () => {
         }
       }
     )
-    .onStop(() => browser.close());
+    .onStop(() => clearInterval(aliveTimer));
 };
