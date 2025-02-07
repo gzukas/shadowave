@@ -16,5 +16,4 @@ FROM base AS release
 COPY --from=builder /usr/src/app/apps/api/dist .
 
 USER bun
-EXPOSE 3000/tcp
 ENTRYPOINT [ "./shadowave-api" ]

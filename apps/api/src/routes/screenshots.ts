@@ -61,7 +61,7 @@ async function* takeScreenshots(
 
 export const screenshots = async (options: ScreenshotsOptions) => {
   const { protocol, hostname, port } = new URL(options.browserURL);
-  const [{ address }] = await dns.lookup(hostname);
+  const [{ address }] = await dns.lookup(hostname, { family: 4 });
   const browser = await puppeteer.connect({
     browserURL: `${protocol}//${address}:${port}`,
     downloadBehavior: {

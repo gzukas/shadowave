@@ -3,6 +3,9 @@ import { cors } from '@elysiajs/cors';
 import closeWithGrace from 'close-with-grace';
 import { screenshots } from './routes/screenshots.js';
 
+const tlsCert = process.env.SHADOWAVE_TLS_CERT;
+const tlsKey = process.env.SHADOWAVE_TLS_KEY;
+
 const app = new Elysia()
   .use(
     cors({
@@ -16,7 +19,11 @@ const app = new Elysia()
   )
   .listen({
     hostname: process.env.SHADOWAVE_HOST || '0.0.0.0',
-    port: process.env.SHADOWAVE_PORT || 3001
+    port: process.env.SHADOWAVE_PORT || 3001,
+    tls: {
+      ...(tlsCert && { cert: Bun.file(tlsCert) }),
+      ...(tlsKey && { key: Bun.file(tlsKey) })
+    }
   });
 
 closeWithGrace({ delay: 2000 }, async ({ err }) => {
