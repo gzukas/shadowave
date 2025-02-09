@@ -1,7 +1,6 @@
 import { Elysia } from 'elysia';
 import { cors } from '@elysiajs/cors';
-import closeWithGrace from 'close-with-grace';
-import { screenshots } from './routes/screenshots.js';
+import screenshots from './routes/screenshots';
 
 const tlsCert = process.env.SHADOWAVE_TLS_CERT;
 const tlsKey = process.env.SHADOWAVE_TLS_KEY;
@@ -26,15 +25,6 @@ const app = new Elysia()
     }
   });
 
-closeWithGrace({ delay: 2000 }, async ({ err }) => {
-  if (err) {
-    console.error(err);
-  }
-  await app.stop();
-});
-
-console.log(
-  `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
-);
+console.log(`🦊 Elysia is running at ${app.server?.url}`);
 
 export type App = typeof app;

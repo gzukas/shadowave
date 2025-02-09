@@ -1,4 +1,3 @@
-# Base image for Bun
 FROM oven/bun:1.2.2 AS base
 WORKDIR /usr/src/app
 
