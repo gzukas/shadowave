@@ -6,6 +6,11 @@ const tlsCert = process.env.SHADOWAVE_TLS_CERT;
 const tlsKey = process.env.SHADOWAVE_TLS_KEY;
 
 const app = new Elysia()
+  .onError(({ code, error }) => {
+    if (code === 'VALIDATION') {
+      return error.validator.Errors(error.value).First();
+    }
+  })
   .use(
     cors({
       origin: process.env.SHADOWAVE_CORS_ORIGIN?.split(',') ?? true

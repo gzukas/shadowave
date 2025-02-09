@@ -46,6 +46,7 @@ export function ImportImages(props: ImportImagesProps) {
   const isImporting = importState === LOADABLE_STATE.LOADING;
 
   const form = useForm<Site>({
+    reValidateMode: 'onSubmit',
     defaultValues: {
       url: '',
       deviceType: 'desktop'
@@ -58,7 +59,7 @@ export function ImportImages(props: ImportImagesProps) {
       toggleImportSignal(false);
     } catch (error) {
       if (isValidationError(error)) {
-        switch (error.property) {
+        switch (error.path) {
           case '/url':
             form.setError('url', error);
             break;
@@ -110,9 +111,16 @@ export function ImportImages(props: ImportImagesProps) {
               name="url"
               render={({ field, fieldState }) => (
                 <FormItem>
-                  <FormLabel>Site URL</FormLabel>
+                  <FormLabel>
+                    <Trans>Site URL</Trans>
+                    <span className="text-destructive">*</span>
+                  </FormLabel>
                   <FormControl>
-                    <Input placeholder={t`https://example.com`} {...field} />
+                    <Input
+                      required
+                      placeholder={t`https://example.com`}
+                      {...field}
+                    />
                   </FormControl>
                   {fieldState.invalid ? (
                     <FormMessage />
