@@ -36,7 +36,6 @@
       "dependencies": {
         "@elysiajs/eden": "^1.2.0",
         "@lingui/core": "^5.2.0",
-        "@lingui/macro": "^5.2.0",
         "@lingui/react": "^5.2.0",
         "@workspace/schema": "workspace:*",
         "@workspace/ui": "workspace:*",
@@ -285,8 +284,6 @@
     "@lingui/core": ["@lingui/core@5.2.0", "", { "dependencies": { "@babel/runtime": "^7.20.13", "@lingui/message-utils": "5.2.0", "unraw": "^3.0.0" }, "peerDependencies": { "@lingui/babel-plugin-lingui-macro": "5.2.0", "babel-plugin-macros": "2 || 3" }, "optionalPeers": ["@lingui/babel-plugin-lingui-macro", "babel-plugin-macros"] }, "sha512-cz35uKDxIGb/CPvgwn7BM/QYpxtARmQm7n+mHUoNJdNKSrg9R7vKkLRG7k9dukZwix2Mdjh+2dPIJnAkor2CiA=="],
 
     "@lingui/format-po": ["@lingui/format-po@5.2.0", "", { "dependencies": { "@lingui/conf": "5.2.0", "@lingui/message-utils": "5.2.0", "date-fns": "^3.6.0", "pofile": "^1.1.4" } }, "sha512-viUQaoRa8UxSghayTY7xjtwXbfXIVdlM8C4HsxmozQnl5TXnPVEwlaPYds3sdJ8PmQGcYCm35r8EsmuKBoWYDQ=="],
-
-    "@lingui/macro": ["@lingui/macro@5.2.0", "", { "dependencies": { "@lingui/core": "5.2.0", "@lingui/react": "5.2.0" }, "peerDependencies": { "@lingui/babel-plugin-lingui-macro": "5.2.0", "babel-plugin-macros": "2 || 3" }, "optionalPeers": ["@lingui/babel-plugin-lingui-macro", "babel-plugin-macros"] }, "sha512-zWrVDxRqlyc4Eirb5sUuL+4bxH2T/pEg5eZGwibLUcZhyRQmIJkarGrpGe6WzzQa5IZH4Y+2lzOM973jQ/IPMA=="],
 
     "@lingui/message-utils": ["@lingui/message-utils@5.2.0", "", { "dependencies": { "@messageformat/parser": "^5.0.0", "js-sha256": "^0.10.1" } }, "sha512-qJFKNc1b7SRX6y5ywtA1x+2/gaY22e09hjC6fiDvDpAFdEguI4qAJGmBmqlAZG/kcokR0tmMpo9zYUF8jjcHEA=="],
 
