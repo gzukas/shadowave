@@ -13,9 +13,8 @@ declare module 'react' {
   }
 }
 
-export interface GraphicsProps extends React.ComponentPropsWithoutRef<'svg'> {
+export interface GraphicsProps extends React.ComponentProps<'svg'> {
   fallback?: React.ReactNode;
-  ref?: React.Ref<SVGSVGElement>;
 }
 
 export function Graphics(props: GraphicsProps) {

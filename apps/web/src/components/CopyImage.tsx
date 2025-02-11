@@ -2,7 +2,7 @@ import { useAtomValue } from 'jotai';
 import { Copy } from 'lucide-react';
 import { Trans } from '@lingui/react/macro';
 import { cn } from '@workspace/ui/lib/utils';
-import { Button, ButtonProps } from '@workspace/ui/components/button';
+import { Button } from '@workspace/ui/components/button';
 import { Tooltip } from '@workspace/ui/components/tooltip';
 import { graphicsAtom } from '@/atoms/graphicsAtom';
 import { isClipboardSupported, useClipboard } from '@/hooks/useClipboard';
@@ -10,7 +10,10 @@ import { LOADABLE_STATE, MIME_TYPES } from '@/constants';
 import { rasterize } from '@/utils/rasterize';
 import { LoadableIcon } from './LoadableIcon';
 
-export type CopyImageProps = Omit<ButtonProps, 'onClick' | 'disabled'>;
+export type CopyImageProps = Omit<
+  React.ComponentProps<typeof Button>,
+  'onClick' | 'disabled'
+>;
 
 export function CopyImage(props: CopyImageProps) {
   const graphics = useAtomValue(graphicsAtom);

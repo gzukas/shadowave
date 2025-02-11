@@ -18,7 +18,9 @@ import {
 import { imagesAtom, unwrappedImagesAtom } from '@/atoms/imagesAtom';
 import { waveformAtom } from '@/atoms/waveformAtoms';
 
-export function RemoveImages() {
+export type RemoveImagesProps = React.ComponentProps<typeof Button>;
+
+export function RemoveImages(props: RemoveImagesProps) {
   const { t } = useLingui();
   const [isPending, startTransition] = useTransition();
   const images = useAtomValue(unwrappedImagesAtom);
@@ -39,6 +41,7 @@ export function RemoveImages() {
           size="icon"
           disabled={!images.length || isPending}
           aria-label={t`Remove images`}
+          {...props}
         >
           <Trash2 />
         </Button>

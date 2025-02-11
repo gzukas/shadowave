@@ -12,7 +12,7 @@ import {
 import { AtomSlider } from '@/components/AtomSlider';
 import { unwrappedImagesAtom } from '@/atoms/imagesAtom';
 
-export type WaveformProps = React.ComponentPropsWithoutRef<'div'>;
+export type WaveformProps = React.ComponentProps<'div'>;
 
 export function Waveform(props: WaveformProps) {
   const { t } = useLingui();
