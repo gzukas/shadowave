@@ -5,10 +5,7 @@ import { Label } from '@workspace/ui/components/label';
 import { Slider } from '@workspace/ui/components/slider';
 
 export interface AtomSliderProps
-  extends Omit<
-    React.ComponentPropsWithoutRef<typeof Slider>,
-    'value' | 'onValueCHange'
-  > {
+  extends Omit<React.ComponentProps<typeof Slider>, 'value' | 'onValueCHange'> {
   atom: PrimitiveAtom<number>;
   label: React.ReactNode;
   LabelProps?: Partial<LabelProps>;

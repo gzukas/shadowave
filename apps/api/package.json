@@ -5,14 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "bun run --watch src/index.ts",
-    "start": "bun run src/index.ts",
     "build": "bun build ./src/index.ts --compile --target bun --outfile ./dist/shadowave-api --minify-whitespace --minify-syntax",
     "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
     "@elysiajs/cors": "^1.2.0",
     "@workspace/schema": "workspace:*",
-    "elysia": "^1.2.11",
+    "elysia": "^1.2.12",
     "puppeteer-core": "^24.2.0"
   },
   "devDependencies": {

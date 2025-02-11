@@ -3,7 +3,7 @@ import { Camera, Monitor, Smartphone, Tablet } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { Trans, Plural, useLingui } from '@lingui/react/macro';
 import { cn } from '@workspace/ui/lib/utils';
-import { Button, ButtonProps } from '@workspace/ui/components/button';
+import { Button } from '@workspace/ui/components/button';
 import {
   Dialog,
   DialogContent,
@@ -35,7 +35,7 @@ import { isValidationError } from '@/utils/client';
 import { LOADABLE_STATE } from '@/constants';
 import { Site } from '@/types';
 
-export type ImportImagesProps = ButtonProps;
+export type ImportImagesProps = React.ComponentProps<typeof Button>;
 
 export function ImportImages(props: ImportImagesProps) {
   const { t } = useLingui();
@@ -145,7 +145,6 @@ export function ImportImages(props: ImportImagesProps) {
                       onValueChange={handleDeviceTypeChange(field.onChange)}
                       type="single"
                       variant="outline"
-                      size="sm"
                     >
                       <ToggleGroupItem
                         value="desktop"

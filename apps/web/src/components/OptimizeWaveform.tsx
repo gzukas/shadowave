@@ -25,7 +25,7 @@ export function OptimizeWaveform() {
         disabled={!largestImage}
         aria-label={t`Optimize`}
       >
-        <WandSparkles className="transition-transform ease-in-out group-active:rotate-45" />
+        <WandSparkles className="transition-transform ease-in-out group-active:rotate-30" />
       </Button>
     </Tooltip>
   );

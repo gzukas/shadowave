@@ -24,6 +24,7 @@ export function ChangeWaveFunction() {
   return (
     <ToggleGroup
       type="single"
+      variant="outline"
       value={waveFunction}
       onValueChange={handleWaveFunctionChange}
       disabled={!images.length}

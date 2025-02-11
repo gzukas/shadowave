@@ -16,7 +16,7 @@ import { OptimizeWaveform } from '@/components/OptimizeWaveform';
 import { useSetAtom } from 'jotai';
 import { graphicsAtom } from '@/atoms/graphicsAtom';
 
-export type EditorProps = React.ComponentPropsWithoutRef<'div'>;
+export type EditorProps = React.ComponentProps<'div'>;
 
 export function Editor(props: EditorProps) {
   const { className, ...other } = props;
@@ -59,12 +59,12 @@ export function Editor(props: EditorProps) {
 
       <div className="flex flex-col justify-between gap-8 p-6">
         <div className="flex flex-col gap-4">
-          <div className="bg-primary flex gap-1 rounded-md">
-            <ReverseImages />
-            <ImportImages className="grow" />
-            <RemoveImages />
+          <div className="flex">
+            <ReverseImages className="disabled:text-accent/50 rounded-none rounded-l-md shadow-none disabled:opacity-100" />
+            <ImportImages className="grow rounded-none shadow-none" />
+            <RemoveImages className="disabled:text-accent/50 rounded-none rounded-r-md shadow-none disabled:opacity-100" />
           </div>
-          <div className="flex flex-row justify-between">
+          <div className="flex justify-between">
             <ChangeWaveFunction />
             <OptimizeWaveform />
           </div>

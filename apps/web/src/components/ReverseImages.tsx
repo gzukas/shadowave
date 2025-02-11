@@ -7,7 +7,9 @@ import { Button } from '@workspace/ui/components/button';
 import { Tooltip } from '@workspace/ui/components/tooltip';
 import { unwrappedImagesAtom } from '@/atoms/imagesAtom';
 
-export function ReverseImages() {
+export type ReverseImagesProps = React.ComponentProps<typeof Button>;
+
+export function ReverseImages(props: ReverseImagesProps) {
   const { t } = useLingui();
   const images = useAtomValue(unwrappedImagesAtom);
   const [areImagesReversed, toggleImagesReversed] = useAtom(
@@ -27,6 +29,7 @@ export function ReverseImages() {
         onClick={handleClick}
         disabled={images.length < 2}
         aria-label={t`Reverse images`}
+        {...props}
       >
         {areImagesReversed ? <ArrowDownUp /> : <ArrowUpDown />}
       </Button>

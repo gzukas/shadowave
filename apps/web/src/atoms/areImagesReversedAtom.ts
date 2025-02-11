@@ -1,3 +1,8 @@
-import { atomWithToggle } from '@/utils/atomWithToggle';
+import { atomWithToggleAndStorage } from '@/utils/atomWithToggleAndStorage';
 
-export const areImagesReversedAtom = atomWithToggle(false);
+export const areImagesReversedAtom = atomWithToggleAndStorage(
+  'areImagesReversed',
+  false,
+  undefined,
+  { getOnInit: true }
+);

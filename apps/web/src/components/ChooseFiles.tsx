@@ -3,8 +3,7 @@ import { CoreFileOptions, fileOpen, FileWithHandle } from 'browser-fs-access';
 import { composeEventHandlers } from '@radix-ui/primitive';
 import { Button } from '@workspace/ui/components/button';
 
-export interface ChooseFilesProps
-  extends React.ComponentPropsWithoutRef<typeof Button> {
+export interface ChooseFilesProps extends React.ComponentProps<typeof Button> {
   onFilesChange?: (files: FileWithHandle[]) => void;
   options?: CoreFileOptions;
 }

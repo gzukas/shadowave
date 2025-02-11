@@ -9,12 +9,11 @@ import {
   exportFileHandleAtom
 } from '@/atoms/exportAtoms';
 import { Button } from '@workspace/ui/components/button';
-import { Separator } from '@workspace/ui/components/separator';
 import { Tooltip } from '@workspace/ui/components/tooltip';
 import { LoadableIcon } from '@/components/LoadableIcon';
 import { LOADABLE_STATE } from '@/constants';
 
-export type ExportImageProps = React.ComponentPropsWithoutRef<'div'>;
+export type ExportImageProps = React.ComponentProps<'div'>;
 
 export function ExportImage(props: ExportImageProps) {
   const { className, ...other } = props;
@@ -31,16 +30,12 @@ export function ExportImage(props: ExportImageProps) {
     };
 
   return (
-    <div
-      className={cn(
-        'bg-secondary text-secondary-foreground flex items-center space-x-1 overflow-hidden rounded-md',
-        className
-      )}
-      {...other}
-    >
+    <div className={cn('flex overflow-hidden', className)} {...other}>
       <Tooltip title={<Trans>Save to</Trans>}>
         <Button
-          className="min-w-0 grow"
+          className={cn('min-w-0 grow', {
+            'justify-start rounded-none rounded-l-md': !!exportFileHandle
+          })}
           variant="secondary"
           onClick={createExportClickHandler()}
           disabled={disabled}
@@ -59,11 +54,10 @@ export function ExportImage(props: ExportImageProps) {
       </Tooltip>
       {exportFileHandle && (
         <>
-          <Separator orientation="vertical" className="h-[20px]" />
           <Tooltip title={<Trans>Choose file</Trans>}>
             <Button
               variant="secondary"
-              className="shrink-0"
+              className="shrink-0 rounded-none rounded-r-md"
               size="icon"
               onClick={createExportClickHandler(null)}
               disabled={disabled}
