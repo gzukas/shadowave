@@ -24,7 +24,7 @@ export default async function screenshots(options: ScreenshotsOptions) {
         });
         return { browser };
       })
-      .onAfterHandle(({ browser }) => browser.disconnect())
+      .onAfterResponse(({ browser }) => browser?.disconnect())
       .get(
         '/:url',
         async ({ params: { url }, query, browser }) => {
