@@ -8,10 +8,7 @@ export interface ChooseFilesProps extends React.ComponentProps<typeof Button> {
   options?: CoreFileOptions;
 }
 
-export const ChooseFiles = React.forwardRef(function ChooseFiles(
-  props: ChooseFilesProps,
-  ref: React.ForwardedRef<HTMLButtonElement>
-) {
+export function ChooseFiles(props: ChooseFilesProps) {
   const { onFilesChange, options, ...other } = props;
   const handleClick = async () => {
     try {
@@ -32,8 +29,7 @@ export const ChooseFiles = React.forwardRef(function ChooseFiles(
   return (
     <Button
       {...other}
-      ref={ref}
       onClick={composeEventHandlers(props.onClick, handleClick)}
     />
   );
-});
+}

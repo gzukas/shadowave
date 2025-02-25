@@ -1,27 +1,31 @@
 import { Moon, Sun } from 'lucide-react';
-import { Trans } from '@lingui/react/macro';
+import { useLingui } from '@lingui/react/macro';
 import { Button } from '@workspace/ui/components/button';
 import { useTheme } from '@/hooks/useTheme';
 
-export function ChangeTheme() {
-  const [appliedTheme, setTheme] = useTheme();
+export type ChangeThemeProps = Omit<
+  React.ComponentProps<typeof Button>,
+  'onClick'
+>;
 
-  const toggleTheme = () => {
-    setTheme(appliedTheme === 'dark' ? 'light' : 'dark');
+export function ChangeTheme(props: ChangeThemeProps) {
+  const { t } = useLingui();
+  const [theme, setTheme] = useTheme();
+
+  const handleThemeClick = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
   return (
     <Button
       variant="ghost"
       size="icon"
-      className="size-8"
-      onClick={toggleTheme}
+      onClick={handleThemeClick}
+      aria-label={t`Toggle theme`}
+      {...props}
     >
       <Sun className="hidden [html.dark_&]:block" />
       <Moon className="hidden [html.light_&]:block" />
-      <span className="sr-only">
-        <Trans>Toggle theme</Trans>
-      </span>
     </Button>
   );
 }

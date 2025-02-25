@@ -5,14 +5,14 @@ import { cn } from '@workspace/ui/lib/utils';
 
 interface SliderProps
   extends React.ComponentProps<typeof SliderPrimitive.Root> {
-  ThumbProps?: Omit<Partial<SliderPrimitive.SliderThumbProps>, 'className'>;
+  thumbProps?: Omit<Partial<SliderPrimitive.SliderThumbProps>, 'className'>;
 }
 
 function Slider({
   className,
   defaultValue,
   value,
-  ThumbProps,
+  thumbProps,
   min = 0,
   max = 100,
   ...props
@@ -58,7 +58,7 @@ function Slider({
           data-slot="slider-thumb"
           key={index}
           className="border-primary bg-background ring-ring/20 block size-4 shrink-0 rounded-full border shadow-sm transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50"
-          {...ThumbProps}
+          {...thumbProps}
         />
       ))}
     </SliderPrimitive.Root>

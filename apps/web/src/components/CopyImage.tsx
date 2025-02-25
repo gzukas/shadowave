@@ -1,6 +1,6 @@
 import { useAtomValue } from 'jotai';
-import { Copy } from 'lucide-react';
-import { Trans } from '@lingui/react/macro';
+import { Clipboard } from 'lucide-react';
+import { useLingui } from '@lingui/react/macro';
 import { cn } from '@workspace/ui/lib/utils';
 import { Button } from '@workspace/ui/components/button';
 import { Tooltip } from '@workspace/ui/components/tooltip';
@@ -16,12 +16,14 @@ export type CopyImageProps = Omit<
 >;
 
 export function CopyImage(props: CopyImageProps) {
+  const { t } = useLingui();
   const graphics = useAtomValue(graphicsAtom);
   const { copy, state } = useClipboard();
 
   const isCopying = state === LOADABLE_STATE.LOADING;
+  const isDisabled = !graphics || isCopying;
 
-  const handleClick = async () => {
+  const handleCopyClick = async () => {
     if (graphics) {
       await copy({
         [MIME_TYPES.png]: rasterize(graphics)
@@ -30,24 +32,22 @@ export function CopyImage(props: CopyImageProps) {
   };
 
   return isClipboardSupported ? (
-    <Tooltip title={<Trans>Copy PNG</Trans>}>
+    <Tooltip title={t`Copy PNG`}>
       <Button
         variant="ghost"
         size="icon"
-        onClick={handleClick}
-        disabled={!graphics || isCopying}
+        onClick={handleCopyClick}
+        disabled={isDisabled}
+        aria-label={t`Copy PNG`}
         {...props}
       >
         <LoadableIcon
           state={state}
-          fallback={Copy}
-          className={cn('size-4', {
+          fallback={Clipboard}
+          className={cn({
             'animate-spin': isCopying
           })}
         />
-        <span className="sr-only">
-          <Trans>Copy PNG</Trans>
-        </span>
       </Button>
     </Tooltip>
   ) : null;
