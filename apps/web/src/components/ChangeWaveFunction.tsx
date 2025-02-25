@@ -9,6 +9,7 @@ import { Cos } from '@/components/Cos';
 import { WAVE_FUNCTION } from '@/constants';
 import { WaveFunction } from '@/types';
 import { unwrappedImagesAtom } from '@/atoms/imagesAtom';
+import { useLingui } from '@lingui/react/macro';
 
 export type ChanveWaveFunctionProps = Omit<
   React.ComponentProps<typeof ToggleGroup>,
@@ -21,6 +22,7 @@ export type ChanveWaveFunctionProps = Omit<
 >;
 
 export function ChangeWaveFunction(props: ChanveWaveFunctionProps) {
+  const { t } = useLingui();
   const images = useAtomValue(unwrappedImagesAtom);
   const [waveFunction, setWaveFunction] = useAtom(waveFunctionAtom);
 
@@ -38,10 +40,10 @@ export function ChangeWaveFunction(props: ChanveWaveFunctionProps) {
       disabled={!images.length}
       {...props}
     >
-      <ToggleGroupItem value={WAVE_FUNCTION.SIN}>
+      <ToggleGroupItem value={WAVE_FUNCTION.SIN} aria-label={t`Sine`}>
         <Sin />
       </ToggleGroupItem>
-      <ToggleGroupItem value={WAVE_FUNCTION.COS}>
+      <ToggleGroupItem value={WAVE_FUNCTION.COS} aria-label={t`Cosine`}>
         <Cos />
       </ToggleGroupItem>
     </ToggleGroup>
