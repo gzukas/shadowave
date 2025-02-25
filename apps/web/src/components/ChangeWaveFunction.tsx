@@ -1,5 +1,4 @@
 import { useAtom, useAtomValue } from 'jotai';
-import { Trans } from '@lingui/react/macro';
 import { waveFunctionAtom } from '@/atoms/waveFunctionAtom';
 import {
   ToggleGroup,
@@ -11,31 +10,39 @@ import { WAVE_FUNCTION } from '@/constants';
 import { WaveFunction } from '@/types';
 import { unwrappedImagesAtom } from '@/atoms/imagesAtom';
 
-export function ChangeWaveFunction() {
+export type ChanveWaveFunctionProps = Omit<
+  React.ComponentProps<typeof ToggleGroup>,
+  | 'type'
+  | 'value'
+  | 'defaultValue'
+  | 'waveFunction'
+  | 'onValueChange'
+  | 'disabled'
+>;
+
+export function ChangeWaveFunction(props: ChanveWaveFunctionProps) {
   const images = useAtomValue(unwrappedImagesAtom);
   const [waveFunction, setWaveFunction] = useAtom(waveFunctionAtom);
 
-  const handleWaveFunctionChange = (waveFunction: WaveFunction) => {
-    if (waveFunction) {
-      setWaveFunction(waveFunction);
+  const handleWaveFunctionChange = (nextWaveFunction: WaveFunction) => {
+    if (nextWaveFunction) {
+      setWaveFunction(nextWaveFunction);
     }
   };
 
   return (
     <ToggleGroup
       type="single"
-      variant="outline"
       value={waveFunction}
       onValueChange={handleWaveFunctionChange}
       disabled={!images.length}
+      {...props}
     >
       <ToggleGroupItem value={WAVE_FUNCTION.SIN}>
         <Sin />
-        <Trans>Sine</Trans>
       </ToggleGroupItem>
       <ToggleGroupItem value={WAVE_FUNCTION.COS}>
         <Cos />
-        <Trans>Cosine</Trans>
       </ToggleGroupItem>
     </ToggleGroup>
   );

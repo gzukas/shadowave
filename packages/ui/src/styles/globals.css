@@ -1,5 +1,4 @@
 @import 'tailwindcss';
-
 @plugin 'tailwindcss-animate';
 
 @custom-variant dark (&:is(.dark *));
@@ -68,7 +67,7 @@
 
 @theme inline {
   --font-*: initial;
-  --font-sans: Noto Sans;
+  --font-sans: Geist;
 
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
@@ -108,14 +107,17 @@
     from {
       height: 0;
     }
+
     to {
       height: var(--radix-accordion-content-height);
     }
   }
+
   @keyframes accordion-up {
     from {
       height: var(--radix-accordion-content-height);
     }
+
     to {
       height: 0;
     }
@@ -125,41 +127,39 @@
 @utility container {
   margin-inline: auto;
   padding-inline: 2rem;
-  @media (width >= --theme(--breakpoint-sm)) {
+
+  @media (width >=--theme(--breakpoint-sm)) {
     max-width: none;
   }
-  @media (width >= 1400px) {
+
+  @media (width >=1400px) {
     max-width: 1400px;
   }
 }
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
+@utility bg-grid {
+  --grid-size: 24px;
+  --grid-alpha: 0.03;
+  --grid-color: rgba(0, 0, 0, var(--grid-alpha));
 
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
-@layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
+  @variant dark {
+    --grid-color: rgba(255, 255, 255, var(--grid-alpha))
   }
+
+  background-size: var(--grid-size) var(--grid-size);
+  background-image: linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+  linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
 }
+
+/* bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] bg-slate-100 dark:bg-[radial-gradient(#374151_1px,transparent_1px)] dark:bg-slate-900 */
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground flex min-h-dvh flex-col antialiased sm:justify-center;
-  }
-  a {
-    @apply font-medium underline underline-offset-4;
   }
 
   button:not(:disabled),

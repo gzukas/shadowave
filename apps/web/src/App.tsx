@@ -1,34 +1,58 @@
-import { Trans } from '@lingui/react/macro';
-import { TooltipProvider } from '@workspace/ui/components/tooltip';
-import { siteConfig } from '@/config/site';
-import { I18nProvider } from '@/components/I18nProvider';
+import { Suspense } from 'react';
+import { LoaderCircle } from 'lucide-react';
+import { Separator } from '@workspace/ui/components/separator';
+import { AppProvider } from '@/components/AppProvider';
 import { ChangeTheme } from '@/components/ChangeTheme';
-import { Editor } from '@/components/Editor';
+import { ChangeWaveFunction } from '@/components/ChangeWaveFunction';
+import { CopyImage } from '@/components/CopyImage';
+import { ExportImage } from '@/components/ExportImage';
+import { Graphics } from '@/components/Graphics';
+import { ImportImages } from '@/components/ImportImages';
+import { NoImages } from '@/components/NoImages';
+import { OptimizeWaveform } from '@/components/OptimizeWaveform';
+import { RemoveImages } from '@/components/RemoveImages';
+import { ReverseImages } from '@/components/ReverseImages';
+import { Waveform } from '@/components/Waveform';
 
 export function App() {
   return (
-    <I18nProvider>
-      <TooltipProvider>
-        <main className="sm:container">
-          <Editor />
+    <AppProvider>
+      <div className="bg-grid pointer-events-none absolute inset-0 [mask-image:linear-gradient(180deg,#fff_5%,transparent_80%)] select-none"></div>
+      <div className="relative grid h-dvh w-dvw grid-rows-[auto_1fr_auto] overflow-hidden">
+        <header className="grid grid-cols-[1fr_2fr_1fr] items-center p-2.5 sm:p-5">
+          <section className="col-start-2 justify-self-center">
+            <div className="bg-card flex items-center rounded-md border p-1 shadow-xs sm:gap-1">
+              <ImportImages variant="ghost" />
+              <ExportImage />
+              <CopyImage />
+              <Separator orientation="vertical" className="h-4" />
+              <ReverseImages variant="ghost" />
+              <OptimizeWaveform />
+              <ChangeWaveFunction />
+              <Separator orientation="vertical" className="h-4" />
+              <RemoveImages variant="ghost" />
+            </div>
+          </section>
+          <ChangeTheme className="justify-self-end" />
+        </header>
+
+        <main className="grid place-items-center overflow-auto p-20">
+          <Suspense
+            fallback={<LoaderCircle className="size-12 animate-spin" />}
+          >
+            <Graphics
+              className="h-full w-full drop-shadow-2xl"
+              fallback={<NoImages />}
+            />
+          </Suspense>
         </main>
-        <footer className="flex flex-col items-center justify-between gap-4 py-8 sm:container sm:flex-row">
-          <p className="text-muted-foreground text-center text-sm">
-            <Trans>
-              Built by{' '}
-              <a href={siteConfig.links.author} target="_blank">
-                gzukas
-              </a>
-              . The source code is available on{' '}
-              <a href={siteConfig.links.github} target="_blank">
-                GitHub
-              </a>
-              .
-            </Trans>
-          </p>
-          <ChangeTheme />
+
+        <footer className="p-5 pb-8 sm:pb-12">
+          <section className="mx-auto grid max-w-4xl grid-cols-1 gap-12 sm:grid-cols-3">
+            <Waveform />
+          </section>
         </footer>
-      </TooltipProvider>
-    </I18nProvider>
+      </div>
+    </AppProvider>
   );
 }
