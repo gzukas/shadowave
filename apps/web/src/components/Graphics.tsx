@@ -11,7 +11,7 @@ import { graphicsAtom } from '@/atoms/graphicsAtom';
 declare module 'react' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface SVGAttributes<T> {
-    transformOrigin?: string | undefined;
+    transformOrigin?: string;
   }
 }
 

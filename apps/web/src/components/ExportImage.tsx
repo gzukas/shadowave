@@ -18,8 +18,8 @@ import {
 } from '@/atoms/exportAtoms';
 import { Button } from '@workspace/ui/components/button';
 import { LoadableIcon } from '@/components/LoadableIcon';
+import { Shortcut } from '@/components/Shortcut';
 import { HOTKEYS, LOADABLE_STATE } from '@/constants';
-import { Shortcut } from './Shortcut';
 
 export function ExportImage() {
   const { t } = useLingui();
