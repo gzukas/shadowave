@@ -1,9 +1,10 @@
 import { useAtom, useAtomValue } from 'jotai';
-import { Camera, Monitor, Smartphone, Tablet } from 'lucide-react';
+import { Camera, Folder, Monitor, Smartphone, Tablet } from 'lucide-react';
 import { useForm } from 'react-hook-form';
+import { useHotkeys } from 'react-hotkeys-hook';
 import { Trans, Plural, useLingui } from '@lingui/react/macro';
 import { cn } from '@workspace/ui/lib/utils';
-import { Button, ButtonProps } from '@workspace/ui/components/button';
+import { Button } from '@workspace/ui/components/button';
 import {
   Dialog,
   DialogContent,
@@ -32,10 +33,10 @@ import { LoadableIcon } from '@/components/LoadableIcon';
 import { importAtom, importSignalAtom } from '@/atoms/importAtoms';
 import { unwrappedImagesAtom } from '@/atoms/imagesAtom';
 import { isValidationError } from '@/utils/client';
-import { LOADABLE_STATE } from '@/constants';
+import { HOTKEYS, LOADABLE_STATE } from '@/constants';
 import { Site } from '@/types';
 
-export type ImportImagesProps = ButtonProps;
+export type ImportImagesProps = React.ComponentProps<typeof Button>;
 
 export function ImportImages(props: ImportImagesProps) {
   const { t } = useLingui();
@@ -77,15 +78,23 @@ export function ImportImages(props: ImportImagesProps) {
       }
     };
 
+  useHotkeys(HOTKEYS.IMPORT, () => toggleImportSignal(true), {
+    preventDefault: true
+  });
+
   return (
     <Dialog open={Boolean(importSignal)} onOpenChange={toggleImportSignal}>
       <DialogTrigger asChild>
         <Button {...props}>
-          {images.length ? (
-            <Plural value={images.length} one="# image" other="# images" />
-          ) : (
-            <Trans>Import</Trans>
-          )}
+          <Folder />
+          <div className="hidden sm:block">
+            <Plural
+              value={images.length}
+              _0="Import"
+              one="# image"
+              other="# images"
+            />
+          </div>
         </Button>
       </DialogTrigger>
       <DialogContent>
@@ -95,7 +104,7 @@ export function ImportImages(props: ImportImagesProps) {
           </DialogTitle>
           <DialogDescription>
             <Trans>
-              The side should respond to the light and dark themes using the{' '}
+              The site should respond to the light and dark themes using the{' '}
               <code>prefers-color-scheme</code> media query. If it does not,
               choose files instead.
             </Trans>
@@ -116,11 +125,7 @@ export function ImportImages(props: ImportImagesProps) {
                     <span className="text-destructive">*</span>
                   </FormLabel>
                   <FormControl>
-                    <Input
-                      required
-                      placeholder={t`https://example.com`}
-                      {...field}
-                    />
+                    <Input required {...field} />
                   </FormControl>
                   {fieldState.invalid ? (
                     <FormMessage />
@@ -145,14 +150,13 @@ export function ImportImages(props: ImportImagesProps) {
                       onValueChange={handleDeviceTypeChange(field.onChange)}
                       type="single"
                       variant="outline"
-                      size="sm"
                     >
                       <ToggleGroupItem
                         value="desktop"
                         aria-label={t`Desktop`}
                         className="flex-grow"
                       >
-                        <Monitor className="size-4" />
+                        <Monitor />
                         <Trans>Desktop</Trans>
                       </ToggleGroupItem>
                       <ToggleGroupItem
@@ -160,7 +164,7 @@ export function ImportImages(props: ImportImagesProps) {
                         aria-label={t`Tablet`}
                         className="flex-grow"
                       >
-                        <Tablet className="size-4" />
+                        <Tablet />
                         <Trans>Tablet</Trans>
                       </ToggleGroupItem>
                       <ToggleGroupItem
@@ -168,7 +172,7 @@ export function ImportImages(props: ImportImagesProps) {
                         aria-label={t`Mobile`}
                         className="flex-grow"
                       >
-                        <Smartphone className="size-4" />
+                        <Smartphone />
                         <Trans>Mobile</Trans>
                       </ToggleGroupItem>
                     </ToggleGroup>
@@ -196,7 +200,7 @@ export function ImportImages(props: ImportImagesProps) {
                 <LoadableIcon
                   state={importState}
                   fallback={Camera}
-                  className={cn('size-4', {
+                  className={cn({
                     'animate-spin': isImporting
                   })}
                 />

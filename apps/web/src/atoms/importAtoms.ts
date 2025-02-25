@@ -10,7 +10,7 @@ const importAbortControllerAtom = atom<AbortController | null>(null);
 
 export const importSignalAtom = atom(
   get => get(importAbortControllerAtom)?.signal,
-  (get, set, refresh: boolean) => {
+  (get, set, refresh?: boolean) => {
     get(importAbortControllerAtom)?.abort();
     set(importAbortControllerAtom, refresh ? new AbortController() : null);
   }

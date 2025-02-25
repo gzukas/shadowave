@@ -29,18 +29,19 @@ export async function* takeScreenshots(
 ) {
   const { deviceType = 'desktop', colorSchemes = ['dark', 'light'] } = options;
   const page = await browser.newPage();
-  await page.emulate(deviceMapping[deviceType]);
-
-  for (const colorScheme of colorSchemes) {
-    await page.emulateMediaFeatures([
-      { name: 'prefers-color-scheme', value: colorScheme }
-    ]);
-    await page.goto(url, { waitUntil: 'networkidle0' });
-    const screenshot = await page.screenshot({
-      type: 'webp'
-    });
-    yield [colorScheme, new Blob([screenshot])] as const;
+  try {
+    await page.emulate(deviceMapping[deviceType]);
+    for (const colorScheme of colorSchemes) {
+      await page.emulateMediaFeatures([
+        { name: 'prefers-color-scheme', value: colorScheme }
+      ]);
+      await page.goto(url, { waitUntil: 'networkidle0' });
+      const screenshot = await page.screenshot({
+        type: 'webp'
+      });
+      yield [colorScheme, new Blob([screenshot])] as const;
+    }
+  } finally {
+    await page.close();
   }
-
-  await page.close();
 }

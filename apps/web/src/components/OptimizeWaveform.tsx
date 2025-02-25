@@ -1,10 +1,10 @@
 import { useAtomValue, useSetAtom } from 'jotai';
 import { WandSparkles } from 'lucide-react';
-import { optimizeWaveformAtom } from '@/atoms/waveformAtoms';
-import { Button } from '@workspace/ui/components/button';
-import { unwrappedLargestImageAtom } from '@/atoms/largestImageAtom';
 import { useLingui } from '@lingui/react/macro';
+import { Button } from '@workspace/ui/components/button';
 import { Tooltip } from '@workspace/ui/components/tooltip';
+import { optimizeWaveformAtom } from '@/atoms/waveformAtoms';
+import { unwrappedLargestImageAtom } from '@/atoms/largestImageAtom';
 
 export function OptimizeWaveform() {
   const { t } = useLingui();
@@ -25,7 +25,7 @@ export function OptimizeWaveform() {
         disabled={!largestImage}
         aria-label={t`Optimize`}
       >
-        <WandSparkles className="transition-transform ease-in-out group-active:rotate-45" />
+        <WandSparkles className="transition-transform ease-in-out group-active:rotate-30" />
       </Button>
     </Tooltip>
   );

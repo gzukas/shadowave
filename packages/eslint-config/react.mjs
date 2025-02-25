@@ -5,7 +5,7 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import reactHooks from 'eslint-plugin-react-hooks';
 import baseConfig from './base.mjs';
 
-/** @type {import('typescript-eslint').Config} */
+/** @type {import('typescript-eslint').ConfigArray} */
 export default [
   ...baseConfig,
   reactHooks.configs['recommended-latest'],

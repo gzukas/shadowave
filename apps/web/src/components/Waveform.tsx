@@ -7,29 +7,31 @@ import {
   amplitudeAtom,
   amplitudeMaxAtom,
   MIN_WAVELENGTH,
-  MIN_AMPLITUDE
+  MIN_AMPLITUDE,
+  MIN_ROTATION,
+  MAX_ROTATION
 } from '@/atoms/waveformAtoms';
 import { AtomSlider } from '@/components/AtomSlider';
 import { unwrappedImagesAtom } from '@/atoms/imagesAtom';
+import { HOTKEYS } from '@/constants';
 
-export type WaveformProps = React.ComponentPropsWithoutRef<'div'>;
-
-export function Waveform(props: WaveformProps) {
+export function Waveform() {
   const { t } = useLingui();
   const images = useAtomValue(unwrappedImagesAtom);
   const wavelengthMax = useAtomValue(wavelengthMaxAtom);
   const amplitudeMax = useAtomValue(amplitudeMaxAtom);
+  const disabled = !images.length;
 
   return (
-    <div {...props}>
+    <>
       <AtomSlider
         label={t`Rotation`}
         atom={rotationAtom}
-        renderValue={rotation => `${rotation}°`}
-        min={0}
-        max={360}
-        disabled={!images.length}
-        ThumbProps={{
+        min={MIN_ROTATION}
+        max={MAX_ROTATION}
+        disabled={disabled}
+        hotkeys={[HOTKEYS.ROTATION_UP, HOTKEYS.ROTATION_DOWN]}
+        thumbProps={{
           'aria-label': t`Rotation`
         }}
       />
@@ -38,8 +40,9 @@ export function Waveform(props: WaveformProps) {
         atom={wavelengthAtom}
         min={MIN_WAVELENGTH}
         max={wavelengthMax}
-        disabled={!images.length}
-        ThumbProps={{
+        disabled={disabled}
+        hotkeys={[HOTKEYS.WAVELENGTH_UP, HOTKEYS.WAVELENGTH_DOWN]}
+        thumbProps={{
           'aria-label': t`Wavelength`
         }}
       />
@@ -48,11 +51,12 @@ export function Waveform(props: WaveformProps) {
         atom={amplitudeAtom}
         min={MIN_AMPLITUDE}
         max={amplitudeMax}
-        disabled={!images.length}
-        ThumbProps={{
+        disabled={disabled}
+        hotkeys={[HOTKEYS.AMPLITUDE_UP, HOTKEYS.AMPLITUDE_DOWN]}
+        thumbProps={{
           'aria-label': t`Amplitude`
         }}
       />
-    </div>
+    </>
   );
 }

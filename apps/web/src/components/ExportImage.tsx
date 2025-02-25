@@ -1,7 +1,15 @@
 import { useAtom, useAtomValue } from 'jotai';
-import { ImageDown, Save } from 'lucide-react';
-import { Trans } from '@lingui/react/macro';
+import { Download, ImageDown, Save } from 'lucide-react';
+import { useHotkeys } from 'react-hotkeys-hook';
+import { Trans, useLingui } from '@lingui/react/macro';
 import { cn } from '@workspace/ui/lib/utils';
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuShortcut,
+  DropdownMenuItem
+} from '@workspace/ui/components/dropdown-menu';
 import { graphicsAtom } from '@/atoms/graphicsAtom';
 import {
   ExportFileHandle,
@@ -9,15 +17,12 @@ import {
   exportFileHandleAtom
 } from '@/atoms/exportAtoms';
 import { Button } from '@workspace/ui/components/button';
-import { Separator } from '@workspace/ui/components/separator';
-import { Tooltip } from '@workspace/ui/components/tooltip';
 import { LoadableIcon } from '@/components/LoadableIcon';
-import { LOADABLE_STATE } from '@/constants';
+import { HOTKEYS, LOADABLE_STATE } from '@/constants';
+import { Shortcut } from './Shortcut';
 
-export type ExportImageProps = React.ComponentPropsWithoutRef<'div'>;
-
-export function ExportImage(props: ExportImageProps) {
-  const { className, ...other } = props;
+export function ExportImage() {
+  const { t } = useLingui();
   const graphics = useAtomValue(graphicsAtom);
   const exportFileHandle = useAtomValue(exportFileHandleAtom);
   const [exportState, exportAsImage] = useAtom(exportAtom);
@@ -30,52 +35,57 @@ export function ExportImage(props: ExportImageProps) {
       exportAsImage(exportFileHandle);
     };
 
+  useHotkeys(
+    [HOTKEYS.SAVE, HOTKEYS.SAVE_AS],
+    (_, { hotkey }) => {
+      exportAsImage(hotkey === HOTKEYS.SAVE ? exportFileHandle : null);
+    },
+    { enabled: () => !disabled, preventDefault: true }
+  );
+
   return (
-    <div
-      className={cn(
-        'bg-secondary text-secondary-foreground flex items-center space-x-1 overflow-hidden rounded-md',
-        className
-      )}
-      {...other}
-    >
-      <Tooltip title={<Trans>Save to</Trans>}>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild disabled={!exportFileHandle}>
         <Button
-          className="min-w-0 grow"
-          variant="secondary"
-          onClick={createExportClickHandler()}
+          variant="ghost"
+          size="icon"
+          onClick={createExportClickHandler(null)}
           disabled={disabled}
+          aria-label={t`Choose file`}
         >
           <LoadableIcon
             state={exportState}
-            fallback={exportFileHandle ? Save : ImageDown}
-            className={cn('mr-2 size-4 shrink-0', {
+            fallback={ImageDown}
+            className={cn({
               'animate-spin': isExporting
             })}
           />
-          <div className="truncate">
-            {exportFileHandle?.name ?? <Trans>Export</Trans>}
-          </div>
         </Button>
-      </Tooltip>
-      {exportFileHandle && (
-        <>
-          <Separator orientation="vertical" className="h-[20px]" />
-          <Tooltip title={<Trans>Choose file</Trans>}>
-            <Button
-              variant="secondary"
-              className="shrink-0"
-              size="icon"
-              onClick={createExportClickHandler(null)}
-              disabled={disabled}
-            >
-              <ImageDown className="size-4" />
-              <span className="sr-only">
-                <Trans>Choose file</Trans>
-              </span>
-            </Button>
-          </Tooltip>
-        </>
-      )}
-    </div>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="start" className="w-66">
+        {exportFileHandle && (
+          <DropdownMenuItem onClick={createExportClickHandler()}>
+            <Save />
+            <span className="truncate">
+              <Trans>
+                Save to <b>{exportFileHandle.name}</b>
+              </Trans>
+            </span>
+            <DropdownMenuShortcut>
+              <Shortcut keys={HOTKEYS.SAVE} />
+            </DropdownMenuShortcut>
+          </DropdownMenuItem>
+        )}
+        <DropdownMenuItem onClick={createExportClickHandler(null)}>
+          <Download />
+          <span>
+            <Trans>Save as</Trans>
+          </span>
+          <DropdownMenuShortcut>
+            <Shortcut keys={HOTKEYS.SAVE_AS} />
+          </DropdownMenuShortcut>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

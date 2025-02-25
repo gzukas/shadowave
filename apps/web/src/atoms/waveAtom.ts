@@ -25,14 +25,14 @@ export const waveAtom = atom(get => {
 
   const { width, height } = largestImage;
   const halfHeight = height / 2;
-  const ys = [halfHeight];
-  let py = halfHeight;
+  let prevY = halfHeight;
+  const ys = [prevY];
 
   for (let x = 0; x <= width; x++) {
     const y =
       amplitude * waveFunction((2 * Math.PI * x) / wavelength) + halfHeight;
-    ys.push(round(y - py));
-    py = y;
+    ys.push(round(y - prevY));
+    prevY = y;
   }
 
   return `m0 ${ys.join(' 1 ')} V0H0Z`;
