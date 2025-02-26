@@ -1,7 +1,8 @@
+import { useAtomValue, useSetAtom } from 'jotai';
 import { Moon, Sun } from 'lucide-react';
 import { useLingui } from '@lingui/react/macro';
 import { Button } from '@workspace/ui/components/button';
-import { useTheme } from '@/hooks/useTheme';
+import { resolvedThemeAtom, themeAtom } from '@/atoms/themeAtoms';
 
 export type ChangeThemeProps = Omit<
   React.ComponentProps<typeof Button>,
@@ -10,10 +11,11 @@ export type ChangeThemeProps = Omit<
 
 export function ChangeTheme(props: ChangeThemeProps) {
   const { t } = useLingui();
-  const [theme, setTheme] = useTheme();
+  const setTheme = useSetAtom(themeAtom);
+  const resolvedTheme = useAtomValue(resolvedThemeAtom);
 
   const handleThemeClick = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
+    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
   };
 
   return (

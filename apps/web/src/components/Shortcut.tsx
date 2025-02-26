@@ -2,8 +2,8 @@ import { cn } from '@workspace/ui/lib/utils';
 import { cva, VariantProps } from 'class-variance-authority';
 
 type Keys = string;
-type KeyDisplay = string | { other: string; macos: string };
-type KeyDisplayMapping = Record<string, KeyDisplay>;
+export type KeyDisplay = string | { other: string; macos: string };
+export type KeyDisplayMapping = Record<string, KeyDisplay>;
 
 const defaultKeyDisplayMapping: KeyDisplayMapping = {
   meta: { other: 'Meta', macos: '⌘' },
@@ -36,30 +36,54 @@ const shortcutVariants = cva(
   }
 );
 
-export interface ShortcutOptions
-  extends React.ComponentProps<'kbd'>,
-    VariantProps<typeof shortcutVariants> {
-  keys: Keys;
-  keyComponent?: React.ElementType;
-  keyDisplayMapping?: KeyDisplayMapping;
-  combinationKey?: string;
-  platform?: string;
+function isMacOS(userAgent: string) {
+  return /(Macintosh)|(MacIntel)|(MacPPC)|(Mac68K)/i.test(userAgent);
 }
 
-export function Shortcut(props: ShortcutOptions) {
+export interface ShortcutProps
+  extends React.ComponentProps<'kbd'>,
+    VariantProps<typeof shortcutVariants> {
+  /**
+   * The keys to render in the shortcut. Can be a single key or a combination of keys separated
+   * by `combinationKey`.
+   */
+  keys: Keys;
+
+  /**
+   * The component used to render each individual key. Defaults to `span`.
+   */
+  keyComponent?: React.ElementType;
+
+  /**
+   * A mapping of key names to display values. Allows customization of key display based on the
+   * operating system.
+   */
+  keyDisplayMapping?: KeyDisplayMapping;
+
+  /**
+   * THe string used to separate multiple keys in the `keys` prop. Defaults to `+`.
+   */
+  combinationKey?: string;
+
+  /**
+   * The user agent string used to determine the operating system. Defaults to `navigator.userAgent`.
+   */
+  userAgent?: string;
+}
+
+export function Shortcut(props: ShortcutProps) {
   const {
     keys,
     keyComponent: KeyComponent = 'span',
     keyDisplayMapping: keyDisplayMappingProp,
     combinationKey = '+',
-    platform = navigator.platform,
+    userAgent = navigator.userAgent,
     variant,
     size,
     className,
     ...other
   } = props;
 
-  const isMac = platform.startsWith('Mac');
   const keyDisplayMapping = {
     ...defaultKeyDisplayMapping,
     ...keyDisplayMappingProp
@@ -79,7 +103,7 @@ export function Shortcut(props: ShortcutOptions) {
             <KeyComponent key={part}>
               {typeof display === 'string'
                 ? display
-                : isMac
+                : isMacOS(userAgent)
                   ? display.macos
                   : display.other}
             </KeyComponent>

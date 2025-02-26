@@ -17,6 +17,9 @@ declare module 'react' {
 
 export interface GraphicsProps
   extends Omit<React.ComponentPropsWithoutRef<'svg'>, 'viewBox'> {
+  /**
+   * Alternative content to render when images are unavailable.
+   */
   fallback?: React.ReactNode;
 }
 

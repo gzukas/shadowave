@@ -15,6 +15,8 @@ import { AtomSlider } from '@/components/AtomSlider';
 import { unwrappedImagesAtom } from '@/atoms/imagesAtom';
 import { HOTKEYS } from '@/constants';
 
+const STEP_PERCENTAGE = 0.01;
+
 export function Waveform() {
   const { t } = useLingui();
   const images = useAtomValue(unwrappedImagesAtom);
@@ -31,6 +33,7 @@ export function Waveform() {
         max={MAX_ROTATION}
         disabled={disabled}
         hotkeys={[HOTKEYS.ROTATION_UP, HOTKEYS.ROTATION_DOWN]}
+        hotkeysStep={Math.abs(MAX_ROTATION - MIN_ROTATION) * STEP_PERCENTAGE}
         thumbProps={{
           'aria-label': t`Rotation`
         }}
@@ -42,6 +45,7 @@ export function Waveform() {
         max={wavelengthMax}
         disabled={disabled}
         hotkeys={[HOTKEYS.WAVELENGTH_UP, HOTKEYS.WAVELENGTH_DOWN]}
+        hotkeysStep={Math.abs(wavelengthMax - MIN_WAVELENGTH) * STEP_PERCENTAGE}
         thumbProps={{
           'aria-label': t`Wavelength`
         }}
@@ -53,6 +57,7 @@ export function Waveform() {
         max={amplitudeMax}
         disabled={disabled}
         hotkeys={[HOTKEYS.AMPLITUDE_UP, HOTKEYS.AMPLITUDE_DOWN]}
+        hotkeysStep={Math.abs(amplitudeMax - MIN_AMPLITUDE) * STEP_PERCENTAGE}
         thumbProps={{
           'aria-label': t`Amplitude`
         }}

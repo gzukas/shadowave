@@ -1,10 +1,6 @@
 import { atom } from 'jotai';
 import { focusAtom } from 'jotai-optics';
 import { atomWithStorage } from 'jotai/utils';
-import { createCountReducer } from '@/utils/createCountReducer';
-import { reducerAtom } from '@/utils/reducerAtom';
-
-const STEP_PERCENTAGE = 0.01;
 
 export const MIN_ROTATION = 0;
 export const MAX_ROTATION = 360;
@@ -34,22 +30,13 @@ export const waveformAtom = atomWithStorage<Waveform>(
 
 // Rotation
 
-export const baseRotationAtom = focusAtom(waveformAtom, optic =>
+export const rotationAtom = focusAtom(waveformAtom, optic =>
   optic.prop('rotation')
-);
-
-export const rotationAtom = reducerAtom(
-  baseRotationAtom,
-  createCountReducer({
-    min: MIN_ROTATION,
-    max: MAX_ROTATION,
-    step: Math.abs(MAX_ROTATION - MIN_ROTATION) * STEP_PERCENTAGE
-  })
 );
 
 // Wavelength
 
-export const baseWavelengthAtom = focusAtom(waveformAtom, optic =>
+export const wavelengthAtom = focusAtom(waveformAtom, optic =>
   optic.prop('wavelength')
 );
 
@@ -57,34 +44,14 @@ export const wavelengthMaxAtom = focusAtom(waveformAtom, optic =>
   optic.prop('wavelengthMax')
 );
 
-export const wavelengthAtom = reducerAtom(
-  baseWavelengthAtom,
-  createCountReducer({
-    min: MIN_WAVELENGTH,
-    max: get => get(wavelengthMaxAtom),
-    step: get =>
-      Math.abs(MIN_WAVELENGTH - get(wavelengthMaxAtom)) * STEP_PERCENTAGE
-  })
-);
-
 // Amplitude
 
-export const baseAmplitudeAtom = focusAtom(waveformAtom, optic =>
+export const amplitudeAtom = focusAtom(waveformAtom, optic =>
   optic.prop('amplitude')
 );
 
 export const amplitudeMaxAtom = focusAtom(waveformAtom, optic =>
   optic.prop('amplitudeMax')
-);
-
-export const amplitudeAtom = reducerAtom(
-  baseAmplitudeAtom,
-  createCountReducer({
-    min: MIN_AMPLITUDE,
-    max: get => get(amplitudeMaxAtom),
-    step: get =>
-      Math.abs(MIN_AMPLITUDE - get(amplitudeMaxAtom)) * STEP_PERCENTAGE
-  })
 );
 
 export const optimizeWaveformAtom = atom(

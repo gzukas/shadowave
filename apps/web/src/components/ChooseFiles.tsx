@@ -4,7 +4,17 @@ import { composeEventHandlers } from '@radix-ui/primitive';
 import { Button } from '@workspace/ui/components/button';
 
 export interface ChooseFilesProps extends React.ComponentProps<typeof Button> {
-  onFilesChange?: (files: FileWithHandle[]) => void;
+  /**
+   * The callback that receives the array of selected files. Not called if the file
+   * picker is cancelled.
+   *
+   * @param files - An array of the selected files.
+   */
+  onFilesChange: (files: FileWithHandle[]) => void;
+
+  /**
+   * Configuration options for the file picker dialog.
+   */
   options?: CoreFileOptions;
 }
 

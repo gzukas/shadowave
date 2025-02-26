@@ -1,37 +1,80 @@
-import { useAtom, WritableAtom } from 'jotai';
+import { useId } from 'react';
+import { PrimitiveAtom, useAtom } from 'jotai';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { LabelProps } from '@radix-ui/react-label';
 import { cn } from '@workspace/ui/lib/utils';
 import { Label } from '@workspace/ui/components/label';
 import { Slider } from '@workspace/ui/components/slider';
-import { CountAction } from '@/utils/createCountReducer';
-import { Shortcut } from '@/components/Shortcut';
+import { Shortcut, ShortcutProps } from '@/components/Shortcut';
 
 export interface AtomSliderProps
   extends Omit<React.ComponentProps<typeof Slider>, 'value' | 'onValueChange'> {
-  atom: WritableAtom<number, [CountAction], void>;
+  /**
+   * The Jotai atom that stores and updates the slider value.
+   */
+  atom: PrimitiveAtom<number>;
+
+  /**
+   * The text or element to display as label.
+   */
   label: React.ReactNode;
+
+  /**
+   * Optional props to pass to the `Label` component.
+   */
   labelProps?: Partial<LabelProps>;
+
+  /**
+   * Optional props to pass to the `Shortcut` components.
+   */
+  shortcutProps?: Partial<ShortcutProps>;
+
+  /**
+   * Optional tuple containing keyboard shortcuts: one for incrementing and one for
+   * decrementing the value.
+   */
   hotkeys?: [incrementHotkey: string, decrementHotkey: string];
+
+  /**
+   * The amount to increase/decrease the value when using `hotkeys`. Unlike the `step`,
+   * the `hotkeysStep` is typically larger to allow for faster value adjustments when
+   * using keyboard shortcuts.
+   */
+  hotkeysStep?: number;
 }
 
 export function AtomSlider(props: AtomSliderProps) {
-  const { atom, className, label, labelProps, hotkeys = [], ...other } = props;
-  const [value, dispatch] = useAtom(atom);
+  const {
+    atom,
+    className,
+    label,
+    labelProps,
+    shortcutProps,
+    hotkeys = [],
+    hotkeysStep = 1,
+    min = 0,
+    max = 100,
+    ...other
+  } = props;
+  const [value, setValue] = useAtom(atom);
   const [incrementHotkey] = hotkeys;
+  const labelId = useId();
 
   const handleValueChange = ([value]: number[]) => {
-    dispatch({ type: 'CHANGE', value });
+    setValue(value);
   };
 
   useHotkeys(
     hotkeys,
     (_, { hotkey }) => {
-      dispatch({
-        type: hotkey === incrementHotkey ? 'INCREMENT' : 'DECREMENT'
-      });
+      setValue(value =>
+        hotkey === incrementHotkey
+          ? Math.min(max, value + hotkeysStep)
+          : Math.max(min, value - hotkeysStep)
+      );
     },
-    { enabled: !!hotkeys.length && !other.disabled }
+    { enabled: !!hotkeys.length && !other.disabled },
+    [incrementHotkey, hotkeysStep]
   );
 
   return (
@@ -39,6 +82,7 @@ export function AtomSlider(props: AtomSliderProps) {
       <div className="flex items-center justify-between">
         <Label
           {...labelProps}
+          id={labelId}
           className={cn(
             { 'text-muted-foreground': other.disabled },
             labelProps?.className
@@ -54,12 +98,20 @@ export function AtomSlider(props: AtomSliderProps) {
                 keys={hotkey}
                 variant="outline"
                 size="sm"
+                {...shortcutProps}
               />
             ))}
           </div>
         )}
       </div>
-      <Slider value={[value]} onValueChange={handleValueChange} {...other} />
+      <Slider
+        value={[value]}
+        min={min}
+        max={max}
+        onValueChange={handleValueChange}
+        aria-labelledby={labelId}
+        {...other}
+      />
     </div>
   );
 }
