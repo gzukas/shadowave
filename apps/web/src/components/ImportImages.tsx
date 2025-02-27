@@ -90,7 +90,7 @@ export function ImportImages(props: ImportImagesProps) {
           <div className="hidden sm:block">
             <Plural
               value={images.length}
-              _0="Import"
+              _0="Open"
               one="# image"
               other="# images"
             />
@@ -204,7 +204,7 @@ export function ImportImages(props: ImportImagesProps) {
                     'animate-spin': isImporting
                   })}
                 />
-                <Trans>Import</Trans>
+                <Trans>Capture</Trans>
               </Button>
             </DialogFooter>
           </form>
