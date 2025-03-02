@@ -4,7 +4,7 @@ import { WaveFunction } from '@/types';
 
 export const waveFunctionAtom = atomWithStorage<WaveFunction>(
   'waveFunction',
-  WAVE_FUNCTION.SIN,
+  WAVE_FUNCTION.HEARTBEAT,
   undefined,
   { getOnInit: true }
 );

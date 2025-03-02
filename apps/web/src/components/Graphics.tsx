@@ -77,17 +77,17 @@ export function Graphics(props: GraphicsProps) {
           </clipPath>
         ))}
       </defs>
-
-      {orderedImages.map((image, i) => (
-        <image
-          key={image.id}
-          href={image.src}
-          style={{ zIndex: i + 1 }}
-          clipPath={
-            i >= 1 ? `url(#${waveId}${orderedImages.length - i})` : undefined
-          }
-        />
-      ))}
+      <g>
+        {orderedImages.map((image, i) => (
+          <image
+            key={image.id}
+            href={image.src}
+            clipPath={
+              i >= 1 ? `url(#${waveId}${orderedImages.length - i})` : undefined
+            }
+          />
+        ))}
+      </g>
     </svg>
   );
 }

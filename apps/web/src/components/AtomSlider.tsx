@@ -5,7 +5,7 @@ import { LabelProps } from '@radix-ui/react-label';
 import { cn } from '@workspace/ui/lib/utils';
 import { Label } from '@workspace/ui/components/label';
 import { Slider } from '@workspace/ui/components/slider';
-import { Shortcut, ShortcutProps } from '@/components/Shortcut';
+import { Shortcut, ShortcutProps } from '@/components/Shortcut/Shortcut';
 
 export interface AtomSliderProps
   extends Omit<React.ComponentProps<typeof Slider>, 'value' | 'onValueChange'> {
@@ -46,7 +46,6 @@ export interface AtomSliderProps
 export function AtomSlider(props: AtomSliderProps) {
   const {
     atom,
-    className,
     label,
     labelProps,
     shortcutProps,
@@ -78,7 +77,7 @@ export function AtomSlider(props: AtomSliderProps) {
   );
 
   return (
-    <div className={cn('grid gap-4', className)}>
+    <div className="grid gap-4">
       <div className="flex items-center justify-between">
         <Label
           {...labelProps}

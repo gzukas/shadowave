@@ -68,6 +68,7 @@
 @theme inline {
   --font-*: initial;
   --font-sans: Geist;
+  --font-mono: 'Geist Mono';
 
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));

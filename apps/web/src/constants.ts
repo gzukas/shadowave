@@ -10,8 +10,8 @@ export const LOADABLE_STATE = {
 } as const;
 
 export const WAVE_FUNCTION = {
-  SIN: 'sin',
-  COS: 'cos'
+  HEARTBEAT: 'heartbeat',
+  SIN: 'sin'
 } as const;
 
 export const HOTKEYS = {
