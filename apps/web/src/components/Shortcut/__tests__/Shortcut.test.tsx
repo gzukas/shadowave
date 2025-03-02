@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react';
-import { Shortcut } from '@/components/Shortcut';
+import { Shortcut } from '@/components/Shortcut/Shortcut';
+import { defaultKeyDisplayMapping } from '../keyDisplayMappings';
 
 interface ShortcutTestCase {
   keys: string;
@@ -14,7 +15,7 @@ describe('Shortcut', () => {
     ${'mod'}             | ${['Ctrl']}                  | ${['⌘']}
     ${'ctrl+alt+delete'} | ${['Ctrl', 'Alt', 'delete']} | ${['⌃', '⌥', 'delete']}
     ${'mod+S'}           | ${['Ctrl', 'S']}             | ${['⌘', 'S']}
-    ${'mod+shift+S'}     | ${['Ctrl', '⇧', 'S']}        | ${['⌘', '⇧', 'S']}
+    ${'mod+shift+S'}     | ${['Ctrl', '⇧', 'S']}        | ${['⇧', '⌘', 'S']}
   `(
     'renders $keys correctly',
     ({ keys, expectedOther, expectedMacos }: ShortcutTestCase) => {
@@ -32,8 +33,13 @@ describe('Shortcut', () => {
     const { container } = render(
       <Shortcut
         keys="ctrl+enter"
+        userAgent="Windows"
         keyDisplayMapping={{
-          enter: '⏎'
+          ...defaultKeyDisplayMapping,
+          other: {
+            ...defaultKeyDisplayMapping.other,
+            enter: '⏎'
+          }
         }}
       />
     );

@@ -5,7 +5,7 @@ import {
   ToggleGroupItem
 } from '@workspace/ui/components/toggle-group';
 import { Sin } from '@/components/Sin';
-import { Cos } from '@/components/Cos';
+import { Heartbeat } from '@/components/Heartbeat';
 import { WAVE_FUNCTION } from '@/constants';
 import { WaveFunction } from '@/types';
 import { unwrappedImagesAtom } from '@/atoms/imagesAtom';
@@ -40,11 +40,14 @@ export function ChangeWaveFunction(props: ChanveWaveFunctionProps) {
       disabled={!images.length}
       {...props}
     >
+      <ToggleGroupItem
+        value={WAVE_FUNCTION.HEARTBEAT}
+        aria-label={t`Heartbeat`}
+      >
+        <Heartbeat />
+      </ToggleGroupItem>
       <ToggleGroupItem value={WAVE_FUNCTION.SIN} aria-label={t`Sine`}>
         <Sin />
-      </ToggleGroupItem>
-      <ToggleGroupItem value={WAVE_FUNCTION.COS} aria-label={t`Cosine`}>
-        <Cos />
       </ToggleGroupItem>
     </ToggleGroup>
   );

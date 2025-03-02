@@ -23,12 +23,13 @@ export function App() {
           <section className="col-start-2 justify-self-center">
             <div className="bg-card flex items-center rounded-md border p-1 shadow-xs sm:gap-1">
               <ImportImages variant="ghost" />
-              <ExportImage />
-              <CopyImage />
               <Separator orientation="vertical" className="h-4" />
-              <ReverseImages variant="ghost" />
               <OptimizeWaveform />
               <ChangeWaveFunction />
+              <ReverseImages variant="ghost" />
+              <Separator orientation="vertical" className="h-4" />
+              <CopyImage />
+              <ExportImage />
               <Separator orientation="vertical" className="h-4" />
               <RemoveImages variant="ghost" />
             </div>
@@ -36,7 +37,7 @@ export function App() {
           <ChangeTheme className="justify-self-end" variant="outline" />
         </header>
 
-        <main className="grid place-items-center overflow-auto">
+        <main className="relative grid place-items-center overflow-auto">
           <Suspense
             fallback={<LoaderCircle className="size-12 animate-spin" />}
           >
@@ -47,7 +48,7 @@ export function App() {
           </Suspense>
         </main>
 
-        <footer className="pb-3 sm:pb-7">
+        <footer className="pb-3 lg:pb-7">
           <section className="mx-auto grid max-w-4xl grid-cols-1 gap-12 lg:grid-cols-3">
             <Waveform />
           </section>

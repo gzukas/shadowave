@@ -2,6 +2,7 @@ import { atom } from 'jotai';
 import { unwrappedLargestImageAtom } from '@/atoms/largestImageAtom';
 import { waveFunctionAtom } from '@/atoms/waveFunctionAtom';
 import { amplitudeAtom, wavelengthAtom } from '@/atoms/waveformAtoms';
+import { sin, heartbeat } from '@/utils/waveFunctions';
 import { WaveFunction } from '@/types';
 
 function round(num: number) {
@@ -9,8 +10,8 @@ function round(num: number) {
 }
 
 const waveFunctionMapping: Record<WaveFunction, (x: number) => number> = {
-  sin: Math.sin,
-  cos: Math.cos
+  sin,
+  heartbeat
 };
 
 export const waveAtom = atom(get => {

@@ -1,5 +1,5 @@
 import { useAtomValue } from 'jotai';
-import { Clipboard } from 'lucide-react';
+import { Copy } from 'lucide-react';
 import { useLingui } from '@lingui/react/macro';
 import { cn } from '@workspace/ui/lib/utils';
 import { Button } from '@workspace/ui/components/button';
@@ -43,7 +43,7 @@ export function CopyImage(props: CopyImageProps) {
       >
         <LoadableIcon
           state={state}
-          fallback={Clipboard}
+          fallback={Copy}
           className={cn({
             'animate-spin': isCopying
           })}

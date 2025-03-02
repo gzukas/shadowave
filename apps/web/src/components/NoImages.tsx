@@ -1,9 +1,9 @@
 import { useSetAtom } from 'jotai';
-import { ImageOff, Folder } from 'lucide-react';
+import { ImageOff, Upload } from 'lucide-react';
 import { Trans } from '@lingui/react/macro';
 import { cn } from '@workspace/ui/lib/utils';
 import { Button } from '@workspace/ui/components/button';
-import { Shortcut } from '@/components/Shortcut';
+import { Shortcut } from '@/components/Shortcut/Shortcut';
 import { importAtom, importSignalAtom } from '@/atoms/importAtoms';
 import { siteConfig } from '@/config/site';
 import { HOTKEYS } from '@/constants';
@@ -45,12 +45,12 @@ export function NoImages(props: NoImagesProps) {
       </p>
       <div className="flex w-full flex-col justify-center gap-4 sm:flex-row">
         <Button onClick={handleImportClick}>
-          <Folder />
+          <Upload />
           Open
           <Shortcut keys={HOTKEYS.IMPORT} />
         </Button>
         <Button onClick={handleClick} variant="secondary">
-          <Trans>See example</Trans>
+          <Trans>See Example</Trans>
         </Button>
       </div>
     </div>

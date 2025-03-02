@@ -1,5 +1,5 @@
 import { useAtom, useAtomValue } from 'jotai';
-import { Camera, Folder, Monitor, Smartphone, Tablet } from 'lucide-react';
+import { Camera, Monitor, Smartphone, Tablet, Upload } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { Trans, Plural, useLingui } from '@lingui/react/macro';
@@ -86,7 +86,7 @@ export function ImportImages(props: ImportImagesProps) {
     <Dialog open={Boolean(importSignal)} onOpenChange={toggleImportSignal}>
       <DialogTrigger asChild>
         <Button {...props}>
-          <Folder />
+          <Upload />
           <div className="hidden sm:block">
             <Plural
               value={images.length}
@@ -100,7 +100,7 @@ export function ImportImages(props: ImportImagesProps) {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            <Trans>Import</Trans>
+            <Trans>Import Images</Trans>
           </DialogTitle>
           <DialogDescription>
             <Trans>
@@ -125,7 +125,7 @@ export function ImportImages(props: ImportImagesProps) {
                     <span className="text-destructive">*</span>
                   </FormLabel>
                   <FormControl>
-                    <Input required {...field} />
+                    <Input required type="url" {...field} />
                   </FormControl>
                   {fieldState.invalid ? (
                     <FormMessage />

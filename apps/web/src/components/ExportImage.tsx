@@ -18,7 +18,7 @@ import {
 } from '@/atoms/exportAtoms';
 import { Button } from '@workspace/ui/components/button';
 import { LoadableIcon } from '@/components/LoadableIcon';
-import { Shortcut } from '@/components/Shortcut';
+import { Shortcut } from '@/components/Shortcut/Shortcut';
 import { HOTKEYS, LOADABLE_STATE } from '@/constants';
 
 export function ExportImage() {
@@ -48,7 +48,6 @@ export function ExportImage() {
       <DropdownMenuTrigger asChild disabled={!exportFileHandle}>
         <Button
           variant="ghost"
-          size="icon"
           onClick={createExportClickHandler(null)}
           disabled={disabled}
           aria-label={t`Choose file`}
@@ -60,6 +59,9 @@ export function ExportImage() {
               'animate-spin': isExporting
             })}
           />
+          <div className="hidden sm:block">
+            <Trans>Export</Trans>
+          </div>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="w-66">
