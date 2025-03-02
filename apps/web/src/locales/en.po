@@ -15,11 +15,11 @@ msgstr ""
 
 #. placeholder {0}: images.length
 #: src/components/ImportImages.tsx:91
-msgid "{0, plural, =0 {Import} one {# image} other {# images}}"
+msgid "{0, plural, =0 {Open} one {# image} other {# images}}"
 msgstr ""
 
-#: src/components/Waveform.tsx:50
-#: src/components/Waveform.tsx:57
+#: src/components/Waveform.tsx:54
+#: src/components/Waveform.tsx:62
 msgid "Amplitude"
 msgstr ""
 
@@ -27,7 +27,11 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: src/components/ExportImage.tsx:54
+#: src/components/ImportImages.tsx:207
+msgid "Capture"
+msgstr ""
+
+#: src/components/ExportImage.tsx:53
 msgid "Choose file"
 msgstr ""
 
@@ -45,13 +49,20 @@ msgstr ""
 msgid "Desktop"
 msgstr ""
 
-#: src/components/NoImages.tsx:29
-msgid "Get started by importing your images or check out the example to see how it works."
+#: src/components/ExportImage.tsx:63
+msgid "Export"
+msgstr ""
+
+#: src/components/NoImages.tsx:41
+msgid "Get started by choosing your images or check out the example to see how it works."
+msgstr ""
+
+#: src/components/ChangeWaveFunction.tsx:45
+msgid "Heartbeat"
 msgstr ""
 
 #: src/components/ImportImages.tsx:103
-#: src/components/ImportImages.tsx:207
-msgid "Import"
+msgid "Import Images"
 msgstr ""
 
 #: src/components/ImportImages.tsx:172
@@ -59,7 +70,7 @@ msgstr ""
 msgid "Mobile"
 msgstr ""
 
-#: src/components/NoImages.tsx:26
+#: src/components/NoImages.tsx:38
 msgid "No images"
 msgstr ""
 
@@ -85,22 +96,26 @@ msgstr ""
 msgid "Reverse images"
 msgstr ""
 
-#: src/components/Waveform.tsx:28
-#: src/components/Waveform.tsx:35
+#: src/components/Waveform.tsx:30
+#: src/components/Waveform.tsx:38
 msgid "Rotation"
 msgstr ""
 
-#: src/components/ExportImage.tsx:82
+#: src/components/ExportImage.tsx:84
 msgid "Save as"
 msgstr ""
 
 #. placeholder {0}: exportFileHandle.name
-#: src/components/ExportImage.tsx:70
+#: src/components/ExportImage.tsx:72
 msgid "Save to <0>{0}</0>"
 msgstr ""
 
-#: src/components/NoImages.tsx:41
-msgid "See example"
+#: src/components/NoImages.tsx:53
+msgid "See Example"
+msgstr ""
+
+#: src/components/ChangeWaveFunction.tsx:49
+msgid "Sine"
 msgstr ""
 
 #: src/components/ImportImages.tsx:124
@@ -124,11 +139,11 @@ msgstr ""
 msgid "These images will be permanently removed. This action cannot be undone."
 msgstr ""
 
-#: src/components/ChangeTheme.tsx:24
+#: src/components/ChangeTheme.tsx:26
 msgid "Toggle theme"
 msgstr ""
 
-#: src/components/Waveform.tsx:39
-#: src/components/Waveform.tsx:46
+#: src/components/Waveform.tsx:42
+#: src/components/Waveform.tsx:50
 msgid "Wavelength"
 msgstr ""
