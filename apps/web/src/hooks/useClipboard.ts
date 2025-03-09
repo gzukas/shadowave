@@ -3,11 +3,15 @@ import { LoadableState } from '@/types';
 import { DEFAULT_LOADABLE_STATE_TIMEOUT, LOADABLE_STATE } from '@/constants';
 import { useExpireAtom } from '@/hooks/useExpireAtom';
 
+type Copy = (
+  ...args: ConstructorParameters<typeof ClipboardItem>
+) => Promise<void>;
+
 export const isClipboardSupported =
   navigator.clipboard && typeof window.ClipboardItem === 'function';
 
 export interface UseClipboardResult {
-  copy: (...args: ConstructorParameters<typeof ClipboardItem>) => Promise<void>;
+  copy: Copy;
   state: LoadableState;
 }
 
@@ -18,7 +22,7 @@ export interface UseClipboardOptions {
 export function useClipboard(options: UseClipboardOptions = {}) {
   const { timeout = DEFAULT_LOADABLE_STATE_TIMEOUT } = options;
   const [state, setState] = useExpireAtom<LoadableState | null>(null);
-  const copy = useCallback<UseClipboardResult['copy']>(
+  const copy = useCallback<Copy>(
     async (...args) => {
       setState(LOADABLE_STATE.LOADING);
       try {

@@ -10,7 +10,7 @@ import { Shortcut, ShortcutProps } from '@/components/Shortcut/Shortcut';
 export interface AtomSliderProps
   extends Omit<React.ComponentProps<typeof Slider>, 'value' | 'onValueChange'> {
   /**
-   * The Jotai atom that stores and updates the slider value.
+   * The Jotai atom that reads and writes the slider value.
    */
   atom: PrimitiveAtom<number>;
 

@@ -6,9 +6,9 @@ import { Button } from '@workspace/ui/components/button';
 import { Tooltip } from '@workspace/ui/components/tooltip';
 import { graphicsAtom } from '@/atoms/graphicsAtom';
 import { isClipboardSupported, useClipboard } from '@/hooks/useClipboard';
-import { LOADABLE_STATE, MIME_TYPES } from '@/constants';
 import { rasterize } from '@/utils/rasterize';
-import { LoadableIcon } from './LoadableIcon';
+import { LoadableIcon } from '@/components/LoadableIcon';
+import { LOADABLE_STATE, MIME_TYPES } from '@/constants';
 
 export type CopyImageProps = Omit<
   React.ComponentProps<typeof Button>,
