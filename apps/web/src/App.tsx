@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { LoaderCircle } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import { Separator } from '@workspace/ui/components/separator';
 import { AppProvider } from '@/components/AppProvider';
 import { ChangeTheme } from '@/components/ChangeTheme';
@@ -37,12 +37,10 @@ export function App() {
           <ChangeTheme className="justify-self-end" variant="outline" />
         </header>
 
-        <main className="relative grid place-items-center overflow-auto">
-          <Suspense
-            fallback={<LoaderCircle className="size-12 animate-spin" />}
-          >
+        <main className="grid place-items-center p-5 md:p-16">
+          <Suspense fallback={<Loader2 className="size-12 animate-spin" />}>
             <Graphics
-              className="h-full w-full p-16 drop-shadow-xl md:drop-shadow-2xl"
+              className="grid h-full place-items-center"
               fallback={<NoImages />}
             />
           </Suspense>
