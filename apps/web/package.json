@@ -37,7 +37,6 @@
     "@lingui/conf": "^5.2.0",
     "@lingui/swc-plugin": "5.1.0",
     "@lingui/vite-plugin": "^5.2.0",
-    "@tailwindcss/postcss": "^4.0.6",
     "@tailwindcss/vite": "^4.0.6",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
