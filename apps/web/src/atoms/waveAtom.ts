@@ -5,6 +5,9 @@ import { amplitudeAtom, wavelengthAtom } from '@/atoms/waveformAtoms';
 import { sin, heartbeat } from '@/utils/waveFunctions';
 import { WaveFunction } from '@/types';
 
+/**
+ * Rounds a number to two decimal places.
+ */
 function round(num: number) {
   return Math.round((num + Number.EPSILON) * 100) / 100;
 }

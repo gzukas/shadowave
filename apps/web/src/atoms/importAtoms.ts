@@ -24,13 +24,14 @@ export const importAtom = atomWithExpiringWriteState(
       : [imageSource];
 
     const blobs = (
-      await Promise.all(
-        imageSources.map<Promise<Blob | Blob[]>>(async source => {
+      await Promise.all<Blob[]>(
+        imageSources.map(async source => {
           if (source instanceof File) {
-            return source;
+            return [source];
           }
           if (typeof source === 'string') {
-            return (await fetch(source, { signal })).blob();
+            const response = await fetch(source, { signal });
+            return [await response.blob()];
           }
           const { url, deviceType } = source;
           const { data, error } = await client
