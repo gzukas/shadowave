@@ -20,19 +20,17 @@ export function App() {
       <div className="bg-grid pointer-events-none absolute inset-0 [mask-image:linear-gradient(180deg,#fff_5%,transparent_80%)] select-none"></div>
       <div className="relative grid h-dvh w-dvw grid-rows-[auto_1fr_auto] overflow-hidden p-5">
         <header className="grid grid-cols-[1fr_2fr_1fr] items-center">
-          <section className="col-start-2 justify-self-center">
-            <div className="bg-card flex items-center rounded-md border p-1 shadow-xs sm:gap-1">
-              <ImportImages variant="ghost" />
-              <Separator orientation="vertical" className="h-4" />
-              <OptimizeWaveform />
-              <ChangeWaveFunction />
-              <ReverseImages variant="ghost" />
-              <Separator orientation="vertical" className="h-4" />
-              <CopyImage />
-              <ExportImage />
-              <Separator orientation="vertical" className="h-4" />
-              <RemoveImages variant="ghost" />
-            </div>
+          <section className="bg-card col-start-2 flex items-center justify-self-center rounded-md border p-1 shadow-xs sm:gap-1">
+            <ImportImages variant="ghost" />
+            <Separator orientation="vertical" className="h-4" />
+            <OptimizeWaveform />
+            <ChangeWaveFunction />
+            <ReverseImages variant="ghost" />
+            <Separator orientation="vertical" className="h-4" />
+            <CopyImage />
+            <ExportImage />
+            <Separator orientation="vertical" className="h-4" />
+            <RemoveImages variant="ghost" />
           </section>
           <ChangeTheme className="justify-self-end" variant="outline" />
         </header>

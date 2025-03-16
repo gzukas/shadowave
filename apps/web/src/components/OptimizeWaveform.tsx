@@ -3,16 +3,16 @@ import { WandSparkles } from 'lucide-react';
 import { useLingui } from '@lingui/react/macro';
 import { Button } from '@workspace/ui/components/button';
 import { Tooltip } from '@workspace/ui/components/tooltip';
-import { optimizeWaveformAtom } from '@/atoms/waveformAtoms';
+import { isWaveformOptimizedAtom } from '@/atoms/waveformAtoms';
 import { unwrappedLargestImageAtom } from '@/atoms/largestImageAtom';
 
 export function OptimizeWaveform() {
   const { t } = useLingui();
   const largestImage = useAtomValue(unwrappedLargestImageAtom);
-  const optimizeWaveform = useSetAtom(optimizeWaveformAtom);
+  const setWaveformOptimized = useSetAtom(isWaveformOptimizedAtom);
 
   const handleClick = () => {
-    optimizeWaveform(largestImage);
+    setWaveformOptimized(false);
   };
 
   return (

@@ -56,13 +56,6 @@ export function Graphics(props: GraphicsProps) {
       <svg
         ref={setGraphics}
         viewBox={`0 0 ${width} ${height}`}
-        className={cn(
-          'h-full w-full',
-          'transform-gpu will-change-transform',
-          'max-h-(--Graphics-height) max-w-(--Graphics-width)',
-          svgClassName
-        )}
-        preserveAspectRatio=""
         style={
           {
             '--Graphics-width': `${width}px`,
@@ -70,6 +63,12 @@ export function Graphics(props: GraphicsProps) {
             ...svgStyle
           } as React.CSSProperties
         }
+        className={cn(
+          'h-full w-full',
+          'transform-gpu will-change-transform',
+          'max-h-(--Graphics-height) max-w-(--Graphics-width)',
+          svgClassName
+        )}
         {...svgOther}
       >
         <defs>
@@ -94,11 +93,7 @@ export function Graphics(props: GraphicsProps) {
             <image
               key={image.id}
               href={image.src}
-              clipPath={
-                i >= 1
-                  ? `url(#${waveId}${orderedImages.length - i})`
-                  : undefined
-              }
+              clipPath={i >= 1 ? `url(#${waveId}${i})` : undefined}
             />
           ))}
         </g>

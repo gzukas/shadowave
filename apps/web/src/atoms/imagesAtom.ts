@@ -1,33 +1,39 @@
 import { atom } from 'jotai';
-import { atomWithStorage, RESET, unwrap } from 'jotai/utils';
-import { readFile } from '@/utils/readFile';
+import { atomWithStorage, unwrap } from 'jotai/utils';
+import { Type } from '@sinclair/typebox';
+import { readFileAsDataURL } from '@/utils/readFile';
 import { loadImage } from '@/utils/loadImage';
-import { createIndexedDbStorage } from '@/utils/createIndexedDbStorage';
+import { createIdbKeyvalStorage } from '@/utils/createIdbKeyvalStorage';
+import { withStorageValidator } from '@/utils/withStorageValidator';
 
-let imageId = 0;
+const ImageFileSchema = Type.Tuple([
+  Type.String({ title: 'filename' }),
+  Type.Unsafe<Blob>(Type.Any({ type: 'object' }))
+]);
 
-const filesAtom = atomWithStorage<Blob[]>(
-  'files',
+const ImageFilesSchema = Type.Array(ImageFileSchema);
+
+export type ImageFile = typeof ImageFileSchema.static;
+
+export const imageFilesAtom = atomWithStorage(
+  'images',
   [],
-  createIndexedDbStorage<Blob[]>(),
-  { getOnInit: true }
-);
-
-export const imagesAtom = atom(
-  async get => {
-    const files = await get(filesAtom);
-    return Promise.all(
-      files.map(async file => {
-        const dataUrl = (await readFile(r => r.readAsDataURL(file))) as string;
-        const image = await loadImage(dataUrl);
-        image.id = `${imageId++}`;
-        return image;
-      })
-    );
-  },
-  (_get, set, files: Blob[] | typeof RESET) => {
-    set(filesAtom, files);
+  withStorageValidator(ImageFilesSchema)(createIdbKeyvalStorage()),
+  {
+    getOnInit: true
   }
 );
+
+export const imagesAtom = atom(async (get, options) => {
+  const imageFiles = await get(imageFilesAtom);
+  return Promise.all(
+    imageFiles.map(async ([id, file]) => {
+      const dataUrl = await readFileAsDataURL(file, options);
+      const image = await loadImage(dataUrl, options);
+      image.id = id;
+      return image;
+    })
+  );
+});
 
 export const unwrappedImagesAtom = unwrap(imagesAtom, prev => prev ?? []);

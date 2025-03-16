@@ -34,10 +34,10 @@ export const waveAtom = atom(get => {
 
   for (let x = 0; x <= width; x++) {
     const y =
-      amplitude * waveFunction((2 * Math.PI * x) / wavelength) + halfHeight;
+      -amplitude * waveFunction((2 * Math.PI * x) / wavelength) + halfHeight;
     ys.push(round(y - prevY));
     prevY = y;
   }
 
-  return `m0 ${ys.join(' 1 ')} V0H0Z`;
+  return `m0 ${ys.join(' 1 ')} V${height}H0Z`;
 });

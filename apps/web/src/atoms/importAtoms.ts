@@ -2,9 +2,7 @@ import { atom } from 'jotai';
 import { client } from '@/utils/client';
 import { atomWithExpiringWriteState } from '@/utils/atomWithExpiringWriteState';
 import { ImageSource } from '@/types';
-import { largestImageAtom } from './largestImageAtom';
-import { optimizeWaveformAtom } from './waveformAtoms';
-import { imagesAtom } from './imagesAtom';
+import { ImageFile, imageFilesAtom } from './imagesAtom';
 
 const importAbortControllerAtom = atom<AbortController | null>(null);
 
@@ -23,15 +21,15 @@ export const importAtom = atomWithExpiringWriteState(
       ? imageSource
       : [imageSource];
 
-    const blobs = (
-      await Promise.all<Blob[]>(
-        imageSources.map(async source => {
+    const imageFiles = (
+      await Promise.all(
+        imageSources.map<Promise<ImageFile[]>>(async source => {
           if (source instanceof File) {
-            return [source];
+            return [[source.name, source]];
           }
           if (typeof source === 'string') {
             const response = await fetch(source, { signal });
-            return [await response.blob()];
+            return [[source, await response.blob()]];
           }
           const { url, deviceType } = source;
           const { data, error } = await client
@@ -44,12 +42,11 @@ export const importAtom = atomWithExpiringWriteState(
             throw error.value;
           }
 
-          return Object.values(data || {});
+          return Object.entries(data);
         })
       )
     ).flat();
 
-    set(imagesAtom, blobs);
-    set(optimizeWaveformAtom, await get(largestImageAtom));
+    set(imageFilesAtom, imageFiles);
   }
 );

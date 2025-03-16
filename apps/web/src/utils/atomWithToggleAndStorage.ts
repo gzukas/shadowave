@@ -8,10 +8,9 @@ export function atomWithToggleAndStorage(
   const derivedAtom = atom(
     get => get(anAtom),
     (get, set, nextValue?: boolean) => {
-      const update = nextValue ?? !get(anAtom);
-      void set(anAtom, update);
+      set(anAtom, nextValue ?? !get(anAtom));
     }
   );
 
-  return derivedAtom as WritableAtom<boolean, [boolean?], void>;
+  return derivedAtom;
 }
