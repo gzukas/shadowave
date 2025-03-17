@@ -1,19 +1,25 @@
-import { atom } from 'jotai';
+import { observe } from 'jotai-effect';
 import { focusAtom } from 'jotai-optics';
-import { atomWithStorage } from 'jotai/utils';
+import { atomWithStorage, createJSONStorage, RESET } from 'jotai/utils';
+import { Type } from '@sinclair/typebox';
+import { largestImageAtom } from '@/atoms/largestImageAtom';
+import { withStorageValidator } from '@/utils/withStorageValidator';
 
 export const MIN_ROTATION = 0;
 export const MAX_ROTATION = 360;
 export const MIN_WAVELENGTH = 9;
 export const MIN_AMPLITUDE = 0;
 
-export interface Waveform {
-  rotation: number;
-  wavelength: number;
-  wavelengthMax: number;
-  amplitude: number;
-  amplitudeMax: number;
-}
+const WaveformSchema = Type.Object({
+  rotation: Type.Number(),
+  wavelength: Type.Number(),
+  wavelengthMax: Type.Number(),
+  amplitude: Type.Number(),
+  amplitudeMax: Type.Number(),
+  _optimized: Type.Optional(Type.Boolean())
+});
+
+export type Waveform = typeof WaveformSchema.static;
 
 export const waveformAtom = atomWithStorage<Waveform>(
   'waveform',
@@ -24,8 +30,12 @@ export const waveformAtom = atomWithStorage<Waveform>(
     wavelengthMax: MIN_WAVELENGTH + 1,
     amplitudeMax: MIN_AMPLITUDE + 1
   },
-  undefined,
+  withStorageValidator(WaveformSchema)(createJSONStorage()),
   { getOnInit: true }
+);
+
+export const isWaveformOptimizedAtom = focusAtom(waveformAtom, optic =>
+  optic.prop('_optimized')
 );
 
 // Rotation
@@ -54,20 +64,37 @@ export const amplitudeMaxAtom = focusAtom(waveformAtom, optic =>
   optic.prop('amplitudeMax')
 );
 
-export const optimizeWaveformAtom = atom(
-  null,
-  (_get, set, image?: HTMLImageElement) => {
-    const wavelengthMax = image?.width ?? MIN_WAVELENGTH + 1;
-    const amplitudeMax = image
-      ? Math.round(image.height / 8)
-      : MIN_AMPLITUDE + 1;
+observe((get, set) => {
+  const abortController = new AbortController();
+  const largestImagePromise = get(largestImageAtom);
+  const isOptimized = get(isWaveformOptimizedAtom);
 
-    set(waveformAtom, {
+  (async () => {
+    const largestImage = await largestImagePromise;
+    if (abortController.signal.aborted) {
+      return;
+    }
+    if (!largestImage) {
+      set(waveformAtom, RESET);
+      return;
+    }
+    if (isOptimized) {
+      return;
+    }
+    const { width, height } = largestImage;
+    const wavelengthMax = width;
+    const amplitudeMax = Math.round(height / 8);
+
+    set(waveformAtom, prev => ({
+      ...prev,
       rotation: 0,
       wavelength: wavelengthMax,
       amplitude: amplitudeMax,
       wavelengthMax,
-      amplitudeMax
-    });
-  }
-);
+      amplitudeMax,
+      _optimized: true
+    }));
+  })();
+
+  return () => abortController.abort();
+});

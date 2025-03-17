@@ -1,15 +1,15 @@
 import { useAtom, useAtomValue } from 'jotai';
+import { useLingui } from '@lingui/react/macro';
 import { waveFunctionAtom } from '@/atoms/waveFunctionAtom';
 import {
   ToggleGroup,
   ToggleGroupItem
 } from '@workspace/ui/components/toggle-group';
-import { Sin } from '@/components/Sin';
-import { Heartbeat } from '@/components/Heartbeat';
+import { unwrappedImagesAtom } from '@/atoms/imagesAtom';
+import { Sin } from '@/icons/Sin';
+import { Heartbeat } from '@/icons/Heartbeat';
 import { WAVE_FUNCTION } from '@/constants';
 import { WaveFunction } from '@/types';
-import { unwrappedImagesAtom } from '@/atoms/imagesAtom';
-import { useLingui } from '@lingui/react/macro';
 
 export type ChanveWaveFunctionProps = Omit<
   React.ComponentProps<typeof ToggleGroup>,

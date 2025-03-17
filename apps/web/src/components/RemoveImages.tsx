@@ -15,8 +15,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger
 } from '@workspace/ui/components/alert-dialog';
-import { imagesAtom, unwrappedImagesAtom } from '@/atoms/imagesAtom';
-import { waveformAtom } from '@/atoms/waveformAtoms';
+import { imageFilesAtom, unwrappedImagesAtom } from '@/atoms/imagesAtom';
 
 export type RemoveImagesProps = React.ComponentProps<typeof Button>;
 
@@ -24,13 +23,11 @@ export function RemoveImages(props: RemoveImagesProps) {
   const { t } = useLingui();
   const [isPending, startTransition] = useTransition();
   const images = useAtomValue(unwrappedImagesAtom);
-  const resetImages = useResetAtom(imagesAtom);
-  const resetWaveform = useResetAtom(waveformAtom);
+  const resetImageFiles = useResetAtom(imageFilesAtom);
 
   const handleConfirm = () => {
     startTransition(() => {
-      resetWaveform();
-      resetImages();
+      resetImageFiles();
     });
   };
 
