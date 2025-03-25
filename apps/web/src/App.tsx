@@ -44,7 +44,7 @@ export function App() {
           </Suspense>
         </main>
 
-        <footer className="pb-3 lg:pb-7">
+        <footer className="relative pb-3 lg:pb-7">
           <section className="mx-auto grid max-w-4xl grid-cols-1 gap-12 lg:grid-cols-3">
             <Waveform />
           </section>

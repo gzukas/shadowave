@@ -7,6 +7,5 @@
   <g mask="url(#roundMask)">
     <rect width="16" height="16" fill="#020817"/>
     <path d="M 0 8 C 2 3, 6 3, 8 8 C 10 13, 14 13, 16 8 L 16 0 L 0 0 Z" fill="#e0e0e0"/>
-    <rect width="16" height="16" rx="3" ry="3" stroke="#555555" stroke-width="1" fill="none"/>
   </g>
 </svg>

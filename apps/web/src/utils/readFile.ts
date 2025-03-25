@@ -2,7 +2,7 @@ import { createAbortablePromise } from '@/utils/createAbortablePromise';
 
 export interface ReadFileOptions {
   /**
-   * Optional AbortSignal to allow cancellation of the file reading.
+   * Optional `AbortSignal` to allow cancellation of the file reading.
    */
   signal?: AbortSignal;
 }

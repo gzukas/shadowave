@@ -2,9 +2,20 @@ import { MIME_TYPES } from '@/constants';
 import { loadImage } from '@/utils/loadImage';
 
 export interface RasterizeOptions {
+  /**
+   * The MIME type for the rasterized image (e.g., `image/png`).
+   */
   type?: string;
 }
 
+/**
+ * Rasterizes an SVG element into an image (blob).
+ *
+ * @param svg - The SVG element to rasterize.
+ * @param options - Rasterization options.
+ *
+ * @returns A promise that resolves with a Blob containing the rasterized image, or rejects with an error if any.
+ */
 export async function rasterize(
   svg: SVGGraphicsElement,
   options: RasterizeOptions = {}
