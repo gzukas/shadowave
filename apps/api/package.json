@@ -12,7 +12,7 @@
     "@elysiajs/cors": "^1.2.0",
     "@workspace/schema": "workspace:*",
     "elysia": "^1.2.25",
-    "puppeteer-core": "^24.4.0"
+    "puppeteer-core": "^24.6.1"
   },
   "devDependencies": {
     "@tsconfig/bun": "^1.0.7",
